@@ -1,0 +1,15 @@
+services:
+  postgres:
+    container_name: homepage_container
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_USER: homepage
+      POSTGRES_PASSWORD: homepag3_sAfe_Pass5ord
+      PGDATA: /data/postgres
+    ports: [ 5430:5432 ]
+    networks: [ postgres ]
+    restart: unless-stopped
+
+networks:
+  postgres:
+    driver: bridge
