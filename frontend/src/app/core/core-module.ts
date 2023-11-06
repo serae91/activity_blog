@@ -1,7 +1,7 @@
 import { APP_INITIALIZER, ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AppConfigService } from '../_services/app-config/app-config.service';
+import { AppConfigService } from './services/app-config/app-config.service';
 import { AuthTokenInterceptorService } from './interceptors/token-interceptor/auth-token-interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 

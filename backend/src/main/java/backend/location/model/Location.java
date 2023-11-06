@@ -55,7 +55,7 @@ public class Location {
     @Column(name = "street_number", nullable = false)
     private Integer streetNumber;
 
-    @ManyToMany(targetEntity = Activity.class, fetch = FetchType.LAZY)
+    @ManyToMany(targetEntity = Activity.class, fetch = FetchType.EAGER)
     @JoinTable(name = "activity_location",
             joinColumns = {
                     @JoinColumn(name = "location_id", referencedColumnName = "location_id")

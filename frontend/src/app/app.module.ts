@@ -4,17 +4,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { RainbowDirective } from './shared/directives/rainbow.directive';
 import { AppRoutingModule } from './shared/routing/app.routing.module';
-import { ServicesModule } from './_services/services.module';
+import { ServicesModule } from './core/services/services.module';
 import { CoreModule } from './core/core-module';
 import { SharedModule } from './shared/shared.module';
 import { PagesModule } from './pages/pages.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    RainbowDirective,
+    AppComponent
   ],
   imports: [
     CoreModule.forRoot(),

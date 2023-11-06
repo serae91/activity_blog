@@ -1,27 +1,17 @@
 import { NgModule } from '@angular/core';
-import { TextFieldDisplayComponent } from './text-field-display/text-field-display.component';
-import { CommonModule } from '@angular/common';
-import { DropdownItemComponent } from './dropdown-menu/dropdown-item/dropdown-item.component';
-import { DropdownMenuComponent } from './dropdown-menu/dropdown-menu.component';
-import { CheckboxInputComponent } from './checkbox-input/checkbox-input.component';
-import { TextInputComponent } from './text-input/text-input.component';
-import { SelectBoxComponent } from './select-box/select-box.component';
 import { FormsModule } from '@angular/forms';
+import { OpacityScrollComponent } from './opacity-scroll/opacity-scroll.component';
+import { CommonModule } from '@angular/common';
+import { MaterialModule } from '../core/material-module';
 
 
 const COMPONENTS = [
-  CheckboxInputComponent,
-  
-  DropdownItemComponent,
-  DropdownMenuComponent,
-  SelectBoxComponent,
-  TextFieldDisplayComponent,
-  TextInputComponent
+  OpacityScrollComponent
 ];
 
 @NgModule({
   declarations: [COMPONENTS],
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MaterialModule],
   exports: [COMPONENTS],
 })
 export class SharedModule {}

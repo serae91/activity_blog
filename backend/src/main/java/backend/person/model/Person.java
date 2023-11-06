@@ -49,7 +49,7 @@ public class Person {
     @Column(name = "birthday", nullable = false)
     private Date birthday;
 
-    @ManyToMany(targetEntity = Activity.class, fetch = FetchType.LAZY)
+    @ManyToMany(targetEntity = Activity.class, fetch = FetchType.EAGER)
     @JoinTable(name = "activity_person",
             joinColumns = {
                     @JoinColumn(name = "author_id", referencedColumnName = "person_id")
