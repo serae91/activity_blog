@@ -1,5 +1,6 @@
 package backend.activity.model;
 
+import backend.location.model.Location;
 import backend.person.model.Person;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.quarkus.runtime.annotations.RegisterForReflection;
@@ -7,9 +8,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrimaryKeyJoinColumn;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.Builder;
@@ -26,7 +25,6 @@ import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 
 @Entity
 @Table(name = "activity")
@@ -66,4 +64,14 @@ public class Activity {
                     @JoinColumn(name = "author_id", referencedColumnName = "person_id")
             })
     private List<Person> persons = new ArrayList<>();
+
+    @ManyToMany(targetEntity = Location.class, fetch = FetchType.LAZY)
+    @JoinTable(name = "activity_location",
+            joinColumns = {
+                    @JoinColumn(name = "activity_id", referencedColumnName = "activity_id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "location_id", referencedColumnName = "location_id")
+            })
+    private List<Location> locations = new ArrayList<>();
 }
