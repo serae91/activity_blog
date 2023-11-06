@@ -50,6 +50,6 @@ CREATE TABLE activity_location
     CONSTRAINT activity_fkey            FOREIGN KEY (activity_id)
         REFERENCES activity (activity_id),
     CONSTRAINT location_fkey            FOREIGN KEY (location_id)
-        REFERENCES person (location_id),
+        REFERENCES location (location_id),
     CONSTRAINT activity_location_unique UNIQUE (activity_id, location_id)
 );
