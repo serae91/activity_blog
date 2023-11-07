@@ -21,8 +21,8 @@ export class LocationService {
     return this.http.get<LocationDto[]>(LocationService.LOCATION + LocationService.ALL);
   }
   
-  createNewLocation(activityCreateDto: CreateLocationDto): Observable<LocationDto>{
-    return this.http.post<LocationDto>(LocationService.LOCATION + LocationService.NEW, activityCreateDto);
+  createNewLocation(createLocationDto: CreateLocationDto): Observable<LocationDto>{
+    return this.http.post<LocationDto>(LocationService.LOCATION + LocationService.NEW, createLocationDto);
   }
   
   deleteLocation(locationId: number): Observable<void>{

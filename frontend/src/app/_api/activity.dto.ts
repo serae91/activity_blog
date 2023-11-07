@@ -1,3 +1,4 @@
+import { LocationDto } from "./location.dto";
 import { PersonDto } from "./person.dto";
 
 export interface ActivityDto {
@@ -6,7 +7,8 @@ export interface ActivityDto {
     title: string;
     description: string;
     postTime: Date;
-    persons: PersonDto;
+    persons: PersonDto[];
+    locations: LocationDto[];
 }
 
 export interface CreateActivityDto {

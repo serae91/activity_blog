@@ -13,19 +13,19 @@ export class LocationService {
 
   constructor(private http: HttpClient){}
   
-  getLocationById(locationId: number): Observable<PersonDto>{
-    return this.http.get<PersonDto>(LocationService.PERSON + '/' + locationId);
+  getPersonById(personId: number): Observable<PersonDto>{
+    return this.http.get<PersonDto>(LocationService.PERSON + '/' + personId);
   }
 
-  getAllLocations(): Observable<PersonDto[]>{
+  getAllPersons(): Observable<PersonDto[]>{
     return this.http.get<PersonDto[]>(LocationService.PERSON + LocationService.ALL);
   }
   
-  createNewLocation(activityCreateDto: CreatePersonDto): Observable<PersonDto>{
-    return this.http.post<PersonDto>(LocationService.PERSON + LocationService.NEW, activityCreateDto);
+  createNewPerson(createPersonDto: CreatePersonDto): Observable<PersonDto>{
+    return this.http.post<PersonDto>(LocationService.PERSON + LocationService.NEW, createPersonDto);
   }
   
-  deleteLocation(locationId: number): Observable<void>{
-    return this.http.delete<void>(LocationService.PERSON + '/' + locationId);
+  deletePerson(personId: number): Observable<void>{
+    return this.http.delete<void>(LocationService.PERSON + '/' + personId);
   }
 }

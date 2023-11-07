@@ -1,5 +1,3 @@
-import { ActivityDto } from "./activity.dto";
-
 export interface LocationDto {
     id: number;
     name: string;
@@ -8,7 +6,6 @@ export interface LocationDto {
     postalCode: number;
     street: string;
     streetNumber: number;
-    activities: ActivityDto[];
 }
 
 export interface CreateLocationDto {
@@ -18,5 +15,4 @@ export interface CreateLocationDto {
     postalCode: number;
     street: string;
     streetNumber: number;
-    activities: ActivityDto[];
 }
