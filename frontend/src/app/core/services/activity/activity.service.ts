@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ActivityCreateDto, ActivityDto } from 'src/app/_api/activity.dto';
+import { CreateActivityDto, ActivityDto } from 'src/app/_api/activity.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +21,11 @@ export class ActivityService {
     return this.http.get<ActivityDto[]>(ActivityService.ACTIVITY + ActivityService.ALL);
   }
   
-  createNewActivity(activityCreateDto: ActivityCreateDto): Observable<ActivityDto>{
+  createNewActivity(activityCreateDto: CreateActivityDto): Observable<ActivityDto>{
     return this.http.post<ActivityDto>(ActivityService.ACTIVITY + ActivityService.NEW, activityCreateDto);
+  }
+  
+  deleteActivity(activityId: number): Observable<void>{
+    return this.http.delete<void>(ActivityService.ACTIVITY + '/' + activityId);
   }
 }

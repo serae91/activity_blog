@@ -11,7 +11,7 @@ export interface LocationDto {
     activities: ActivityDto[];
 }
 
-export interface LocationCreateDto {
+export interface CreateLocationDto {
     name: string;
     country: string;
     city: string;

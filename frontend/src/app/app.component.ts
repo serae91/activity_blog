@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivityService } from './core/services/activity/activity.service';
-import { ActivityCreateDto } from './_api/activity.dto';
+import { CreateActivityDto } from './_api/activity.dto';
 
 @Component({
   selector: 'app-root',

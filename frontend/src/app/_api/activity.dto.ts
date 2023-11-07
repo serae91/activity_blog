@@ -9,7 +9,7 @@ export interface ActivityDto {
     persons: PersonDto;
 }
 
-export interface ActivityCreateDto {
+export interface CreateActivityDto {
     authorId: number;
     title: string;
     description: string;

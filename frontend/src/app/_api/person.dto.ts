@@ -8,7 +8,7 @@ export interface PersonDto {
     activities: ActivityDto[];
 }
 
-export interface PersonCreateDto {
+export interface CreatePersonDto {
     id: number;
     firstName: string;
     lastName: string;
