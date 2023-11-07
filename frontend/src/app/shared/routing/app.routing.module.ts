@@ -1,9 +1,9 @@
 import{ NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainComponent } from '../../pages/main/main.component';
+import { ActivityListComponent } from '../../pages/activity-list/activity-list.component';
 const appRoutes: Routes=[
-    {path:'',redirectTo: 'main', pathMatch:'full'},
-    {path:'main',component: MainComponent},
+    {path:'',redirectTo: 'activities', pathMatch:'full'},
+    {path:'activities',component: ActivityListComponent},
 ]
 @NgModule({
     imports: [RouterModule.forRoot(appRoutes)],

@@ -1,0 +1,13 @@
+<div class="flex-column absolute" [ngStyle]="getHeightStyle()">
+  <div class="scroll-indicator-container" [ngStyle]="getScrollIndicatorStyle()">
+    <mat-icon  class="scroll-indicator"
+    >arrow_drop_up</mat-icon>
+  </div>
+  <div class="scroll-padding overflow-auto" (scroll)="scroll($event)">
+      <div>
+
+          <ng-content></ng-content>
+      
+      </div>
+  </div>
+</div>

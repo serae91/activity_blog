@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MainComponent } from './main/main.component';
+import { ActivityListComponent } from './activity-list/activity-list.component';
 import { SharedModule } from '../shared/shared.module';
 
 const COMPONENTS = [
-  MainComponent
+  ActivityListComponent
 ];
 
 @NgModule({

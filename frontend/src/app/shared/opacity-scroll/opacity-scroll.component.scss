@@ -1,0 +1,36 @@
+.scroll-indicator-container {
+  position: sticky;
+  top: 0px;
+  text-align: center;
+  z-index: 1;
+  height: auto;
+  margin-top: -30px;
+}
+
+.scroll-indicator {
+  color: greenyellow;
+  width: auto;
+  font-size: 50px;
+}
+
+.scroll-padding {
+  padding: 16px;
+  margin: -16px 0px;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
