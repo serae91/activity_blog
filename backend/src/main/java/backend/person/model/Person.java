@@ -48,14 +48,4 @@ public class Person {
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     @Column(name = "birthday", nullable = false)
     private Date birthday;
-
-    @ManyToMany(targetEntity = Activity.class, fetch = FetchType.EAGER)
-    @JoinTable(name = "activity_person",
-            joinColumns = {
-                    @JoinColumn(name = "author_id", referencedColumnName = "person_id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "activity_id", referencedColumnName = "activity_id")
-            })
-    private List<Activity> activities = new ArrayList<>();
 }

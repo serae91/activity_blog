@@ -61,7 +61,7 @@ public class Activity {
                     @JoinColumn(name = "activity_id", referencedColumnName = "activity_id")
             },
             inverseJoinColumns = {
-                    @JoinColumn(name = "author_id", referencedColumnName = "person_id")
+                    @JoinColumn(name = "person_id", referencedColumnName = "person_id")
             })
     private List<Person> persons = new ArrayList<>();
 
