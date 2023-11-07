@@ -1,0 +1,9 @@
+<div class="card-container">
+    <h5>{{activity.title}}</h5>
+    <p class="card-text">{{activity.description}}</p>
+    <div class="signature">
+        <div>{{activity.author.firstName + ' ' + activity.author.lastName}}</div>
+        <div>{{getDateString(activity.postTime)}}</div>
+        <div>{{getTimeString(activity.postTime)}}</div>
+    </div>
+</div>

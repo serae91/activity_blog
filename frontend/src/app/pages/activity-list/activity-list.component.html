@@ -1,9 +1,5 @@
-<p>Activity List</p>
 <app-opacity-scroll>
     <div *ngFor="let activity of activities">
-        <p>{{activity.title}}</p>
+        <app-activity-card [activity]="activity"></app-activity-card>
     </div>
-    <p>ab</p>
-    <p>cd</p>
-    <p>ef</p>
 </app-opacity-scroll>
