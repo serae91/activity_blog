@@ -1,8 +1,8 @@
-package backend.activity.usecase;
+package backend.activity.usecase.create;
 
 import backend.activity.core.ActivityRepository;
 import backend.activity.model.Activity;
-import backend.activity.model.ActivityCreateDto;
+import backend.activity.usecase.create.model.CreateActivityDto;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
@@ -11,7 +11,7 @@ public class CreateActivityService {
     @Inject
     ActivityRepository activityRepository;
 
-    public Activity createNewActivity(final ActivityCreateDto activityCreateDto) {
+    public Activity createNewActivity(final CreateActivityDto activityCreateDto) {
         final Activity newActivity = Activity.builder()
                 .title(activityCreateDto.getTitle())
                 .description(activityCreateDto.getDescription())

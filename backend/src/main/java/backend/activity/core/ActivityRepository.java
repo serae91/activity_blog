@@ -9,15 +9,19 @@ import java.util.Optional;
 
 @ApplicationScoped
 public class ActivityRepository implements PanacheRepository<Activity> {
-    public Optional<Activity> getByActivityId(final Long sponsorId) {
-        return findByIdOptional(sponsorId);
+    public Optional<Activity> getByActivityId(final Long activityId) {
+        return findByIdOptional(activityId);
     }
 
-    public List<Activity> getAll() {
+    public List<Activity> getAllActivities() {
         return listAll();
     }
     public Activity createNewActivity(final Activity activity) {
         persist(activity);
         return activity;
+    }
+
+    public void deleteActivityById(final Long activityId) {
+        deleteById(activityId);
     }
 }

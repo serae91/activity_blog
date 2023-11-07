@@ -1,4 +1,4 @@
-package backend.activity.model;
+package backend.activity.usecase.create.model;
 
 import java.util.Date;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class ActivityCreateDto {
+public class CreateActivityDto {
     private Long authorId;
     private String title;
     private String description;

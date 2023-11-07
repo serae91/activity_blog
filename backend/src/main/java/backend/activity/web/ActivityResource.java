@@ -1,10 +1,11 @@
 package backend.activity.web;
 
 import backend.activity.model.Activity;
-import backend.activity.model.ActivityCreateDto;
+import backend.activity.usecase.create.model.CreateActivityDto;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -39,7 +40,15 @@ public class ActivityResource {
     @Path("/new")
     @Transactional
     @Produces(MediaType.APPLICATION_JSON)
-    public Activity createNewActivity(final ActivityCreateDto activityCreateDto) {
-        return activityResourceFacade.createNewActivity(activityCreateDto);
+    public Activity createNewActivity(final CreateActivityDto createActivityDto) {
+        return activityResourceFacade.createNewActivity(createActivityDto);
+    }
+
+    @DELETE
+    @Path("/{activityId}")
+    @Transactional
+    @Produces(MediaType.APPLICATION_JSON)
+    public void deletePersonById(@PathParam("activityId") final Long activityId) {
+        activityResourceFacade.deleteActivityById(activityId);
     }
 }

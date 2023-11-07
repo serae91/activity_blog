@@ -1,7 +1,6 @@
 package backend.activity.core;
 
 import backend.activity.model.Activity;
-import backend.activity.model.ActivityCreateDto;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
@@ -20,7 +19,7 @@ public class ActivityService {
         return null;
     }
 
-    public List<Activity> getAll() {
-        return activityRepository.getAll();
+    public List<Activity> getAllActivities() {
+        return activityRepository.getAllActivities();
     }
 }
