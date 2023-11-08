@@ -1,0 +1,41 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h3>Create New Activity</h3>
+    </div>
+    <div class="modal-content">
+        <form [formGroup]="formGroup">
+            <mat-dialog-content class="dialog-content">
+                    <div class="modal-content-box-header">
+                        <h4>Title</h4>
+                    </div>
+                    <mat-form-field>
+                        <mat-label>Title</mat-label>
+                        <input matInput
+                               formControlName="title"
+                               required
+                               id="title"
+                               name="title"
+                               maxlength="50">
+                    </mat-form-field>
+                    
+                    <mat-form-field>
+                        <mat-label>Description</mat-label>
+                        <input id="description"
+                               name="description"
+                               type="text" matInput appNumeric
+                               formControlName="description"
+                               required>
+                    </mat-form-field>
+                    <div *ngFor="let personId of formGroup.controls['personIds'].value; let i = index; let lastItem = last"
+               formArrayName="personIds">
+               <mat-select [formControlName]="i" [value]="personId"></mat-select>
+               <mat-select placeholder="ABC" [formControlName]="i">
+                <mat-option *ngFor="let person of persons" [value]="person.id">
+                  {{person.firstName + ' ' + person.lastName}}
+                </mat-option>
+            </mat-select>
+          </div>
+            </mat-dialog-content>
+        </form>
+    </div>
+</div>

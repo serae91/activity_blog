@@ -6,7 +6,7 @@ import { CreatePersonDto, PersonDto } from 'src/app/_api/person.dto';
 @Injectable({
   providedIn: 'root',
 })
-export class LocationService {
+export class PersonService {
   static readonly PERSON = 'person';
   static readonly ALL = '/all';
   static readonly NEW = '/new';
@@ -14,18 +14,18 @@ export class LocationService {
   constructor(private http: HttpClient){}
   
   getPersonById(personId: number): Observable<PersonDto>{
-    return this.http.get<PersonDto>(LocationService.PERSON + '/' + personId);
+    return this.http.get<PersonDto>(PersonService.PERSON + '/' + personId);
   }
 
   getAllPersons(): Observable<PersonDto[]>{
-    return this.http.get<PersonDto[]>(LocationService.PERSON + LocationService.ALL);
+    return this.http.get<PersonDto[]>(PersonService.PERSON + PersonService.ALL);
   }
   
   createNewPerson(createPersonDto: CreatePersonDto): Observable<PersonDto>{
-    return this.http.post<PersonDto>(LocationService.PERSON + LocationService.NEW, createPersonDto);
+    return this.http.post<PersonDto>(PersonService.PERSON + PersonService.NEW, createPersonDto);
   }
   
   deletePerson(personId: number): Observable<void>{
-    return this.http.delete<void>(LocationService.PERSON + '/' + personId);
+    return this.http.delete<void>(PersonService.PERSON + '/' + personId);
   }
 }

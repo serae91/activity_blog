@@ -17,4 +17,5 @@ export interface CreateActivityDto {
     description: string;
     postTime: Date;
     personIds: number[];
+    locationIds: number[];
 }
