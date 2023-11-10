@@ -22,4 +22,7 @@ public class LocationService {
     public List<Location> getAllLocations() {
         return locationRepository.getAllLocations();
     }
+    public List<Location> getLocationsForLocationIds(final List<Long> locationIds) {
+        return locationIds.stream().map(locationId -> getLocationById(locationId)).toList();
+    }
 }

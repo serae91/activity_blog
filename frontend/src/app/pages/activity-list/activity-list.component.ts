@@ -13,6 +13,6 @@ export class ActivityListComponent implements OnInit {
   constructor(private activityService: ActivityService) {}
 
   ngOnInit(): void {
-    this.activityService.getAllActivities().subscribe(activities => {this.activities = activities;console.log(this.activities);});
+    this.activityService.getAllActivities().subscribe(activities => this.activities = activities);
   }
 }

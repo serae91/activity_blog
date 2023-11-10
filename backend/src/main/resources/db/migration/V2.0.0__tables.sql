@@ -3,7 +3,7 @@ CREATE TABLE person
     person_id       bigint                      NOT NULL,
     first_name      character varying(255)      NOT NULL,
     last_name       character varying(255)      NOT NULL,
-    birthday        DATE                        NOT NULL,
+    birthday        timestamp without time zone NOT NULL,
     CONSTRAINT person_pkey PRIMARY KEY (person_id),
     CONSTRAINT person_attributes_unique   UNIQUE (first_name, last_name, birthday)
 );

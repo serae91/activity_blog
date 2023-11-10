@@ -22,4 +22,8 @@ public class PersonService {
     public List<Person> getAllPersons() {
         return personRepository.getAllPersons();
     }
+
+    public List<Person> getPersonsForPersonIds(final List<Long> personIds) {
+        return personIds.stream().map(personId -> getPersonById(personId)).toList();
+    }
 }

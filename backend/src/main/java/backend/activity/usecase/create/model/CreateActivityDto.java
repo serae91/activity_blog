@@ -12,4 +12,5 @@ public class CreateActivityDto {
     private String description;
     private Date postTime;
     private List<Long> personIds;
+    private List<Long> locationIds;
 }

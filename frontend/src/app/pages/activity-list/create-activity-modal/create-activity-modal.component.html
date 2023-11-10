@@ -32,8 +32,11 @@
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
+                    <button (click)="removeParticipant(i)">remove Participant</button>
                 </div>
+                <button (click)="addParticipant()">Add Participant</button>
             </mat-dialog-content>
         </form>
+        <button (click)="saveActivity()">Save</button>
     </div>
 </div>

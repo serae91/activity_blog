@@ -4,11 +4,12 @@ import backend.location.model.Location;
 import backend.person.model.Person;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.quarkus.runtime.annotations.RegisterForReflection;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.Builder;
@@ -41,8 +42,8 @@ public class Activity {
     @Column(name = "activity_id", nullable = false)
     private Long id;
 
+    @ManyToOne(targetEntity = Person.class, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "author_id", nullable = false)
-    @OneToOne
     private Person author;
 
     @Column(name = "title", nullable = false)
@@ -55,7 +56,7 @@ public class Activity {
     @Column(name = "post_time", nullable = false)
     private Date postTime;
 
-    @ManyToMany(targetEntity = Person.class, fetch = FetchType.LAZY)
+    @ManyToMany(targetEntity = Person.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "activity_person",
             joinColumns = {
                     @JoinColumn(name = "activity_id", referencedColumnName = "activity_id")
@@ -65,7 +66,7 @@ public class Activity {
             })
     private List<Person> persons = new ArrayList<>();
 
-    @ManyToMany(targetEntity = Location.class, fetch = FetchType.LAZY)
+    @ManyToMany(targetEntity = Location.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "activity_location",
             joinColumns = {
                     @JoinColumn(name = "activity_id", referencedColumnName = "activity_id")
