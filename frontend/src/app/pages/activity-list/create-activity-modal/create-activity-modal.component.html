@@ -36,7 +36,7 @@
                             </mat-form-field>
                             <button (click)="removeParticipant(i)">Remove Participant</button>
                         </div>
-                        <button class="btn-secondary" (click)="addParticipant()">Add Participant</button>
+                        <button type="button" class="btn-secondary" (click)="addParticipant()">Add Participant</button>
                     </div>
                     <div class="select-panel">
                         <div *ngFor="let locationId of locationIds.value; let i = index">
@@ -50,7 +50,7 @@
                             </mat-form-field>
                             <button (click)="removeLocation(i)">Remove Location</button>
                         </div>
-                        <button class="btn-secondary" (click)="addLocation()">Add Location</button>
+                        <button type="button" class="btn-secondary" (click)="addLocation()">Add Location</button>
                     </div>
                 </div>
                 

@@ -18,9 +18,13 @@ export class PersonListComponent {
     this.personService.getAllPersons().subscribe(persons => this.persons = persons);
   }
 
-  openCreateActivityModal(): void {
+  openCreatePersonModal(): void {
     this.dialog.open(CreatePersonModalComponent)
     .afterClosed()
-    .subscribe((person: PersonDto) => this.persons.push(person));
+    .subscribe((person: PersonDto) => {
+      if(person) {
+        this.persons.push(person)
+      }
+    });
   }
 }

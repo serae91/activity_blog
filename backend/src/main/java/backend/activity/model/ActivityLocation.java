@@ -1,7 +1,6 @@
 package backend.activity.model;
 
 import backend.location.model.Location;
-import backend.person.model.Person;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

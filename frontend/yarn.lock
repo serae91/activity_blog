@@ -2430,6 +2430,11 @@
   resolved "https://registry.npmjs.org/@pkgjs/parseargs/-/parseargs-0.11.0.tgz"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
 
+"@popperjs/core@^2.11.8":
+  version "2.11.8"
+  resolved "https://registry.npmjs.org/@popperjs/core/-/core-2.11.8.tgz"
+  integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
+
 "@schematics/angular@16.2.6":
   version "16.2.6"
   resolved "https://registry.npmjs.org/@schematics/angular/-/angular-16.2.6.tgz"
@@ -3651,10 +3656,10 @@ bootstrap-scss@^4.6.1:
   resolved "https://registry.npmjs.org/bootstrap-scss/-/bootstrap-scss-4.6.1.tgz"
   integrity sha512-8rAYXcuOUAr5SAGM0omZa9wefBR0hZMUVfcbZCCvW+Sm5nSRgI/qMEbb+oWdocwcoX9PYV1yoP722Yp5OEJlnw==
 
-bootstrap@^3.4.1:
-  version "3.4.1"
-  resolved "https://registry.npmjs.org/bootstrap/-/bootstrap-3.4.1.tgz"
-  integrity sha512-yN5oZVmRCwe5aKwzRj6736nSmKDX7pLYwsXiCj/EYmo16hODaBiT4En5btW/jhBF/seV+XMx3aYwukYC3A49DA==
+bootstrap@^5.3.2:
+  version "5.3.2"
+  resolved "https://registry.npmjs.org/bootstrap/-/bootstrap-5.3.2.tgz"
+  integrity sha512-D32nmNWiQHo94BKHLmOrdjlL05q1c8oxbtBphQFb9Z5to6eGRDCm0QgeaZ4zFBHzfg2++rqa2JkqCcxDy0sH0g==
 
 brace-expansion@^1.1.7:
   version "1.1.11"

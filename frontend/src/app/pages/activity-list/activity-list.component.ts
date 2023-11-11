@@ -23,7 +23,11 @@ export class ActivityListComponent implements OnInit {
   openCreateActivityModal(): void {
     this.dialog.open(CreateActivityModalComponent)
     .afterClosed()
-    .subscribe((activity: ActivityDto) => this.activities.push(activity));
+    .subscribe((activity: ActivityDto) => {
+      if(activity) {
+        this.activities.push(activity)
+      }
+    });
   }
   onDeleteActivity(activityId: number) {
     this.activities = this.activities.filter(activity => activity.id !== activityId);
