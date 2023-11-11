@@ -1,6 +1,9 @@
+<div>
 <app-opacity-scroll>
     <div *ngFor="let activity of activities">
         <app-activity-card [activity]="activity"></app-activity-card>
     </div>
 </app-opacity-scroll>
-<app-create-activity-modal></app-create-activity-modal>
+</div>
+<button (click)="openCreateActivityModal()">Create new Activity</button>
+<!--<app-create-activity-modal></app-create-activity-modal>-->

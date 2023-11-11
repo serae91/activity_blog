@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormArray, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MatOptionSelectionChange } from '@angular/material/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { CreateActivityDto } from 'src/app/_api/activity.dto';
 import { LocationDto } from 'src/app/_api/location.dto';
 import { PersonDto } from 'src/app/_api/person.dto';
@@ -27,7 +28,12 @@ export class CreateActivityModalComponent {
     return this.formGroup.controls['locationIds'] as FormArray;
   }
 
-  constructor(private formBuilder: UntypedFormBuilder, private activityService: ActivityService, private personService: PersonService, private locationService: LocationService) {}
+  constructor(
+    private dialogRef: MatDialogRef<CreateActivityModalComponent>,
+    private formBuilder: UntypedFormBuilder,
+    private activityService: ActivityService,
+    private personService: PersonService,
+    private locationService: LocationService) {}
 
   ngOnInit(): void {
     this.loadAllPersons();
@@ -80,8 +86,12 @@ export class CreateActivityModalComponent {
     return values.filter((value, index, self) => index === self.indexOf(value));
   }
 
-  saveActivity(): void {
-    console.log(this.getCreateActivityDto());
-    this.activityService.createNewActivity(this.getCreateActivityDto()).subscribe(newActivity => console.log(newActivity));
+  saveActivityAndCloseDialog(): void {
+    this.activityService.createNewActivity(this.getCreateActivityDto())
+    .subscribe(newActivity => this.dialogRef.close(newActivity));
+  }
+
+  cancel(): void {
+    this.dialogRef.close(null);
   }
 }

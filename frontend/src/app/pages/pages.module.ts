@@ -6,13 +6,16 @@ import { ActivityCardComponent } from './activity-list/activity-card/activity-ca
 import { CreateActivityModalComponent } from './activity-list/create-activity-modal/create-activity-modal.component';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../core/material-module';
+import { PersonListComponent } from './person-list/person-list.component';
+import { PersonCardComponent } from './person-list/person-card/person-card.component';
+import { CreatePersonModalComponent } from './person-list/create-person-modal/create-person-modal.component';
 
 const COMPONENTS = [
   ActivityListComponent
 ];
 
 @NgModule({
-  declarations: [COMPONENTS, ActivityCardComponent, CreateActivityModalComponent],
+  declarations: [COMPONENTS, ActivityCardComponent, CreateActivityModalComponent, PersonListComponent, PersonCardComponent, CreatePersonModalComponent],
   imports: [CommonModule, FormsModule, MaterialModule, SharedModule],
   exports: [COMPONENTS],
 })

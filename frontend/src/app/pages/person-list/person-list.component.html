@@ -1,0 +1,8 @@
+<div>
+    <app-opacity-scroll>
+        <div *ngFor="let person of persons">
+            <app-person-card [person]="person"></app-person-card>
+        </div>
+    </app-opacity-scroll>
+    </div>
+    <button (click)="openCreateActivityModal()">Create new Activity</button>
