@@ -20,7 +20,6 @@ public class LocationRepository implements PanacheRepository<Location> {
         persist(location);
         return location;
     }
-
     public void deleteLocationById(final Long locationId) {
         deleteById(locationId);
     }

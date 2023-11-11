@@ -1,0 +1,63 @@
+@use '@angular/material' as mat;
+@import '../../node_modules/@angular/material/theming';
+
+@include mat.all-component-typographies();
+@include mat.core();
+
+$activity-blog-palette: (
+  50: #e0f7f4,
+  100: #b3ece4,
+  200: #80dfd2,
+  300: #4dd2c0,
+  400: #26c9b3,
+  500: #00bfa5,
+  600: #00b99d,
+  700: #00b193,
+  800: #00a98a,
+  900: #009b79,
+  A100: #c6fff0,
+  A200: #93ffe3,
+  A400: #60ffd6,
+  A700: #47ffcf,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$activity-blog-primary: mat.define-palette($activity-blog-palette, 500);
+$activity-blog-accent: mat.define-palette(mat.$pink-palette, 500);
+$activity-blog-warn: mat.define-palette(mat.$red-palette);
+
+$assaymaster-typography: mat.define-typography-config(
+  $font-family: 'Inter, sans-serif',
+);
+
+$assaymaster-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $activity-blog-primary,
+      accent: $activity-blog-accent,
+      warn: $activity-blog-warn,
+    ),
+    typography: $assaymaster-typography,
+    density: 0,
+  )
+);
+
+@include mat.core-theme($assaymaster-theme);
+@include mat.all-component-themes($assaymaster-theme);
+@include mat.all-component-densities($assaymaster-theme);
+@include mat.all-component-typographies($assaymaster-theme);

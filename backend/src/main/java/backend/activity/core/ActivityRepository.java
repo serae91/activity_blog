@@ -24,4 +24,8 @@ public class ActivityRepository implements PanacheRepository<Activity> {
     public void deleteActivityById(final Long activityId) {
         deleteById(activityId);
     }
+
+    public void deleteActivity(final Activity activity) {
+        delete(activity);
+    }
 }

@@ -1,7 +1,7 @@
 <div>
 <app-opacity-scroll>
     <div *ngFor="let activity of activities">
-        <app-activity-card [activity]="activity"></app-activity-card>
+        <app-activity-card [activity]="activity" (deleteActivityEvent)="onDeleteActivity($event)"></app-activity-card>
     </div>
 </app-opacity-scroll>
 </div>

@@ -71,6 +71,18 @@ export class CreateActivityModalComponent {
     this.personIds.push(this.formBuilder.control(0))
   }
 
+  onLocationSelectionChange(event: MatOptionSelectionChange, index: number): void {
+    this.locationIds.controls[index].setValue(event.source.value);
+  }
+
+  removeLocation(index: number) {
+    this.locationIds.removeAt(index);
+  }
+  
+  addLocation() {
+    this.locationIds.push(this.formBuilder.control(0))
+  }
+
   getCreateActivityDto(): CreateActivityDto {
     return {
       authorId: this.formGroup.controls['authorId'].value,
@@ -82,13 +94,13 @@ export class CreateActivityModalComponent {
     } as CreateActivityDto;
   }
 
-  getUniqueValues<T>(values: T[]): T[] {
-    return values.filter((value, index, self) => index === self.indexOf(value));
-  }
-
   saveActivityAndCloseDialog(): void {
     this.activityService.createNewActivity(this.getCreateActivityDto())
     .subscribe(newActivity => this.dialogRef.close(newActivity));
+  }
+
+  getUniqueValues<T>(values: T[]): T[] {
+    return values.filter((value, index, self) => index === self.indexOf(value));
   }
 
   cancel(): void {

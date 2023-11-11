@@ -22,4 +22,5 @@ public class ActivityService {
     public List<Activity> getAllActivities() {
         return activityRepository.getAllActivities();
     }
+
 }

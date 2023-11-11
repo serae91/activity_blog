@@ -25,4 +25,7 @@ export class ActivityListComponent implements OnInit {
     .afterClosed()
     .subscribe((activity: ActivityDto) => this.activities.push(activity));
   }
+  onDeleteActivity(activityId: number) {
+    this.activities = this.activities.filter(activity => activity.id !== activityId);
+  }
 }

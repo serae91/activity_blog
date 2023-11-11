@@ -48,7 +48,7 @@ public class ActivityResource {
     @Path("/{activityId}")
     @Transactional
     @Produces(MediaType.APPLICATION_JSON)
-    public void deletePersonById(@PathParam("activityId") final Long activityId) {
+    public void deleteActivityById(@PathParam("activityId") final Long activityId) {
         activityResourceFacade.deleteActivityById(activityId);
     }
 }
