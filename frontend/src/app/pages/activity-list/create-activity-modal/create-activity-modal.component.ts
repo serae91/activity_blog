@@ -55,12 +55,13 @@ export class CreateActivityModalComponent {
       title: this.formBuilder.control(''),
       description: this.formBuilder.control(''),
       personIds: this.formBuilder.array([this.formBuilder.control(0)]),
-      locationIds: this.formBuilder.array([]),
+      locationIds: this.formBuilder.array([this.formBuilder.control(0)]),
     });
   }
 
   onPersonSelectionChange(event: MatOptionSelectionChange, index: number): void {
     this.personIds.controls[index].setValue(event.source.value);
+    console.log(this.personIds.controls[index].value);
   }
 
   removeParticipant(index: number) {

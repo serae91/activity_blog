@@ -1,10 +1,14 @@
 <div class="card-container">
     <h5>{{activity.title}}</h5>
     <p class="card-text">{{activity.description}}</p>
+    <h6>Participants</h6>
+    <p class="card-text" *ngFor="let person of activity.persons">{{person.firstName + ' ' + person.lastName}}</p>
+    <h6>Locations</h6>
+    <p class="card-text" *ngFor="let location of activity.locations">{{location.name}}</p>
     <div class="signature">
         <div>{{activity.author.firstName + ' ' + activity.author.lastName}}</div>
         <div>{{getDateString(activity.postTime)}}</div>
         <div>{{getTimeString(activity.postTime)}}</div>
     </div>
-    <button (click)="deleteActivity()">Remove</button>
+    <button type="button" class="tiny-btn" (click)="deleteActivity()">-</button>
 </div>
