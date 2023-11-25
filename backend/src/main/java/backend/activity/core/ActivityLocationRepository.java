@@ -21,6 +21,10 @@ public class ActivityLocationRepository implements PanacheRepository<ActivityLoc
         return list("activity.id", activityId);
     }
 
+    public List<ActivityLocation> getAllActivityLocationsForLocation(final Long locationId) {
+        return list("location.id", locationId);
+    }
+
     public void deleteAllActivityLocationsForActivity(final Long activityId) {
         final List<ActivityLocation> activityLocations = getAllActivityLocationsForActivity(activityId);
         activityLocations.forEach(this::delete);

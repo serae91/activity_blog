@@ -1,5 +1,6 @@
 package backend.location.web;
 
+import backend.location.core.listview.LocationListDto;
 import backend.location.model.Location;
 import backend.location.usecase.create.model.CreateLocationDto;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -34,6 +35,13 @@ public class LocationResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Location> getAllLocations() {
         return locationResourceFacade.getAllLocations();
+    }
+
+    @GET
+    @Path("/all/list")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<LocationListDto> getAllLocationListDtos() {
+        return locationResourceFacade.getAllLocationListDtos();
     }
 
     @POST

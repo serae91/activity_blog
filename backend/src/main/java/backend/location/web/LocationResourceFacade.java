@@ -1,6 +1,7 @@
 package backend.location.web;
 
 import backend.location.core.LocationService;
+import backend.location.core.listview.LocationListDto;
 import backend.location.model.Location;
 import backend.location.usecase.create.CreateLocationService;
 import backend.location.usecase.create.model.CreateLocationDto;
@@ -24,6 +25,9 @@ public class LocationResourceFacade {
 
     public List<Location> getAllLocations() {
         return locationService.getAllLocations();
+    }
+    public List<LocationListDto> getAllLocationListDtos() {
+        return locationService.getAllLocationListDtos();
     }
 
     public Location createNewLocation(final CreateLocationDto createLocationDto) {
