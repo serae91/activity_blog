@@ -1,1 +1,46 @@
-<p>create-person-modal works!</p>
+<div class="modal-content">
+    <div class="modal-header">
+        <h3>Create New Activity</h3>
+    </div>
+    <div class="modal-content">
+        <form [formGroup]="formGroup">
+            <mat-dialog-content class="dialog-content">
+                <div class="flex-col">
+                    <mat-form-field>
+                        <mat-label>First Name</mat-label>
+                        <input matInput
+                               formControlName="firstName"
+                               required
+                               id="firstName"
+                               name="firstName"
+                               maxlength="50">
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>Last Name</mat-label>
+                        <input id="lastName"
+                               name="lastName"
+                               type="text" matInput appNumeric
+                               formControlName="lastName"
+                               required>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>Birthday</mat-label>
+                        <input id="birthday"
+                               name="birthday"
+                               type="date" matInput appNumeric
+                               formControlName="birthday"
+                               required>
+                    </mat-form-field>
+                </div>
+                
+            </mat-dialog-content>
+        </form>
+        
+    </div>
+    <div class="flex-row">
+        <button class="btn-secondary" (click)="cancel()">Cancel</button>
+        <button class="btn-success" [disabled]="!canSave()" (click)="savePersonAndCloseDialog()">Save</button>
+    </div>
+</div>

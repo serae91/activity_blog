@@ -9,9 +9,7 @@ export interface PersonDto {
 }
 
 export interface CreatePersonDto {
-    id: number;
     firstName: string;
     lastName: string;
     birthday: Date;
-    activities: ActivityDto[];
 }
