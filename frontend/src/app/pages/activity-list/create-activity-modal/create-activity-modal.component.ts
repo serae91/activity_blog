@@ -51,7 +51,7 @@ export class CreateActivityModalComponent {
 
   initFormGroup(): void {
     this.formGroup = this.formBuilder.group({
-      authorId: this.formBuilder.control(0),
+      authorId: this.formBuilder.control(null),
       title: this.formBuilder.control(''),
       description: this.formBuilder.control(''),
       personIds: this.formBuilder.array([this.formBuilder.control(0)]),
@@ -122,5 +122,9 @@ export class CreateActivityModalComponent {
 
   cancel(): void {
     this.dialogRef.close(null);
+  }
+
+  canSave(): boolean {
+    return this.formGroup.valid;
   }
 }
