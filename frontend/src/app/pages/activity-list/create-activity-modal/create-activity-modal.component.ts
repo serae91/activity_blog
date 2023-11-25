@@ -111,7 +111,6 @@ export class CreateActivityModalComponent {
   }
 
   saveActivityAndCloseDialog(): void {
-    console.log(this.getCreateActivityDto());
     this.activityService.createNewActivity(this.getCreateActivityDto())
     .subscribe(newActivity => this.dialogRef.close(newActivity));
   }

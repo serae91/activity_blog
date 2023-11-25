@@ -9,13 +9,23 @@ import { MaterialModule } from '../core/material-module';
 import { PersonListComponent } from './person-list/person-list.component';
 import { PersonCardComponent } from './person-list/person-card/person-card.component';
 import { CreatePersonModalComponent } from './person-list/create-person-modal/create-person-modal.component';
+import { LocationListComponent } from './location-list/location-list.component';
+import { CreateLocationModalComponent } from './location-list/create-location-modal/create-location-modal.component';
+import { LocationCardComponent } from './location-list/location-card/location-card.component';
 
 const COMPONENTS = [
-  ActivityListComponent
+  ActivityListComponent,
+  ActivityCardComponent,
+  CreateActivityModalComponent,
+  CreateLocationModalComponent,
+  CreatePersonModalComponent,
+  PersonCardComponent,
+  PersonListComponent,
+  LocationListComponent
 ];
 
 @NgModule({
-  declarations: [COMPONENTS, ActivityCardComponent, CreateActivityModalComponent, PersonListComponent, PersonCardComponent, CreatePersonModalComponent],
+  declarations: [COMPONENTS, LocationCardComponent],
   imports: [CommonModule, FormsModule, MaterialModule, SharedModule],
   exports: [COMPONENTS],
 })

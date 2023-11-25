@@ -1,0 +1,8 @@
+<div>
+    <app-opacity-scroll>
+        <div *ngFor="let locationListDto of locationListDtos">
+            <app-location-card [locationListDto]="locationListDto" (deleteLocationEvent)="onDeleteLocation($event)"></app-location-card>
+        </div>
+    </app-opacity-scroll>
+</div>
+<button type="button" class="btn-primary" (click)="openCreateLocationModal()">Add new Location</button>
