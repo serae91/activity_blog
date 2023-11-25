@@ -1,6 +1,7 @@
 package backend.person.web;
 
 import backend.person.core.PersonService;
+import backend.person.core.listview.PersonListDto;
 import backend.person.model.Person;
 import backend.person.usecase.create.CreatePersonService;
 import backend.person.usecase.create.model.CreatePersonDto;
@@ -24,6 +25,9 @@ public class PersonResourceFacade {
 
     public List<Person> getAllPersons() {
         return personService.getAllPersons();
+    }
+    public List<PersonListDto> getAllPersonListDtos() {
+        return personService.getAllPersonListDtos();
     }
 
     public Person createNewPerson(final CreatePersonDto createPersonDto) {

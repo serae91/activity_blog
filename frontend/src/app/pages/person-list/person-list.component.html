@@ -1,7 +1,7 @@
 <div>
     <app-opacity-scroll>
-        <div *ngFor="let person of persons">
-            <app-person-card [person]="person"></app-person-card>
+        <div *ngFor="let personListDto of personListDtos">
+            <app-person-card [personListDto]="personListDto" (deletePersonEvent)="onDeletePerson($event)"></app-person-card>
         </div>
     </app-opacity-scroll>
     </div>

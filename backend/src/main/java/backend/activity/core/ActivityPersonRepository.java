@@ -21,6 +21,10 @@ public class ActivityPersonRepository implements PanacheRepository<ActivityPerso
         return list("activity.id", activityId);
     }
 
+    public List<ActivityPerson> getAllActivityPersonsForPerson(final Long personId) {
+        return list("person.id", personId);
+    }
+
     public void deleteAllActivityPersonsForActivity(final Long activityId) {
         final List<ActivityPerson> activityLocations = getAllActivityPersonsForActivity(activityId);
         activityLocations.forEach(this::delete);

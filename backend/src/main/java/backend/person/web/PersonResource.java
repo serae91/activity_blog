@@ -1,5 +1,6 @@
 package backend.person.web;
 
+import backend.person.core.listview.PersonListDto;
 import backend.person.model.Person;
 import backend.person.usecase.create.model.CreatePersonDto;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -31,8 +32,15 @@ public class PersonResource {
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Person> getAllActivities() {
+    public List<Person> getAllPersons() {
         return personResourceFacade.getAllPersons();
+    }
+
+    @GET
+    @Path("/all/list")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<PersonListDto> getAllPersonListDtos() {
+        return personResourceFacade.getAllPersonListDtos();
     }
 
     @POST

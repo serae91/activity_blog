@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { PersonDto } from 'src/app/_api/person.dto';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { PersonDto, PersonListDto } from 'src/app/_api/person.dto';
+import { PersonService } from 'src/app/core/services/person/person.service';
 
 @Component({
   selector: 'app-person-card',
@@ -9,9 +10,21 @@ import { PersonDto } from 'src/app/_api/person.dto';
 })
 export class PersonCardComponent {
   @Input()
-  person: PersonDto;
+  personListDto: PersonListDto;
+
+  @Output()
+  deletePersonEvent = new EventEmitter<number>();
 
   datePipe = new DatePipe('en-US');
+
+  personService = inject(PersonService);
+
+  deletePerson(): void {
+    if(!this.personListDto.canBeDeleted){
+      return;
+    }
+    this.personService.deletePerson(this.personListDto.person.id).subscribe(() => this.deletePersonEvent.emit(this.personListDto.person.id));
+  }
 
   getDateString(date: Date): string {
     return this.getDateTimeString(date).substring(0, 11);

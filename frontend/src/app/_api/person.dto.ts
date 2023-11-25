@@ -1,5 +1,10 @@
 import { ActivityDto } from "./activity.dto";
 
+export interface PersonListDto {
+    person: PersonDto;
+    canBeDeleted: boolean;
+}
+
 export interface PersonDto {
     id: number;
     firstName: string;

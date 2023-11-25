@@ -1,5 +1,6 @@
 package backend.person.core;
 
+import backend.person.core.listview.PersonListDto;
 import backend.person.model.Person;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;

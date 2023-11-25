@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CreatePersonDto, PersonDto } from 'src/app/_api/person.dto';
+import { CreatePersonDto, PersonDto, PersonListDto } from 'src/app/_api/person.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +9,7 @@ import { CreatePersonDto, PersonDto } from 'src/app/_api/person.dto';
 export class PersonService {
   static readonly PERSON = 'person';
   static readonly ALL = '/all';
+  static readonly LIST = '/list';
   static readonly NEW = '/new';
 
   constructor(private http: HttpClient){}
@@ -19,6 +20,10 @@ export class PersonService {
 
   getAllPersons(): Observable<PersonDto[]>{
     return this.http.get<PersonDto[]>(PersonService.PERSON + PersonService.ALL);
+  }
+
+  getAllPersonListDtos(): Observable<PersonListDto[]>{
+    return this.http.get<PersonListDto[]>(PersonService.PERSON + PersonService.ALL + PersonService.LIST);
   }
   
   createNewPerson(createPersonDto: CreatePersonDto): Observable<PersonDto>{

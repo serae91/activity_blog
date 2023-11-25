@@ -16,6 +16,9 @@ public class ActivityRepository implements PanacheRepository<Activity> {
     public List<Activity> getAllActivities() {
         return listAll();
     }
+    public List<Activity> getAllActivitiesForAuthor(final Long authorId) {
+        return list("author.id", authorId);
+    }
     public Activity createNewActivity(final Activity activity) {
         persist(activity);
         return activity;

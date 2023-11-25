@@ -1,5 +1,6 @@
 <div class="card-container">
-    <h5>{{person.firstName + ' ' + person.lastName}}</h5>
-    <p class="card-text">{{'Birthday: ' + getDateString(person.birthday)}}</p>
-
+    <h5>{{personListDto.person.firstName + ' ' + personListDto.person.lastName}}</h5>
+    <p class="card-text">{{'Birthday: ' + getDateString(personListDto.person.birthday)}}</p>
+    <button type="button" class="tiny-btn" (click)="deletePerson()" *ngIf="personListDto.canBeDeleted">-</button>
+    <p class="card-text" *ngIf="!personListDto.canBeDeleted">This Person can't be deleted, because it is listed in an activity</p>
 </div>

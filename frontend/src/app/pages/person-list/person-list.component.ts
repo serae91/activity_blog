@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PersonDto } from 'src/app/_api/person.dto';
+import { PersonDto, PersonListDto } from 'src/app/_api/person.dto';
 import { PersonService } from 'src/app/core/services/person/person.service';
 import { CreatePersonModalComponent } from './create-person-modal/create-person-modal.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -10,12 +10,12 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./person-list.component.scss']
 })
 export class PersonListComponent {
-  persons: PersonDto[];
+  personListDtos: PersonListDto[];
 
   constructor(private personService: PersonService, private dialog: MatDialog){}
 
   ngOnInit(): void {
-    this.personService.getAllPersons().subscribe(persons => this.persons = persons);
+    this.personService.getAllPersonListDtos().subscribe(personListDtos => this.personListDtos = personListDtos);
   }
 
   openCreatePersonModal(): void {
@@ -23,8 +23,12 @@ export class PersonListComponent {
     .afterClosed()
     .subscribe((person: PersonDto) => {
       if(person) {
-        this.persons.push(person)
+        this.personListDtos.push({person, canBeDeleted: true} as PersonListDto)
       }
     });
+  }
+
+  onDeletePerson(personId: number): void {
+    this.personListDtos = this.personListDtos.filter(personListDto => personListDto.person.id !== personId);
   }
 }

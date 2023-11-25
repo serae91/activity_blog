@@ -29,6 +29,7 @@ export class ActivityListComponent implements OnInit {
       }
     });
   }
+
   onDeleteActivity(activityId: number) {
     this.activities = this.activities.filter(activity => activity.id !== activityId);
   }
