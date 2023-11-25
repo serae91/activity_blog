@@ -23,15 +23,23 @@
                            formControlName="description"
                            required>
                 </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Author</mat-label>
+                    <mat-select placeholder="Add Author" formControlName="authorId" required>
+                        <mat-option *ngFor="let person of persons" [value]="person.id" [disabled]="isPersonSelected(person)">
+                            {{person.firstName + ' ' + person.lastName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
                 <div class="select-panels">
-                    <div class="select-panel">
+                    <div class="select-panel" formArrayName="personIds">
                         <mat-label>Participants</mat-label>
-                        <div *ngFor="let personId of personIds.value; let i = index">
+                        <div *ngFor="let personId of personIds.controls; let i = index">
                             <div class="flex-row">
                                 <mat-form-field>
-                                    <mat-select placeholder="Add new Person">
-                                        <mat-option *ngFor="let person of persons" [value]="person.id" (onSelectionChange)="onPersonSelectionChange($event, i)">
-                                            {{person.firstName + ' ' + person.lastName}}
+                                    <mat-select placeholder="Add new Person" [formControlName]="i">
+                                        <mat-option *ngFor="let person of persons; let i = index" [value]="person.id" [disabled]="isPersonSelected(person)">
+                                            {{persons[i].firstName + ' ' + persons[i].lastName}}
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
@@ -40,13 +48,13 @@
                         </div>
                         <button type="button" class="tiny-btn" (click)="addParticipant()">+</button>
                     </div>
-                    <div class="select-panel">
+                    <div class="select-panel" formArrayName="locationIds">
                         <mat-label>Locations</mat-label>
                         <div *ngFor="let locationId of locationIds.value; let i = index">
                             <div class="flex-row">
                                 <mat-form-field>
-                                    <mat-select placeholder="Add new Location">
-                                        <mat-option *ngFor="let location of locations" [value]="location.id" (onSelectionChange)="onLocationSelectionChange($event, i)">
+                                    <mat-select placeholder="Add new Location" [formControlName]="i">
+                                        <mat-option *ngFor="let location of locations" [value]="location.id" [disabled]="isLocationSelected(location)">
                                             {{location.name}}
                                         </mat-option>
                                     </mat-select>

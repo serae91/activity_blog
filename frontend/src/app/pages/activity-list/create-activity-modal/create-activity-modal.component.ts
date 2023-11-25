@@ -51,17 +51,12 @@ export class CreateActivityModalComponent {
 
   initFormGroup(): void {
     this.formGroup = this.formBuilder.group({
-      authorId: this.formBuilder.control(1),
+      authorId: this.formBuilder.control(0),
       title: this.formBuilder.control(''),
       description: this.formBuilder.control(''),
       personIds: this.formBuilder.array([this.formBuilder.control(0)]),
       locationIds: this.formBuilder.array([this.formBuilder.control(0)]),
     });
-  }
-
-  onPersonSelectionChange(event: MatOptionSelectionChange, index: number): void {
-    this.personIds.controls[index].setValue(event.source.value);
-    console.log(this.personIds.controls[index].value);
   }
 
   removeParticipant(index: number) {
@@ -72,8 +67,28 @@ export class CreateActivityModalComponent {
     this.personIds.push(this.formBuilder.control(0))
   }
 
-  onLocationSelectionChange(event: MatOptionSelectionChange, index: number): void {
-    this.locationIds.controls[index].setValue(event.source.value);
+  isPersonSelected(person: PersonDto): boolean {
+    const selectedPersonIds = this.getSelectedPersons().map(person => person.id);
+    return selectedPersonIds.includes(person.id);
+  }
+
+  getSelectedPersons(): PersonDto[] {
+    if(!this.persons || !this.formGroup?.controls['authorId'] || !this.personIds) {
+      return [];
+    }
+    return this.persons.filter(person => this.formGroup.controls['authorId'].value === person.id || this.personIds.value.includes(person.id));
+  }
+
+  isLocationSelected(location: LocationDto): boolean {
+    const selectedLocationIds = this.getSelectedLocations().map(location => location.id);
+    return selectedLocationIds.includes(location.id);
+  }
+
+  getSelectedLocations(): LocationDto[] {
+    if(!this.locations || !this.locationIds) {
+      return [];
+    }
+    return this.locations.filter(location => this.locationIds.value.includes(location.id));
   }
 
   removeLocation(index: number) {
@@ -96,6 +111,7 @@ export class CreateActivityModalComponent {
   }
 
   saveActivityAndCloseDialog(): void {
+    console.log(this.getCreateActivityDto());
     this.activityService.createNewActivity(this.getCreateActivityDto())
     .subscribe(newActivity => this.dialogRef.close(newActivity));
   }
