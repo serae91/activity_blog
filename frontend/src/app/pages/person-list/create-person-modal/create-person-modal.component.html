@@ -39,6 +39,7 @@
         </form>
         
     </div>
+    <div *ngIf="doesPersonAlreadyExist()">This person already exists</div>
     <div class="flex-row">
         <button class="btn-secondary" (click)="cancel()">Cancel</button>
         <button class="btn-success" [disabled]="!canSave()" (click)="savePersonAndCloseDialog()">Save</button>

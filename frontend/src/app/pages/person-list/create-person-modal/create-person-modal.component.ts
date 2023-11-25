@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormArray, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -13,6 +14,8 @@ export class CreatePersonModalComponent {
 
   formGroup: UntypedFormGroup;
   persons: PersonDto[];
+
+  datePipe = new DatePipe('en-US');
 
   get personIds(): FormArray {
     return this.formGroup.controls['personIds'] as FormArray;
@@ -39,33 +42,17 @@ export class CreatePersonModalComponent {
       birthday: this.formBuilder.control(null),
     });
   }
-  
-  addParticipant() {
-    this.personIds.push(this.formBuilder.control(0))
-  }
 
-  isPersonSelected(person: PersonDto): boolean {
-    const selectedPersonIds = this.getSelectedPersons().map(person => person.id);
-    return selectedPersonIds.includes(person.id);
-  }
-
-  getSelectedPersons(): PersonDto[] {
-    if(!this.persons || !this.formGroup?.controls['authorId'] || !this.personIds) {
-      return [];
-    }
-    return this.persons.filter(person => this.formGroup.controls['authorId'].value === person.id || this.personIds.value.includes(person.id));
-  }
-
-  getCreatePersonyDto(): CreatePersonDto {
+  getCreatePersonDto(): CreatePersonDto {
     return {
       firstName: this.formGroup.controls['firstName'].value,
       lastName: this.formGroup.controls['lastName'].value,
-      birthday: this.formGroup.controls['birthday'].value
+      birthday: new Date(this.formGroup.controls['birthday'].value)
     } as CreatePersonDto;
   }
 
   savePersonAndCloseDialog(): void {
-    this.personService.createNewPerson(this.getCreatePersonyDto())
+    this.personService.createNewPerson(this.getCreatePersonDto())
     .subscribe(newPerson => this.dialogRef.close(newPerson));
   }
 
@@ -74,6 +61,36 @@ export class CreatePersonModalComponent {
   }
 
   canSave(): boolean {
+    if(this.doesPersonAlreadyExist()) {
+      return false;
+    }
     return this.formGroup.valid;
+  }
+
+  doesPersonAlreadyExist(): boolean {
+    if(!this.formGroup.controls['firstName'].valid || !this.formGroup.controls['lastName'].valid || !this.formGroup.controls['birthday'].valid) {
+      return false;
+    }
+    const newPerson = {
+      firstName: this.formGroup.controls['firstName'].value,
+      lastName: this.formGroup.controls['lastName'].value,
+      birthday: new Date(this.formGroup.controls['birthday'].value)
+    } as PersonDto;
+    for(let person of this.persons) {
+      if(this.doPersonsEqual(person, newPerson)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  doPersonsEqual(person1: PersonDto, person2: PersonDto): boolean {
+    return person1.firstName === person2.firstName && person1.lastName === person2.lastName && this.isSameDay(person1.birthday, person2.birthday);
+  }
+
+  isSameDay(date1: Date, date2: Date): boolean {
+    const dateToCheck1 = this.datePipe.transform(date1.toString().substring(0, date1.toString().length - 6));
+    const dateToCheck2 = this.datePipe.transform(date2.toString().substring(0, date2.toString().length - 6));
+    return dateToCheck1 === dateToCheck2;
   }
 }
