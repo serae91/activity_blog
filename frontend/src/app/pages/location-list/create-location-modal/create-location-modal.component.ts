@@ -63,10 +63,21 @@ export class CreateLocationModalComponent {
   }
 
   canSave(): boolean {
-    if(this.doesLocationAlreadyExist()) {
+    if(this.doesLocationNameAlreadyExist() || this.doesLocationAlreadyExist()) {
       return false;
     }
     return this.formGroup.valid;
+  }
+
+  doesLocationNameAlreadyExist(): boolean {
+    if(!this.formGroup.controls['name'].value) {
+      return false;
+    }
+    const locationNames = this.locations.map(location => location.name);
+    if(locationNames.includes(this.formGroup.controls['name'].value)) {
+      return true;
+    }
+    return false;
   }
 
   doesLocationAlreadyExist(): boolean {
@@ -74,10 +85,6 @@ export class CreateLocationModalComponent {
       return false;
     }
     const createLocationDto = this.getCreateLocationDto();
-    const locationNames = this.locations.map(location => location.name);
-    if(locationNames.includes(createLocationDto.name)) {
-      return true;
-    }
     for(const location of this.locations) {
       if(location.city === createLocationDto.city
         && location.country === createLocationDto.country
