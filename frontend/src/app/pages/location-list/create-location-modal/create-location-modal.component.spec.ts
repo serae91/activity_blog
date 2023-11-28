@@ -6,7 +6,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { CreateLocationDto, LocationDto } from '../../../_api/location.dto';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { LocationService } from '../../../core/services/location/location.service';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 describe('CreateLocationModalComponent', () => {
   let component: CreateLocationModalComponent;
@@ -60,7 +60,7 @@ describe('CreateLocationModalComponent', () => {
     expect(component.formGroup.controls['country'].value).toBe('');
   });
 
-  it('should save locations', () => {
+  it('should save locations success', () => {
     const createLocationDto = {name:'mockName'} as CreateLocationDto;
     const newLocation = {name:'newMockName'} as LocationDto;
     jest.spyOn(component, 'getCreateLocationDto').mockReturnValue(createLocationDto);
@@ -72,5 +72,19 @@ describe('CreateLocationModalComponent', () => {
     expect(component.getCreateLocationDto).toHaveBeenCalledWith();
     expect(locationService.createNewLocation).toHaveBeenCalledWith(createLocationDto);
     expect(dialogRef.close).toHaveBeenCalledWith(newLocation);
+  });
+
+  it('should save locations error', () => {
+    const createLocationDto = {name:'mockName'} as CreateLocationDto;
+    const newLocation = {name:'newMockName'} as LocationDto;
+    jest.spyOn(component, 'getCreateLocationDto').mockReturnValue(createLocationDto);
+    jest.spyOn(locationService, 'createNewLocation').mockReturnValue(throwError('Error'));
+    jest.spyOn(dialogRef, 'close').mockReturnValue(undefined);
+
+    component.saveLocationAndCloseDialog();
+
+    expect(component.getCreateLocationDto).toHaveBeenCalledWith();
+    expect(locationService.createNewLocation).toHaveBeenCalledWith(createLocationDto);
+    expect(dialogRef.close).not.toHaveBeenCalled();
   });
 });

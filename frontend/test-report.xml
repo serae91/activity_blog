@@ -5,6 +5,7 @@
     <testCase name="CreateLocationModalComponent should init" duration="0"/>
     <testCase name="CreateLocationModalComponent should load all locations" duration="0"/>
     <testCase name="CreateLocationModalComponent should init form group" duration="0"/>
-    <testCase name="CreateLocationModalComponent should save locations" duration="37"/>
+    <testCase name="CreateLocationModalComponent should save locations success" duration="0"/>
+    <testCase name="CreateLocationModalComponent should save locations error" duration="37"/>
   </file>
 </testExecutions>

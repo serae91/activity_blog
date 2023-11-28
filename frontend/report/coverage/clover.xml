@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1701206070298" clover="3.2.0">
-  <project timestamp="1701206070298" name="All files">
-    <metrics statements="47" coveredstatements="33" conditionals="12" coveredconditionals="3" methods="20" coveredmethods="12" elements="79" coveredelements="48" complexity="0" loc="47" ncloc="47" packages="2" files="3" classes="3"/>
+<coverage generated="1701206138318" clover="3.2.0">
+  <project timestamp="1701206138318" name="All files">
+    <metrics statements="47" coveredstatements="32" conditionals="12" coveredconditionals="3" methods="20" coveredmethods="11" elements="79" coveredelements="46" complexity="0" loc="47" ncloc="47" packages="2" files="3" classes="3"/>
     <package name="core.services.location">
       <metrics statements="13" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="2"/>
       <file name="location.service.ts" path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/core/services/location/location.service.ts">
@@ -22,13 +22,13 @@
       </file>
     </package>
     <package name="pages.location-list.create-location-modal">
-      <metrics statements="34" coveredstatements="24" conditionals="12" coveredconditionals="3" methods="14" coveredmethods="10"/>
+      <metrics statements="34" coveredstatements="23" conditionals="12" coveredconditionals="3" methods="14" coveredmethods="9"/>
       <file name="create-location-modal.component.html" path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/location-list/create-location-modal/create-location-modal.component.html">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
       </file>
       <file name="create-location-modal.component.ts" path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/location-list/create-location-modal/create-location-modal.component.ts">
-        <metrics statements="33" coveredstatements="23" conditionals="12" coveredconditionals="3" methods="14" coveredmethods="10"/>
+        <metrics statements="33" coveredstatements="22" conditionals="12" coveredconditionals="3" methods="14" coveredmethods="9"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -44,7 +44,7 @@
         <line num="35" count="1" type="stmt"/>
         <line num="46" count="4" type="stmt"/>
         <line num="57" count="1" type="stmt"/>
-        <line num="58" count="1" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
         <line num="62" count="0" type="stmt"/>
         <line num="66" count="2" type="cond" truecount="2" falsecount="1"/>
         <line num="67" count="0" type="stmt"/>
