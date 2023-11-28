@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { LocationDto, LocationListDto } from 'src/app/_api/location.dto';
-import { LocationService } from 'src/app/core/services/location/location.service';
+import { LocationDto, LocationListDto } from '../../_api/location.dto';
+import { LocationService } from '../../../app/core/services/location/location.service';
 import { CreateLocationModalComponent } from './create-location-modal/create-location-modal.component';
 
 @Component({

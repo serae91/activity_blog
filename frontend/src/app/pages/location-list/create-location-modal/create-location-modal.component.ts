@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormArray, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { CreateLocationDto, LocationDto } from 'src/app/_api/location.dto';
-import { LocationService } from 'src/app/core/services/location/location.service';
+import { LocationService } from '../../../core/services/location/location.service';
+import { CreateLocationDto, LocationDto } from '../../../_api/location.dto';
 
 @Component({
   selector: 'app-create-location-modal',
