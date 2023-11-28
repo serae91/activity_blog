@@ -1,4 +1,4 @@
-# je.jointeffortsonline Project
+# activity blog Project
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
