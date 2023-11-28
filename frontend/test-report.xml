@@ -2,6 +2,9 @@
 <testExecutions version="1">
   <file path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/location-list/create-location-modal/create-location-modal.component.spec.ts">
     <testCase name="CreateLocationModalComponent should create" duration="0"/>
-    <testCase name="CreateLocationModalComponent should init" duration="35"/>
+    <testCase name="CreateLocationModalComponent should init" duration="0"/>
+    <testCase name="CreateLocationModalComponent should load all locations" duration="0"/>
+    <testCase name="CreateLocationModalComponent should init form group" duration="0"/>
+    <testCase name="CreateLocationModalComponent should save locations" duration="37"/>
   </file>
 </testExecutions>
