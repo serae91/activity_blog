@@ -76,7 +76,6 @@ describe('CreateLocationModalComponent', () => {
 
   it('should save locations error', () => {
     const createLocationDto = {name:'mockName'} as CreateLocationDto;
-    const newLocation = {name:'newMockName'} as LocationDto;
     jest.spyOn(component, 'getCreateLocationDto').mockReturnValue(createLocationDto);
     jest.spyOn(locationService, 'createNewLocation').mockReturnValue(throwError('Error'));
     jest.spyOn(dialogRef, 'close').mockReturnValue(undefined);

@@ -12,13 +12,13 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ActivityResourceTest {
+class ActivityResourceTest {
     @Mock
     ActivityResourceFacade activityResourceFacade;
     @InjectMocks
     ActivityResource activityResource;
     @Mock
-    Activity activity;
+    private Activity activity;
     @Test
     void getActivityByIdTest() {
         when(activityResourceFacade.getActivityById(7L)).thenReturn(activity);
