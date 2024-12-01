@@ -1,20 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
-import { MatOptionSelectionChange } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { CreateActivityDto } from 'src/app/_api/activity.dto';
-import { LocationDto } from 'src/app/_api/location.dto';
-import { PersonDto } from 'src/app/_api/person.dto';
-import { ActivityService } from 'src/app/core/services/activity/activity.service';
-import { LocationService } from 'src/app/core/services/location/location.service';
-import { PersonService } from 'src/app/core/services/person/person.service';
+import { CreateActivityDto } from '../../../_api/activity.dto';
+import { LocationDto } from '../../../_api/location.dto';
+import { PersonDto } from '../../../_api/person.dto';
+import { ActivityService } from '../../../core/services/activity/activity.service';
+import { LocationService } from '../../../core/services/location/location.service';
+import { PersonService } from '../../../core/services/person/person.service';
 
 @Component({
   selector: 'app-create-activity-modal',
   templateUrl: './create-activity-modal.component.html',
   styleUrls: ['./create-activity-modal.component.scss']
 })
-export class CreateActivityModalComponent {
+export class CreateActivityModalComponent implements OnInit {
 
   formGroup: UntypedFormGroup;
   persons: PersonDto[];
@@ -62,7 +61,7 @@ export class CreateActivityModalComponent {
   removeParticipant(index: number) {
     this.personIds.removeAt(index);
   }
-  
+
   addParticipant() {
     this.personIds.push(this.formBuilder.control(0))
   }
@@ -73,7 +72,7 @@ export class CreateActivityModalComponent {
   }
 
   getSelectedPersons(): PersonDto[] {
-    if(!this.persons || !this.formGroup?.controls['authorId'] || !this.personIds) {
+    if (!this.persons || !this.formGroup?.controls['authorId'] || !this.personIds) {
       return [];
     }
     return this.persons.filter(person => this.formGroup.controls['authorId'].value === person.id || this.personIds.value.includes(person.id));
@@ -85,7 +84,7 @@ export class CreateActivityModalComponent {
   }
 
   getSelectedLocations(): LocationDto[] {
-    if(!this.locations || !this.locationIds) {
+    if (!this.locations || !this.locationIds) {
       return [];
     }
     return this.locations.filter(location => this.locationIds.value.includes(location.id));
@@ -94,7 +93,7 @@ export class CreateActivityModalComponent {
   removeLocation(index: number) {
     this.locationIds.removeAt(index);
   }
-  
+
   addLocation() {
     this.locationIds.push(this.formBuilder.control(0))
   }
@@ -112,7 +111,7 @@ export class CreateActivityModalComponent {
 
   saveActivityAndCloseDialog(): void {
     this.activityService.createNewActivity(this.getCreateActivityDto())
-    .subscribe(newActivity => this.dialogRef.close(newActivity));
+      .subscribe(newActivity => this.dialogRef.close(newActivity));
   }
 
   getUniqueValues<T>(values: T[]): T[] {

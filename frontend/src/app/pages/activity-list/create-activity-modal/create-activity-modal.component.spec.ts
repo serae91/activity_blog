@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateActivityModalComponent } from './create-activity-modal.component';
+import { MaterialModule } from '../../../core/material.module';
+import { MatDialogRef } from '@angular/material/dialog';
 
 describe('CreateActivityModalComponent', () => {
   let component: CreateActivityModalComponent;
@@ -8,7 +10,8 @@ describe('CreateActivityModalComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CreateActivityModalComponent]
+      declarations: [CreateActivityModalComponent],
+      imports: [MaterialModule]
     });
     fixture = TestBed.createComponent(CreateActivityModalComponent);
     component = fixture.componentInstance;

@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ActivityDto } from 'src/app/_api/activity.dto';
-import { ActivityService } from 'src/app/core/services/activity/activity.service';
+import { ActivityDto } from '../../../_api/activity.dto';
+import { ActivityService } from '../../../core/services/activity/activity.service';
 
 @Component({
   selector: 'app-activity-card',
@@ -32,6 +32,7 @@ export class ActivityCardComponent {
   }
 
   private getDateTimeString(date: Date): string {
+    if (!date) return '';
     return this.datePipe.transform(date.toString().substring(0, 19), 'dd MMM YYYY HH:mm:ss')?.toString() ?? '';
   }
 }

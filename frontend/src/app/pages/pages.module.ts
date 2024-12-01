@@ -12,7 +12,6 @@ import { CreatePersonModalComponent } from './person-list/create-person-modal/cr
 import { LocationListComponent } from './location-list/location-list.component';
 import { CreateLocationModalComponent } from './location-list/create-location-modal/create-location-modal.component';
 import { LocationCardComponent } from './location-list/location-card/location-card.component';
-import { ServicesModule } from '../core/services/services.module';
 
 const COMPONENTS = [
   ActivityListComponent,

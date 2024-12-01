@@ -1,6 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1732996792494" clover="3.2.0">
-  <project timestamp="1732996792494" name="All files">
-    <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0" elements="0" coveredelements="0" complexity="0" loc="0" ncloc="0" packages="0" files="0" classes="0"/>
+<coverage generated="1733092829054" clover="3.2.0">
+  <project timestamp="1733092829054" name="All files">
+    <metrics statements="24" coveredstatements="18" conditionals="3" coveredconditionals="1" methods="11" coveredmethods="5" elements="38" coveredelements="24" complexity="0" loc="24" ncloc="24" packages="2" files="3" classes="3"/>
+    <package name="core.services.activity">
+      <metrics statements="11" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="1"/>
+      <file name="activity.service.ts" path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/core/services/activity/activity.service.ts">
+        <metrics statements="11" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="pages.activity-list.activity-card">
+      <metrics statements="13" coveredstatements="11" conditionals="3" coveredconditionals="1" methods="6" coveredmethods="4"/>
+      <file name="activity-card.component.html" path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/activity-list/activity-card/activity-card.component.html">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="activity-card.component.ts" path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/activity-list/activity-card/activity-card.component.ts">
+        <metrics statements="12" coveredstatements="10" conditionals="3" coveredconditionals="1" methods="6" coveredmethods="4"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="31" count="2" type="stmt"/>
+        <line num="35" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="36" count="0" type="cond" truecount="0" falsecount="2"/>
+      </file>
+    </package>
   </project>
 </coverage>

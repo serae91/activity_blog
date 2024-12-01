@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/activity-list/activity-list.component.spec.ts">
+  <file path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/activity-list/activity-card/activity-card.component.spec.ts">
+    <testCase name="ActivityCardComponent should create" duration="41"/>
   </file>
 </testExecutions>

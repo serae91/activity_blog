@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivityDto } from 'src/app/_api/activity.dto';
-import { ActivityService } from 'src/app/core/services/activity/activity.service';
+import { ActivityDto } from '../../_api/activity.dto';
+import { ActivityService } from '../../core/services/activity/activity.service';
 import { CreateActivityModalComponent } from './create-activity-modal/create-activity-modal.component';
 
 @Component({
