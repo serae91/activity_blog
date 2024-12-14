@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 import { CreateLocationModalComponent } from './create-location-modal.component';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -7,6 +7,7 @@ import { CreateLocationDto, LocationDto } from '../../../_api/location.dto';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { LocationService } from '../../../core/services/location/location.service';
 import { of, throwError } from 'rxjs';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('CreateLocationModalComponent', () => {
   let component: CreateLocationModalComponent;
@@ -16,13 +17,15 @@ describe('CreateLocationModalComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CreateLocationModalComponent],
-      imports:[MatDialogModule, HttpClientTestingModule],
-      providers:[
+    declarations: [CreateLocationModalComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+    imports: [MatDialogModule],
+    providers: [
         { provide: MatDialogRef, useValue: { close: (location: LocationDto) => undefined } },
-      ],
-      schemas:[CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
-    });
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+    ]
+});
     fixture = TestBed.createComponent(CreateLocationModalComponent);
     component = fixture.componentInstance;
     locationService = TestBed.inject(LocationService);
