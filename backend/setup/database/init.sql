@@ -1,2 +1,2 @@
-CREATE USER homepage;
-GRANT ALL ON DATABASE homepage TO homepage;
+CREATE USER blogger;
+GRANT ALL ON DATABASE activity_blog TO blogger;
