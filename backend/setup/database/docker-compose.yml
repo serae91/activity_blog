@@ -1,6 +1,6 @@
 services:
   postgres:
-    container_name: homepage_container
+    container_name: activity_blog_container
     image: postgres:13-alpine
     environment:
       POSTGRES_USER: blogger

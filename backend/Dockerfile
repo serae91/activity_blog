@@ -1,30 +1,16 @@
-# Use the official Maven image to build the app
-FROM maven:3.9.5-eclipse-temurin-21 AS build
-
-# Set the working directory
-WORKDIR /usr/src/app
-
-# Copy Maven files and resolve dependencies
-COPY pom.xml ./
-RUN mvn dependency:go-offline
-
-# Copy the rest of the application code
+# Stage 1: Build the application
+FROM maven:3.9-eclipse-temurin-21 AS build
+WORKDIR /build
+COPY pom.xml .
 COPY src ./src
+RUN mvn package -DskipTests
 
-# Build the application
-RUN mvn package -Dquarkus.package.type=fast-jar
-
-# Use a lightweight JDK image to run the app
-FROM openjdk:17-jdk-slim
-
-# Set the working directory
+# Stage 2: Run the application
+FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
-
-# Copy the built Quarkus app
-COPY --from=build /usr/src/app/target/*-runner.jar /app/app.jar
-
-# Expose the application port
+COPY --from=build /build/target/quarkus-app/lib/ /app/lib/
+COPY --from=build /build/target/quarkus-app/*.jar /app/
+COPY --from=build /build/target/quarkus-app/app/ /app/app/
+COPY --from=build /build/target/quarkus-app/quarkus/ /app/quarkus/
+ENTRYPOINT ["java", "-jar", "/app/quarkus-run.jar"]
 EXPOSE 8080
-
-# Run the Quarkus application
-CMD ["java", "-jar", "/app/app.jar"]

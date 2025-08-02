@@ -1,0 +1,37 @@
+# quarkus-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quarkus-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: quarkus-backend
+  template:
+    metadata:
+      labels:
+        app: quarkus-backend
+    spec:
+      containers:
+        - name: quarkus-backend
+          image: your-registry/quarkus-backend:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: QUARKUS_DATASOURCE_JDBC_URL
+              value: jdbc:postgresql://postgres:5432/mydb
+            - name: QUARKUS_DATASOURCE_USERNAME
+              value: myuser
+            - name: QUARKUS_DATASOURCE_PASSWORD
+              value: mypassword
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: quarkus-backend
+spec:
+  ports:
+    - port: 8080
+  selector:
+    app: quarkus-backend
