@@ -1,7 +1,5 @@
 package backend.activity.usecase.create;
 
-import backend.activity.core.ActivityLocationRepository;
-import backend.activity.core.ActivityPersonRepository;
 import backend.activity.core.ActivityRepository;
 import backend.activity.core.ActivityService;
 import backend.activity.model.Activity;

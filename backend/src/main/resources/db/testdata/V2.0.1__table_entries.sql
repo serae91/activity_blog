@@ -8,6 +8,6 @@ INSERT INTO activity VALUES (nextval('activity_sequence'), (SELECT id FROM perso
 
 INSERT INTO location VALUES (nextval('location_sequence'), 'Fischbrunnen', 'Germany', 'Munich', 80919, 'Marienplatz', 11);
 
-INSERT INTO activity_person VALUES (nextval('activity_person_sequence'), currval('activity_sequence'), currval('person_sequence'));
+INSERT INTO activity_person VALUES (currval('activity_sequence'), currval('person_sequence'));
 
-INSERT INTO activity_location VALUES (nextval('activity_location_sequence'), currval('activity_sequence'), currval('location_sequence'));
+INSERT INTO activity_location VALUES (currval('activity_sequence'), currval('location_sequence'));

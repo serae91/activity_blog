@@ -2,6 +2,9 @@ import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivityDto } from '../../../_api/activity.dto';
 import { ActivityService } from '../../../core/services/activity/activity.service';
+import { ActivityModalComponent } from '../activity-modal/activity-modal.component';
+import { MatDialog } from '@angular/material/dialog';
+import { updateObjectExcludingId } from '../../../utils/update-object.utils';
 
 @Component({
   selector: 'app-activity-card',
@@ -17,7 +20,15 @@ export class ActivityCardComponent {
 
   datePipe = new DatePipe('en-US');
 
-  constructor(private activityService: ActivityService) {}
+  constructor(private dialog: MatDialog, private activityService: ActivityService) {}
+
+  openUpdateActivityModal(): void {
+    this.dialog.open(ActivityModalComponent,{data: this.activity})
+      .afterClosed()
+      .subscribe((activity: ActivityDto) => {
+          updateObjectExcludingId(this.activity, activity);
+      });
+  }
 
   deleteActivity(): void {
     this.activityService.deleteActivity(this.activity.id).subscribe(() => this.deleteActivityEvent.emit(this.activity.id));

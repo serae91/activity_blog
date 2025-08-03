@@ -35,10 +35,9 @@ CREATE TABLE location
 
 CREATE TABLE activity_person
 (
-    activity_person_id  bigint                  NOT NULL,
     activity_id         bigint                  NOT NULL,
     person_id           bigint                  NOT NULL ,
-    CONSTRAINT activity_person_pkey     PRIMARY KEY (activity_id),
+    CONSTRAINT activity_person_pkey     PRIMARY KEY (activity_id, person_id),
     CONSTRAINT activity_fkey            FOREIGN KEY (activity_id)
         REFERENCES activity (activity_id),
     CONSTRAINT person_fkey              FOREIGN KEY (person_id)
@@ -48,10 +47,9 @@ CREATE TABLE activity_person
 
 CREATE TABLE activity_location
 (
-    activity_location_id bigint                  NOT NULL,
     activity_id          bigint                  NOT NULL,
     location_id          bigint                  NOT NULL,
-    CONSTRAINT activity_location_pkey   PRIMARY KEY (activity_location_id),
+    CONSTRAINT activity_location_pkey   PRIMARY KEY (activity_id, location_id),
     CONSTRAINT activity_fkey            FOREIGN KEY (activity_id)
         REFERENCES activity (activity_id),
     CONSTRAINT location_fkey            FOREIGN KEY (location_id)

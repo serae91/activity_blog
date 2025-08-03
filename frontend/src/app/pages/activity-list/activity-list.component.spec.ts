@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { CreateActivityModalComponent } from './create-activity-modal/create-activity-modal.component';
+import { ActivityModalComponent } from './activity-modal/activity-modal.component';
 import { of } from 'rxjs';
 import { ActivityDto } from '../../_api/activity.dto';
 import { ActivityService } from '../../core/services/activity/activity.service';
@@ -47,13 +47,13 @@ describe('ActivityListComponent', () => {
     const activity = { id: 17 } as ActivityDto;
     const dialogRef = {
       afterClosed: () => of(undefined)
-    } as MatDialogRef<CreateActivityModalComponent>;
+    } as MatDialogRef<ActivityModalComponent>;
     jest.spyOn(dialog, 'open').mockReturnValue(dialogRef);
     jest.spyOn(dialogRef, 'afterClosed').mockReturnValue(of(activity));
 
     component.openCreateActivityModal();
 
-    expect(dialog.open).toHaveBeenCalledWith(CreateActivityModalComponent);
+    expect(dialog.open).toHaveBeenCalledWith(ActivityModalComponent);
     expect(dialogRef.afterClosed).toHaveBeenCalledWith();
     expect(component.activities).toEqual([activity]);
   });

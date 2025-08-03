@@ -1,8 +1,5 @@
 package backend.location.core;
 
-import backend.activity.core.ActivityLocationRepository;
-import backend.activity.model.Activity;
-import backend.activity.model.ActivityLocation;
 import backend.location.core.listview.LocationListDto;
 import backend.location.model.Location;
 import jakarta.enterprise.context.Dependent;
@@ -15,8 +12,6 @@ import java.util.Optional;
 public class LocationService {
     @Inject
     LocationRepository locationRepository;
-    @Inject
-    ActivityLocationRepository activityLocationRepository;
     public Location getLocationById(final Long personId) {
         final Optional<Location> optionalLocation = locationRepository.findByIdOptional(personId);
         if(optionalLocation.isPresent()) {
@@ -38,8 +33,7 @@ public class LocationService {
     }
 
     private LocationListDto getLocationListDto(final Location location) {
-        final List<ActivityLocation> activityPersonsForPerson = activityLocationRepository.getAllActivityLocationsForLocation(location.getId());
-        final Boolean canBeDeleted = activityPersonsForPerson.isEmpty();
+        final Boolean canBeDeleted = false;//activityPersonsForPerson.isEmpty();
         return LocationListDto.builder()
                 .location(location)
                 .canBeDeleted(canBeDeleted)

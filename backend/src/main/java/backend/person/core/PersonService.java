@@ -1,9 +1,7 @@
 package backend.person.core;
 
-import backend.activity.core.ActivityPersonRepository;
 import backend.activity.core.ActivityRepository;
 import backend.activity.model.Activity;
-import backend.activity.model.ActivityPerson;
 import backend.person.core.listview.PersonListDto;
 import backend.person.model.Person;
 import jakarta.enterprise.context.Dependent;
@@ -18,8 +16,6 @@ public class PersonService {
     PersonRepository personRepository;
     @Inject
     ActivityRepository activityRepository;
-    @Inject
-    ActivityPersonRepository activityPersonRepository;
     public Person getPersonById(final Long personId) {
         final Optional<Person> optionalPerson = personRepository.findByIdOptional(personId);
         return optionalPerson.orElse(null);
@@ -38,9 +34,9 @@ public class PersonService {
     }
 
     private PersonListDto getPersonListDto(final Person person) {
-        final List<ActivityPerson> activityPersonsForPerson = activityPersonRepository.getAllActivityPersonsForPerson(person.getId());
+        //final List<ActivityPerson> activityPersonsForPerson = activityPersonRepository.getAllActivityPersonsForPerson(person.getId());
         final List<Activity> activitiesForAuthor = activityRepository.getAllActivitiesForAuthor(person.getId());
-        final Boolean canBeDeleted = activityPersonsForPerson.isEmpty() && activitiesForAuthor.isEmpty();
+        final Boolean canBeDeleted = false;//person.get.isEmpty() && activitiesForAuthor.isEmpty();
         return PersonListDto.builder()
                 .person(person)
                 .canBeDeleted(canBeDeleted)

@@ -29,7 +29,7 @@
                         <mat-label>Author</mat-label>
                         <mat-select placeholder="Add Author" formControlName="authorId" required>
                             <mat-option *ngFor="let person of persons" [value]="person.id" [disabled]="isPersonSelected(person)">
-                                {{person.id?person.firstName + ' ' + person.lastName:''}}
+                                {{person.id ? person.firstName + ' ' + person.lastName:''}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -68,10 +68,10 @@
                         <button type="button" class="tiny-btn" (click)="addLocation()">+</button>
                     </div>
                 </div>
-                
+
             </mat-dialog-content>
         </form>
-        
+
     </div>
     <div class="flex-row">
         <button class="btn-secondary" (click)="cancel()">Cancel</button>

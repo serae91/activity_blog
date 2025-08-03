@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivityDto } from '../../_api/activity.dto';
 import { ActivityService } from '../../core/services/activity/activity.service';
-import { CreateActivityModalComponent } from './create-activity-modal/create-activity-modal.component';
+import { ActivityModalComponent } from './activity-modal/activity-modal.component';
 
 @Component({
   selector: 'app-activity-list',
@@ -20,7 +20,7 @@ export class ActivityListComponent implements OnInit {
   }
 
   openCreateActivityModal(): void {
-    this.dialog.open(CreateActivityModalComponent)
+    this.dialog.open(ActivityModalComponent)
     .afterClosed()
     .subscribe((activity: ActivityDto) => {
       if(activity) {

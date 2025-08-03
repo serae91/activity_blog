@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
-import { CreateActivityDto } from '../../../_api/activity.dto';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ActivityDto, CreateActivityDto, UpdateActivityDto } from '../../../_api/activity.dto';
 import { LocationDto } from '../../../_api/location.dto';
 import { PersonDto } from '../../../_api/person.dto';
 import { ActivityService } from '../../../core/services/activity/activity.service';
 import { LocationService } from '../../../core/services/location/location.service';
 import { PersonService } from '../../../core/services/person/person.service';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-create-activity-modal',
-  templateUrl: './create-activity-modal.component.html',
-  styleUrls: ['./create-activity-modal.component.scss']
+  selector: 'app-activity-modal',
+  templateUrl: './activity-modal.component.html',
+  styleUrls: ['./activity-modal.component.scss']
 })
-export class CreateActivityModalComponent implements OnInit {
+export class ActivityModalComponent implements OnInit {
 
   formGroup: UntypedFormGroup;
   persons: PersonDto[];
@@ -28,7 +29,8 @@ export class CreateActivityModalComponent implements OnInit {
   }
 
   constructor(
-    private dialogRef: MatDialogRef<CreateActivityModalComponent>,
+    @Inject(MAT_DIALOG_DATA) private data: ActivityDto,
+    private dialogRef: MatDialogRef<ActivityModalComponent>,
     private formBuilder: UntypedFormBuilder,
     private activityService: ActivityService,
     private personService: PersonService,
@@ -50,11 +52,11 @@ export class CreateActivityModalComponent implements OnInit {
 
   initFormGroup(): void {
     this.formGroup = this.formBuilder.group({
-      authorId: this.formBuilder.control(null),
-      title: this.formBuilder.control(''),
-      description: this.formBuilder.control(''),
-      personIds: this.formBuilder.array([this.formBuilder.control(0)]),
-      locationIds: this.formBuilder.array([this.formBuilder.control(0)]),
+      authorId: this.formBuilder.control(this.data?.author?.id ?? null),
+      title: this.formBuilder.control(this.data?.title ?? ''),
+      description: this.formBuilder.control(this.data?.description ??''),
+      personIds: this.formBuilder.array([this.data?.persons?.map(person => this.formBuilder.control(person.id)) ?? this.formBuilder.control(0)]),
+      locationIds: this.formBuilder.array([this.data?.locations?.map(location => this.formBuilder.control(location.id)) ?? this.formBuilder.control(0)]),
     });
   }
 
@@ -103,15 +105,25 @@ export class CreateActivityModalComponent implements OnInit {
       authorId: this.formGroup.controls['authorId'].value,
       title: this.formGroup.controls['title'].value,
       description: this.formGroup.controls['description'].value,
-      postTime: new Date(),
       personIds: this.getUniqueValues<number>(this.personIds.value).filter(value => value > 0),
       locationIds: this.getUniqueValues<number>(this.locationIds.value).filter(value => value > 0),
     } as CreateActivityDto;
   }
 
+  getUpdateActivityDto(): UpdateActivityDto {
+    return {
+      ...this.getCreateActivityDto(),
+      id: this.data.id
+    } as UpdateActivityDto;
+  }
+
   saveActivityAndCloseDialog(): void {
-    this.activityService.createNewActivity(this.getCreateActivityDto())
+    this.createOrUpdateActivity()
       .subscribe(newActivity => this.dialogRef.close(newActivity));
+  }
+
+  createOrUpdateActivity(): Observable<ActivityDto> {
+    return this.data?.id ? this.activityService.updateActivity(this.getUpdateActivityDto()) : this.activityService.createActivity(this.getCreateActivityDto());
   }
 
   getUniqueValues<T>(values: T[]): T[] {

@@ -2,6 +2,7 @@ package backend.activity.web;
 
 import backend.activity.model.Activity;
 import backend.activity.usecase.create.model.CreateActivityDto;
+import backend.activity.usecase.update.model.UpdateActivityDto;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -37,11 +38,19 @@ public class ActivityResource {
     }
 
     @POST
-    @Path("/new")
+    @Path("/create")
     @Transactional
     @Produces(MediaType.APPLICATION_JSON)
-    public Activity createNewActivity(final CreateActivityDto createActivityDto) {
-        return activityResourceFacade.createNewActivity(createActivityDto);
+    public Activity createActivity(final CreateActivityDto createActivityDto) {
+        return activityResourceFacade.createActivity(createActivityDto);
+    }
+
+    @POST
+    @Path("/update")
+    @Transactional
+    @Produces(MediaType.APPLICATION_JSON)
+    public Activity updateActivity(final UpdateActivityDto updatectivityDto) {
+        return activityResourceFacade.updateActivity(updatectivityDto);
     }
 
     @DELETE

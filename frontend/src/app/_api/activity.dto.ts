@@ -15,7 +15,15 @@ export interface CreateActivityDto {
     authorId: number;
     title: string;
     description: string;
-    postTime: Date;
     personIds: number[];
     locationIds: number[];
+}
+
+export interface UpdateActivityDto {
+  id: number;
+  authorId: number;
+  title: string;
+  description: string;
+  personIds: number[];
+  locationIds: number[];
 }
