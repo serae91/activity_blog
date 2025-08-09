@@ -49,8 +49,8 @@ class ActivityResourceFacadeTest {
 
     @Test
     void createNewActivityTest() {
-        when(createActivityService.createNewActivity(createActivityDto)).thenReturn(activity);
-        final Activity result = activityResourceFacade.createNewActivity(createActivityDto);
+        when(createActivityService.createActivity(createActivityDto)).thenReturn(activity);
+        final Activity result = activityResourceFacade.createActivity(createActivityDto);
         MatcherAssert.assertThat(result, CoreMatchers.is(activity));
     }
 

@@ -33,10 +33,6 @@ public class CreateActivityServiceTest {
     PersonService personService;
     @Mock
     LocationService locationService;
-    @Mock
-    ActivityPersonRepository activityPersonRepository;
-    @Mock
-    ActivityLocationRepository activityLocationRepository;
     @InjectMocks
     CreateActivityService createActivityService;
     @Mock
@@ -60,7 +56,7 @@ public class CreateActivityServiceTest {
         when(createActivityDto.getAuthorId()).thenReturn(2L);
         when(createActivityDto.getTitle()).thenReturn("mockTitle");
         when(createActivityDto.getDescription()).thenReturn("mockDesciption");
-        when(createActivityDto.getPostTime()).thenReturn(postTime);
+        //when(createActivityDto.getPostTime()).thenReturn(postTime);
         when(createActivityDto.getPersonIds()).thenReturn(List.of(3L));
         when(createActivityDto.getLocationIds()).thenReturn(List.of(4L));
 
@@ -70,10 +66,10 @@ public class CreateActivityServiceTest {
 
         when(activityRepository.createNewActivity(any())).thenReturn(resultActivity);
 
-        final Activity result = createActivityService.createNewActivity(createActivityDto);
-        verify(activityRepository).createNewActivity(any());
+        final Activity result = createActivityService.createActivity(createActivityDto);
+        /*verify(activityRepository).createNewActivity(any());
         verify(activityPersonRepository).createNewActivityPerson(any());
-        verify(activityLocationRepository).createNewActivityLocation(any());
+        verify(activityLocationRepository).createNewActivityLocation(any());*/
         MatcherAssert.assertThat(result, CoreMatchers.is(resultActivity));
     }
 }

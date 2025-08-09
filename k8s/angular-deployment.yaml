@@ -2,30 +2,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: angular-frontend
+  name: activity-blog-frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: angular-frontend
+      app: activity-blog-frontend
   template:
     metadata:
       labels:
-        app: angular-frontend
+        app: activity-blog-frontend
     spec:
       containers:
-        - name: angular-frontend
-          image: your-registry/angular-frontend:latest
+        - name: activity-blog-frontend
+          image: activity-blog-frontend
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: angular-frontend
+  name: activity-blog-frontend
 spec:
+  type: NodePort
+  selector:
+    app: activity-blog-frontend
   ports:
     - port: 80
-  selector:
-    app: angular-frontend
-  type: LoadBalancer  # Oder ClusterIP / NodePort je nach Cluster
+      targetPort: 80
+      nodePort: 30080

@@ -6,7 +6,7 @@ COPY src ./src
 RUN mvn package -DskipTests
 
 # Stage 2: Run the application
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin:17-jdk
 WORKDIR /app
 COPY --from=build /build/target/quarkus-app/lib/ /app/lib/
 COPY --from=build /build/target/quarkus-app/*.jar /app/
