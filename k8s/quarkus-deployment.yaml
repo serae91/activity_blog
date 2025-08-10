@@ -15,21 +15,28 @@ spec:
     spec:
       containers:
         - name: quarkus-backend
-          image: your-registry/quarkus-backend:latest
+          image: activity-blog-backend
           ports:
             - containerPort: 8080
+          imagePullPolicy: IfNotPresent
           env:
             - name: QUARKUS_DATASOURCE_JDBC_URL
-              value: jdbc:postgresql://postgres:5432/mydb
+              value: jdbc:postgresql://postgres:5432/activity-blog-db
             - name: QUARKUS_DATASOURCE_USERNAME
-              value: myuser
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: postgres-root-username
             - name: QUARKUS_DATASOURCE_PASSWORD
-              value: mypassword
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: postgres-root-password
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: quarkus-backend
+  name: quarkus-backend-service
 spec:
   ports:
     - port: 8080

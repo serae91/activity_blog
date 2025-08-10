@@ -1,3 +1,25 @@
+# postgres-secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-secret
+type: Opaque
+data:
+  postgres-root-username: cG9zdGdyZXM=       # "postgres" Base64
+  postgres-root-password: cGFzc3dvcmQ=       # "password" Base64
+---
+# postgres-pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
 # postgres-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -18,11 +40,17 @@ spec:
           image: postgres:15-alpine
           env:
             - name: POSTGRES_USER
-              value: myuser
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: postgres-root-username
             - name: POSTGRES_PASSWORD
-              value: mypassword
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: postgres-root-password
             - name: POSTGRES_DB
-              value: mydb
+              value: activity-blog-db
           ports:
             - containerPort: 5432
           volumeMounts:
@@ -30,8 +58,10 @@ spec:
               name: pgdata
       volumes:
         - name: pgdata
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: postgres-pvc
 ---
+# postgres-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -39,5 +69,6 @@ metadata:
 spec:
   ports:
     - port: 5432
+      targetPort: 5432
   selector:
     app: postgres
