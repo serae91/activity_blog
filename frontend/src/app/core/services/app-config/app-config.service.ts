@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../../src/environments/environment';
 
 export interface AppConfig {
   version: string;
-  homepage_api: string;
+  apiURL: string;
 }
 
 @Injectable()
@@ -11,10 +12,10 @@ export class AppConfigService {
   constructor(private http: HttpClient) {}
 
   private appConfigPath = 'assets/app-config/app-config.json';
-  private configuration: AppConfig;
+  private configuration = {} as AppConfig;
 
-  async loadEnvironment(): Promise<boolean> {
-    try {
+  loadEnvironment(): void {
+    /*try {
       this.configuration = await (<Promise<AppConfig>>(
         this.http.get(this.appConfigPath).toPromise()
       ));
@@ -22,10 +23,11 @@ export class AppConfigService {
       console.error(err);
       return Promise.resolve(false);
     }
-    return Promise.resolve(true);
+    return Promise.resolve(true);*/
+    this.configuration.apiURL = environment.apiUrl;
   }
 
-  get homepageUrl(): string {
-    return this.configuration ? this.configuration.homepage_api : '';
+  get apiUrl(): string {
+    return this.configuration ? this.configuration.apiURL : ''; //hier in k8s andere URL
   }
 }

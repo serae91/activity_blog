@@ -25,7 +25,7 @@ export class AuthTokenInterceptorService implements HttpInterceptor {
       return next.handle(req);
     }
 
-    let url = this.appConfig.homepageUrl;
+    let url = this.appConfig.apiUrl;
 
     const jwt: string | null = this.tokenStorageService.getAuthToken();
     // CASE: JWT exists
