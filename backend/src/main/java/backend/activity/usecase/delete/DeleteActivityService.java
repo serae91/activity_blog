@@ -9,8 +9,6 @@ public class DeleteActivityService {
     @Inject
     ActivityRepository activityRepository;
     public void deleteActivityById(final Long activityId) {
-        //activityLocationRepository.deleteAllActivityLocationsForActivity(activityId);
-        //activityPersonRepository.deleteAllActivityPersonsForActivity(activityId);
         activityRepository.deleteActivityById(activityId);
     }
 }

@@ -23,7 +23,7 @@ start_dev() {
   echo "Start Frontend in Dev-Mode..."
   ( cd frontend && npm start & )
 
-  echo "✅ Entwicklungsumgebung läuft!
+  echo "Development Environment is running!
   - Postgres: localhost:5430
   - Backend:  http://localhost:8080
   - Frontend: http://localhost:4200

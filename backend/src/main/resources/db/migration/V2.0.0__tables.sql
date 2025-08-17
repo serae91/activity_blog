@@ -39,10 +39,9 @@ CREATE TABLE activity_person
     person_id           bigint                  NOT NULL ,
     CONSTRAINT activity_person_pkey     PRIMARY KEY (activity_id, person_id),
     CONSTRAINT activity_fkey            FOREIGN KEY (activity_id)
-        REFERENCES activity (activity_id),
+        REFERENCES activity (activity_id) ON DELETE CASCADE,
     CONSTRAINT person_fkey              FOREIGN KEY (person_id)
-        REFERENCES person (person_id),
-    CONSTRAINT activity_person_unique   UNIQUE (activity_id, person_id)
+        REFERENCES person (person_id) ON DELETE CASCADE
 );
 
 CREATE TABLE activity_location
@@ -51,8 +50,7 @@ CREATE TABLE activity_location
     location_id          bigint                  NOT NULL,
     CONSTRAINT activity_location_pkey   PRIMARY KEY (activity_id, location_id),
     CONSTRAINT activity_fkey            FOREIGN KEY (activity_id)
-        REFERENCES activity (activity_id),
+        REFERENCES activity (activity_id) ON DELETE CASCADE,
     CONSTRAINT location_fkey            FOREIGN KEY (location_id)
-        REFERENCES location (location_id),
-    CONSTRAINT activity_location_unique UNIQUE (activity_id, location_id)
+        REFERENCES location (location_id) ON DELETE CASCADE
 );
