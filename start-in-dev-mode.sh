@@ -22,16 +22,16 @@ start_dev() {
   trap cleanup SIGINT EXIT
 
   echo "Start Postgres via Docker Compose..."
-  cd backend/setup/database
-  docker-compose up -d postgres
-  cd - >/dev/null
+  (cd backend/setup/database && docker-compose up -d postgres)
 
   echo "Wait for Postgres to be ready..."
-  sleep 5
+  sleep 3
 
   echo "Start Quarkus Backend in Dev-Mode..."
-  (cd backend && ./mvnw quarkus:dev) &
+  cd backend
+  ./mvnw quarkus:dev &
   PID1=$!
+  cd - >/dev/null
 
   timeout=60
   count=0
@@ -45,12 +45,21 @@ start_dev() {
   done
 
   echo "Start Frontend in Dev-Mode..."
-  (cd frontend && npm start) &
+  cd frontend
+  npm start &
   PID2=$!
+  cd - >/dev/null
 
+  timeout=60
+  count=0
   until curl -s http://localhost:4200 > /dev/null; do
-        sleep 1
-    done
+      sleep 1
+      count=$((count+1))
+      if [ $count -ge $timeout ]; then
+          echo "Frontend did not start in time!"
+          cleanup
+      fi
+  done
 
   # Open Frontend in Browser (Mac/Linux/Windows)
   if command -v xdg-open >/dev/null; then
