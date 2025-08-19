@@ -1,5 +1,6 @@
 import { LocationDto } from "./location.dto";
 import { PersonDto } from "./person.dto";
+import { IdDto } from './id.dto';
 
 export interface ActivityDto {
     id: number;
@@ -21,9 +22,9 @@ export interface CreateActivityDto {
 
 export interface UpdateActivityDto {
   id: number;
-  authorId: number;
+  author: IdDto;
   title: string;
   description: string;
-  personIds: number[];
-  locationIds: number[];
+  persons: IdDto[];
+  locations: IdDto[];
 }

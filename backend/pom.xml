@@ -13,6 +13,7 @@
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
     <quarkus.platform.version>3.4.3</quarkus.platform.version>
+    <blaze-persistence.version>1.6.16</blaze-persistence.version>
     <skipITs>true</skipITs>
     <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
   </properties>
@@ -82,6 +83,59 @@
           <version>5.6.0</version>
           <scope>test</scope>
       </dependency>
+    <!--dependency>
+      <groupId>jakarta.enterprise</groupId>
+      <artifactId>jakarta.enterprise.cdi-api</artifactId>
+      <version>3.0.0</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.blazebit</groupId>
+      <artifactId>blaze-persistence-core-api-jakarta</artifactId>
+      <version>${blaze-persistence.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.blazebit</groupId>
+      <artifactId>blaze-persistence-core-impl-jakarta</artifactId>
+      <version>${blaze-persistence.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.blazebit</groupId>
+      <artifactId>blaze-persistence-entity-view-api-jakarta</artifactId>
+      <version>${blaze-persistence.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.blazebit</groupId>
+      <artifactId>blaze-persistence-entity-view-impl-jakarta</artifactId>
+      <version>${blaze-persistence.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.blazebit</groupId>
+      <artifactId>blaze-persistence-entity-view-processor-jakarta</artifactId>
+      <version>${blaze-persistence.version}</version>
+      <scope>annotationProcessor</scope>
+    </dependency-->
+    <dependency>
+      <groupId>com.blazebit</groupId>
+      <artifactId>blaze-persistence-integration-quarkus-3</artifactId>
+      <version>${blaze-persistence.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.blazebit</groupId>
+      <artifactId>blaze-persistence-integration-hibernate-6.2</artifactId>
+      <version>${blaze-persistence.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.blazebit</groupId>
+      <artifactId>blaze-persistence-integration-jaxrs-jackson-jakarta</artifactId>
+      <version>${blaze-persistence.version}</version>
+      <scope>runtime</scope>
+    </dependency>
   </dependencies>
   <build>
     <plugins>

@@ -42,7 +42,7 @@ public class Activity {
     @Column(name = "activity_id", nullable = false)
     private Long id;
 
-    @ManyToOne(targetEntity = Person.class, fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(targetEntity = Person.class, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "author_id", nullable = false)
     private Person author;
 
@@ -56,7 +56,7 @@ public class Activity {
     @Column(name = "post_time", nullable = false)
     private Date postTime;
 
-    @ManyToMany(targetEntity = Person.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @ManyToMany(targetEntity = Person.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(name = "activity_person",
             joinColumns = {
                     @JoinColumn(name = "activity_id", referencedColumnName = "activity_id")
@@ -66,7 +66,7 @@ public class Activity {
             })
     private List<Person> persons = new ArrayList<>();
 
-    @ManyToMany(targetEntity = Location.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(targetEntity = Location.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(name = "activity_location",
             joinColumns = {
                     @JoinColumn(name = "activity_id", referencedColumnName = "activity_id")
@@ -75,11 +75,4 @@ public class Activity {
                     @JoinColumn(name = "location_id", referencedColumnName = "location_id")
             })
     private List<Location> locations = new ArrayList<>();
-
-    /*public void setPersons(List<Person> persons) {
-        this.persons = persons;
-    }
-    public void setLocations(List<Location> location) {
-        this.locations = locations;
-    }*/
 }

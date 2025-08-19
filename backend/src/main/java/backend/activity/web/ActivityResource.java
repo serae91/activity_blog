@@ -2,7 +2,7 @@ package backend.activity.web;
 
 import backend.activity.model.Activity;
 import backend.activity.usecase.create.model.CreateActivityDto;
-import backend.activity.usecase.update.model.UpdateActivityDto;
+import backend.activity.usecase.update.model.ActivityUpdateView;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -49,8 +49,9 @@ public class ActivityResource {
     @Path("/update")
     @Transactional
     @Produces(MediaType.APPLICATION_JSON)
-    public Activity updateActivity(final UpdateActivityDto updatectivityDto) {
-        return activityResourceFacade.updateActivity(updatectivityDto);
+    public Activity updateActivity(final ActivityUpdateView activityUpdateView) {
+        System.out.println(activityUpdateView);
+        return activityResourceFacade.updateActivity(activityUpdateView);
     }
 
     @DELETE

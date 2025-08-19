@@ -18,18 +18,18 @@ export class ActivityService extends BaseService {
   }
 
   getAllActivities(): Observable<ActivityDto[]>{
-    return this.get<ActivityDto[]>('/all', (error)=> 'Error loading all activities: ' + error);
+    return this.get<ActivityDto[]>('/all', (error)=> 'Error loading all activities: ' + error.statusText);
   }
 
   createActivity(activityCreateDto: CreateActivityDto): Observable<ActivityDto>{
-    return this.post<ActivityDto>('/create', activityCreateDto, (error)=> 'Error creating activity: ' + error,(response)=> 'Successfully created activity');
+    return this.post<ActivityDto>('/create', activityCreateDto, (error)=> 'Error creating activity: ' + error.statusText,(response)=> 'Successfully created activity');
   }
 
   updateActivity(updateActivityDto: UpdateActivityDto): Observable<ActivityDto>{
-    return this.post<ActivityDto>('/update', updateActivityDto, (error)=> 'Error updating activity: ' + error,(response)=> 'Successfully updated activity');
+    return this.post<ActivityDto>('/update', updateActivityDto, (error)=> 'Error updating activity: ' + error.statusText,(response)=> 'Successfully updated activity');
   }
 
   deleteActivity(activityId: number): Observable<void>{
-    return this.delete<void>('/' + activityId, (error)=> 'Error deleting activity: ' + error,(response)=> 'Successfully deleted activity');
+    return this.delete<void>('/' + activityId, (error)=> 'Error deleting activity: ' + error.statusText,(response)=> 'Successfully deleted activity');
   }
 }

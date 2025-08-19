@@ -6,7 +6,7 @@ import backend.activity.usecase.create.model.CreateActivityDto;
 import backend.activity.usecase.create.CreateActivityService;
 import backend.activity.usecase.delete.DeleteActivityService;
 import backend.activity.usecase.update.UpdateActivityService;
-import backend.activity.usecase.update.model.UpdateActivityDto;
+import backend.activity.usecase.update.model.ActivityUpdateView;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
@@ -33,8 +33,8 @@ public class ActivityResourceFacade {
         return createActivityService.createActivity(createActivityDto);
     }
 
-    public Activity updateActivity(final UpdateActivityDto updateActivityDto) {
-        return updateActivityService.updateActivity(updateActivityDto);
+    public Activity updateActivity(final ActivityUpdateView activityUpdateView) {
+        return updateActivityService.updateActivity(activityUpdateView);
     }
 
     public void deleteActivityById(final Long activityId) {

@@ -8,6 +8,7 @@ import { ActivityService } from '../../../core/services/activity/activity.servic
 import { LocationService } from '../../../core/services/location/location.service';
 import { PersonService } from '../../../core/services/person/person.service';
 import { Observable } from 'rxjs';
+import { IdDto } from '../../../_api/id.dto';
 
 @Component({
   selector: 'app-activity-modal',
@@ -111,8 +112,14 @@ export class ActivityModalComponent implements OnInit {
   }
 
   getUpdateActivityDto(): UpdateActivityDto {
+    const personIds = this.personIds.value.filter((id: number) => !!id).map((id: number) => ({id} as IdDto));
+    const locationIds = this.locationIds.value.filter((id: number) => !!id).map((id: number) => ({id} as IdDto));
     return {
-      ...this.getCreateActivityDto(),
+      author: {id: this.formGroup.controls['authorId'].value} as IdDto,
+      title: this.formGroup.controls['title'].value,
+      description: this.formGroup.controls['description'].value,
+      persons: personIds,
+      locations: locationIds,
       id: this.data.id
     } as UpdateActivityDto;
   }
@@ -123,6 +130,7 @@ export class ActivityModalComponent implements OnInit {
   }
 
   createOrUpdateActivity(): Observable<ActivityDto> {
+    console.log(this.getUpdateActivityDto());
     return this.data?.id ? this.activityService.updateActivity(this.getUpdateActivityDto()) : this.activityService.createActivity(this.getCreateActivityDto());
   }
 
