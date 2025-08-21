@@ -1,5 +1,6 @@
 package backend.activity.web;
 
+import backend.activity.core.ActivityService;
 import backend.activity.model.Activity;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
@@ -14,14 +15,17 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class ActivityResourceTest {
     @Mock
-    ActivityResourceFacade activityResourceFacade;
+    ActivityService activityService;
+
     @InjectMocks
     ActivityResource activityResource;
+
     @Mock
     private Activity activity;
+
     @Test
     void getActivityByIdTest() {
-        when(activityResourceFacade.getActivityById(7L)).thenReturn(activity);
+        when(activityService.getActivityById(7L)).thenReturn(activity);
         final Activity result = activityResource.getActivityById(7L);
         MatcherAssert.assertThat(result, CoreMatchers.is(activity));
     }

@@ -1,7 +1,12 @@
 package backend.activity.web;
 
+import backend.activity.core.ActivityService;
 import backend.activity.model.Activity;
-import backend.activity.usecase.create.model.CreateActivityDto;
+import backend.activity.model.ActivityEntityView;
+import backend.activity.usecase.create.ActivityCreateService;
+import backend.activity.usecase.create.model.ActivityCreateView;
+import backend.activity.usecase.delete.DeleteActivityService;
+import backend.activity.usecase.update.UpdateActivityService;
 import backend.activity.usecase.update.model.ActivityUpdateView;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -21,37 +26,42 @@ import java.util.List;
 public class ActivityResource {
 
     @Inject
-    ActivityResourceFacade activityResourceFacade;
+    ActivityService activityService;
+    @Inject
+    ActivityCreateService activityCreateService;
+    @Inject
+    UpdateActivityService updateActivityService;
+    @Inject
+    DeleteActivityService deleteActivityService;
 
     @GET
     @Path("/{activityId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Activity getActivityById(@PathParam("activityId") final Long activityId) {
-        return activityResourceFacade.getActivityById(activityId);
+        return activityService.getActivityById(activityId);
     }
 
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Activity> getAllActivities() {
-        return activityResourceFacade.getAllActivities();
+        return activityService.getAllActivities();
     }
 
     @POST
     @Path("/create")
     @Transactional
     @Produces(MediaType.APPLICATION_JSON)
-    public Activity createActivity(final CreateActivityDto createActivityDto) {
-        return activityResourceFacade.createActivity(createActivityDto);
+    public ActivityEntityView createActivity(final ActivityCreateView activityCreateView) {
+        return activityCreateService.createActivity(activityCreateView);
     }
 
     @POST
     @Path("/update")
     @Transactional
     @Produces(MediaType.APPLICATION_JSON)
-    public Activity updateActivity(final ActivityUpdateView activityUpdateView) {
-        System.out.println(activityUpdateView);
-        return activityResourceFacade.updateActivity(activityUpdateView);
+    public ActivityEntityView updateActivity(final ActivityUpdateView activityUpdateView) {
+        return updateActivityService.updateActivity(activityUpdateView);
     }
 
     @DELETE
@@ -59,6 +69,6 @@ public class ActivityResource {
     @Transactional
     @Produces(MediaType.APPLICATION_JSON)
     public void deleteActivityById(@PathParam("activityId") final Long activityId) {
-        activityResourceFacade.deleteActivityById(activityId);
+        deleteActivityService.deleteActivityById(activityId);
     }
 }

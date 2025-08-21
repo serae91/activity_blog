@@ -103,23 +103,21 @@ export class ActivityModalComponent implements OnInit {
 
   getCreateActivityDto(): CreateActivityDto {
     return {
-      authorId: this.formGroup.controls['authorId'].value,
+      author: { id: this.formGroup.controls['authorId'].value } as IdDto,
       title: this.formGroup.controls['title'].value,
       description: this.formGroup.controls['description'].value,
-      personIds: this.getUniqueValues<number>(this.personIds.value).filter(value => value > 0),
-      locationIds: this.getUniqueValues<number>(this.locationIds.value).filter(value => value > 0),
+      persons: this.getToIdDtoMappedIds(this.personIds.value),
+      locations: this.getToIdDtoMappedIds(this.locationIds.value),
     } as CreateActivityDto;
   }
 
   getUpdateActivityDto(): UpdateActivityDto {
-    const personIds = this.personIds.value.filter((id: number) => !!id).map((id: number) => ({id} as IdDto));
-    const locationIds = this.locationIds.value.filter((id: number) => !!id).map((id: number) => ({id} as IdDto));
     return {
       author: {id: this.formGroup.controls['authorId'].value} as IdDto,
       title: this.formGroup.controls['title'].value,
       description: this.formGroup.controls['description'].value,
-      persons: personIds,
-      locations: locationIds,
+      persons: this.getToIdDtoMappedIds(this.personIds.value),
+      locations: this.getToIdDtoMappedIds(this.locationIds.value),
       id: this.data.id
     } as UpdateActivityDto;
   }
@@ -130,8 +128,11 @@ export class ActivityModalComponent implements OnInit {
   }
 
   createOrUpdateActivity(): Observable<ActivityDto> {
-    console.log(this.getUpdateActivityDto());
-    return this.data?.id ? this.activityService.updateActivity(this.getUpdateActivityDto()) : this.activityService.createActivity(this.getCreateActivityDto());
+    return !!this.data?.id ? this.activityService.updateActivity(this.getUpdateActivityDto()) : this.activityService.createActivity(this.getCreateActivityDto());
+  }
+
+  getToIdDtoMappedIds(ids: number[]): IdDto[] {
+    return this.getUniqueValues(ids.filter((id) => id > 0)).map((id) => ({id} as IdDto))
   }
 
   getUniqueValues<T>(values: T[]): T[] {

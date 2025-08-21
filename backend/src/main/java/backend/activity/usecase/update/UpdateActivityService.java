@@ -2,6 +2,7 @@ package backend.activity.usecase.update;
 
 import backend.activity.core.ActivityRepository;
 import backend.activity.model.Activity;
+import backend.activity.model.ActivityEntityView;
 import backend.activity.usecase.update.model.ActivityUpdateView;
 import com.blazebit.persistence.view.EntityViewManager;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -17,8 +18,8 @@ public class UpdateActivityService {
     @Inject
     EntityViewManager entityViewManager;
 
-    public Activity updateActivity(final ActivityUpdateView activityUpdateView) {
+    public ActivityEntityView updateActivity(final ActivityUpdateView activityUpdateView) {
         entityViewManager.save(entityManager, activityUpdateView);
-        return activityRepository.findById(activityUpdateView.getId());
+        return entityViewManager.find(entityManager, ActivityEntityView.class, activityUpdateView.getId());
     }
 }

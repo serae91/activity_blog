@@ -13,11 +13,11 @@ export interface ActivityDto {
 }
 
 export interface CreateActivityDto {
-    authorId: number;
+    author: IdDto;
     title: string;
     description: string;
-    personIds: number[];
-    locationIds: number[];
+    persons: IdDto[];
+    locations: IdDto[];
 }
 
 export interface UpdateActivityDto {
