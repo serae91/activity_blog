@@ -17,9 +17,6 @@ export class LocationCardComponent {
   locationService =  inject(LocationService);
 
   deleteLocation(): void {
-    if(!this.canLocationBeDeleted()){
-      return;
-    }
     this.locationService.deleteLocation(this.locationListDto.location.id).subscribe(() => this.deleteLocationEvent.emit(this.locationListDto.location.id));
   }
 

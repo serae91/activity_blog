@@ -3,5 +3,5 @@
     <p class="card-text">{{'Birthday: ' + getDateString(personListDto.person.birthday)}}</p>
     <button type="button" class="tiny-btn" (click)="deletePerson()" *ngIf="canPersonBeDeleted()">-</button>
     <p class="card-text" *ngIf="!canPersonBeDeleted()">
-        This Person cant be deleted, because it is listed in {{this.personListDto.activityCount}} activity</p>
+        This Person can't be deleted, because it is listed in {{this.personListDto.activityCount}} activities</p>
 </div>

@@ -35,6 +35,6 @@ export class LocationService extends BaseService {
   }
 
   deleteLocation(locationId: number): Observable<void>{
-    return this.delete<void>(`/${locationId}`, (error) => `Error deleting Location by id: ${error.statusText}`);
+    return this.delete<void>(`/${locationId}`, (error) => `Error deleting Location by id: ${error.error.details}`);
   }
 }

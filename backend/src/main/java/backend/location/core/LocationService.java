@@ -4,7 +4,10 @@ import backend.activity.model.Activity;
 import backend.location.core.listview.LocationListDto;
 import backend.location.model.Location;
 import backend.location.model.LocationEntityView;
+import com.blazebit.persistence.CriteriaBuilder;
 import com.blazebit.persistence.CriteriaBuilderFactory;
+import com.blazebit.persistence.view.EntityViewManager;
+import com.blazebit.persistence.view.EntityViewSetting;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
@@ -16,18 +19,21 @@ public class LocationService {
 
     @Inject
     EntityManager entityManager;
+    @Inject
+    EntityViewManager entityViewManager;
 
     @Inject
     CriteriaBuilderFactory criteriaBuilderFactory;
 
     public LocationEntityView getLocationById(final Long locationId) {
-        return criteriaBuilderFactory.create(entityManager, LocationEntityView.class)
-                .where("id").eq(locationId).getSingleResult();
+        final CriteriaBuilder<Location> criteriaBuilder = criteriaBuilderFactory.create(entityManager, Location.class)
+                .where("id").eq(locationId);
+        return entityViewManager.applySetting(EntityViewSetting.create(LocationEntityView.class), criteriaBuilder).getSingleResult();
     }
 
     public List<LocationEntityView> getAllLocationEntityViews() {
-        return criteriaBuilderFactory.create(entityManager, LocationEntityView.class)
-                .getResultList();
+        final CriteriaBuilder<Location> criteriaBuilder = criteriaBuilderFactory.create(entityManager, Location.class);
+        return entityViewManager.applySetting(EntityViewSetting.create(LocationEntityView.class), criteriaBuilder).getResultList();
     }
 
     public List<LocationListDto> getAllLocationListDtos() {

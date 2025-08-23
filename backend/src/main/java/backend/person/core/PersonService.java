@@ -4,7 +4,10 @@ import backend.activity.model.Activity;
 import backend.person.core.listview.PersonListDto;
 import backend.person.model.Person;
 import backend.person.model.PersonEntityView;
+import com.blazebit.persistence.CriteriaBuilder;
 import com.blazebit.persistence.CriteriaBuilderFactory;
+import com.blazebit.persistence.view.EntityViewManager;
+import com.blazebit.persistence.view.EntityViewSetting;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
@@ -16,16 +19,19 @@ public class PersonService {
     @Inject
     EntityManager entityManager;
     @Inject
+    EntityViewManager entityViewManager;
+    @Inject
     CriteriaBuilderFactory criteriaBuilderFactory;
 
     public PersonEntityView getPersonEntityViewById(final Long personId) {
-        return criteriaBuilderFactory.create(entityManager, PersonEntityView.class)
-                .where("id").eq(personId).getSingleResult();
+        final CriteriaBuilder<Person> criteriaBuilder = criteriaBuilderFactory.create(entityManager, Person.class)
+                .where("id").eq(personId);
+        return entityViewManager.applySetting(EntityViewSetting.create(PersonEntityView.class), criteriaBuilder).getSingleResult();
     }
 
     public List<PersonEntityView> getAllPersonEntityViews() {
-        return criteriaBuilderFactory.create(entityManager, PersonEntityView.class)
-                .getResultList();
+        final CriteriaBuilder<Person> criteriaBuilder = criteriaBuilderFactory.create(entityManager, Person.class);
+        return entityViewManager.applySetting(EntityViewSetting.create(PersonEntityView.class), criteriaBuilder).getResultList();
     }
 
     public List<PersonListDto> getAllPersonListDtos() {
@@ -49,8 +55,10 @@ public class PersonService {
         return criteriaBuilderFactory.create(entityManager, Long.class)
                 .from(Activity.class)
                 .select("COUNT(DISTINCT(id))")
+                .whereOr()
                 .where("author.id").eq(person.getId())
                 .where("persons.id").eq(person.getId())
+                .endOr()
                 .getSingleResult();
     }
 }

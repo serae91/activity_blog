@@ -35,6 +35,6 @@ export class PersonService extends BaseService {
   }
 
   deletePerson(personId: number): Observable<void>{
-    return this.delete<void>(`/${personId}`,(error) => `Error deleting Person: ${error.statusText}`);
+    return this.delete<void>(`/${personId}`,(error) => `Error deleting Person: ${error.error.details}`);
   }
 }

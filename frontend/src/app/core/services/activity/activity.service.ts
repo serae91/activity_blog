@@ -14,7 +14,7 @@ export class ActivityService extends BaseService {
   }
 
   getActivityById(activityId: number, ): Observable<ActivityDto>{
-    return this.get<ActivityDto>('/' + activityId, (error)=> 'Error loading activity by id');
+    return this.get<ActivityDto>(`/${activityId}`, (error)=> 'Error loading activity by id');
   }
 
   getFilteredActivities(activityFilter: ActivityFilterDto): Observable<ActivityDto[]>{
@@ -30,6 +30,6 @@ export class ActivityService extends BaseService {
   }
 
   deleteActivity(activityId: number): Observable<void>{
-    return this.delete<void>('/' + activityId, (error)=> `Error deleting activity: ${error.statusText}`,(response)=> `Successfully deleted activity`);
+    return this.delete<void>(`/${activityId}`, (error)=> `Error deleting activity: ${error.statusText}`,(response)=> `Successfully deleted activity`);
   }
 }
