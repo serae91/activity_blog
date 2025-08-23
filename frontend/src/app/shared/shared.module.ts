@@ -4,11 +4,13 @@ import { OpacityScrollComponent } from './opacity-scroll/opacity-scroll.componen
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../core/material.module';
 import { HeaderComponent } from './header/header.component';
+import { ConfirmationModal } from './confirmation-modal/confirmation-modal.component';
 
 
 const COMPONENTS = [
   OpacityScrollComponent,
-  HeaderComponent
+  HeaderComponent,
+  ConfirmationModal
 ];
 
 @NgModule({

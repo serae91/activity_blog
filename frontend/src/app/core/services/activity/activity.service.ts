@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ActivityCreateDto, ActivityDto, ActivityFilterDto, ActivityUpdateDto } from 'src/app/_api/activity.dto';
 import { BaseService } from '../base.service';
+import { ConfirmationModalDataDto } from '../../../shared/confirmation-modal/confirmation-modal.component';
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +31,6 @@ export class ActivityService extends BaseService {
   }
 
   deleteActivity(activityId: number): Observable<void>{
-    return this.delete<void>(`/${activityId}`, (error)=> `Error deleting activity: ${error.statusText}`,(response)=> `Successfully deleted activity`);
+    return this.delete<void>(`/${activityId}`, {title: 'Delete Activity', question: 'Do you want to delete this activity?'} as ConfirmationModalDataDto, (error)=> `Error deleting activity: ${error.statusText}`,(response)=> `Successfully deleted activity`);
   }
 }

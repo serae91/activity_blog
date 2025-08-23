@@ -1,14 +1,20 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, PartialObserver, tap } from 'rxjs';
+import { concatMap, Observable, of, PartialObserver, tap } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {
+  ConfirmationModal,
+  ConfirmationModalDataDto
+} from '../../shared/confirmation-modal/confirmation-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BaseService {
-  private httpClient = inject(HttpClient)
-  private snackbar = inject(MatSnackBar)
+  private httpClient = inject(HttpClient);
+  private snackbar = inject(MatSnackBar);
+  private dialog = inject(MatDialog);
   protected baseUrl = '';
 
   protected get<T>(url: string, errorMessage: (error: HttpErrorResponse) => string, successMessage?: (response: T) => string): Observable<T> {
@@ -23,8 +29,14 @@ export class BaseService {
     return this.pipeSnackbar(this.httpClient.put<T>(this.baseUrl + url, body), errorMessage, successMessage);
   }
 
-  protected delete<T>(url: string, errorMessage: (error: HttpErrorResponse) => string, successMessage?: (response: T) => string): Observable<T> {
-    return this.pipeSnackbar(this.httpClient.delete<T>(this.baseUrl + url), errorMessage, successMessage);
+  protected delete<T>(url: string, confirmationModalDataDto: ConfirmationModalDataDto, errorMessage: (error: HttpErrorResponse) => string, successMessage?: (response: T) => string): Observable<T> {
+    return this.dialog.open(ConfirmationModal, {data: confirmationModalDataDto}).afterClosed().pipe(concatMap((confirmation: boolean) =>
+    {
+      if(confirmation) {
+        return this.pipeSnackbar(this.httpClient.delete<T>(this.baseUrl + url), errorMessage, successMessage);
+      }
+      return of()
+    }));
   }
 
   private pipeSnackbar<T>(observable: Observable<T>, errorMessage: (error: HttpErrorResponse) => string, successMessage?: (response: T) => string): Observable<T> {

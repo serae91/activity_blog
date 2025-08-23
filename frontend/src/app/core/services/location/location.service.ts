@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CreateLocationDto, LocationDto, LocationListDto } from 'src/app/_api/location.dto';
 import { BaseService } from '../base.service';
+import { ConfirmationModalDataDto } from '../../../shared/confirmation-modal/confirmation-modal.component';
 
 @Injectable({
   providedIn: 'root',
@@ -35,6 +36,6 @@ export class LocationService extends BaseService {
   }
 
   deleteLocation(locationId: number): Observable<void>{
-    return this.delete<void>(`/${locationId}`, (error) => `Error deleting Location by id: ${error.error.details}`);
+    return this.delete<void>(`/${locationId}`, {title: 'Delete Location', question: 'Do you want to delete this location?'} as ConfirmationModalDataDto, (error) => `Error deleting Location by id: ${error.error.details}`);
   }
 }

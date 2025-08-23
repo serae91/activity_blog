@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CreatePersonDto, PersonDto, PersonListDto } from 'src/app/_api/person.dto';
 import { BaseService } from '../base.service';
+import { ConfirmationModalDataDto } from '../../../shared/confirmation-modal/confirmation-modal.component';
 
 @Injectable({
   providedIn: 'root',
@@ -35,6 +36,6 @@ export class PersonService extends BaseService {
   }
 
   deletePerson(personId: number): Observable<void>{
-    return this.delete<void>(`/${personId}`,(error) => `Error deleting Person: ${error.error.details}`);
+    return this.delete<void>(`/${personId}`, {title: 'Delete Person', question: 'Do you want to delete this person?'} as ConfirmationModalDataDto,(error) => `Error deleting Person: ${error.error.details}`);
   }
 }
