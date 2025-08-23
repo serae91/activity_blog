@@ -13,8 +13,6 @@ export interface LocationDto {
     streetNumber: number;
 }
 
-
-
 export interface CreateLocationDto {
     name: string;
     country: string;

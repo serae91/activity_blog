@@ -48,6 +48,10 @@ public class LocationService {
     }
 
     private Long getActivityCount(final Location location) {
-        return criteriaBuilderFactory.create(entityManager, Long.class).from(Activity.class).select("COUNT(id)").where("locations.id").eq(location.getId()).getSingleResult();
+        return criteriaBuilderFactory.create(entityManager, Long.class)
+                .from(Activity.class)
+                .select("COUNT(DISTINCT(id))")
+                .where("locations.id").eq(location.getId())
+                .getSingleResult();
     }
 }

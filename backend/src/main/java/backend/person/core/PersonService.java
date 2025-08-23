@@ -46,6 +46,11 @@ public class PersonService {
     }
 
     private Long getActivityCount(final Person person) {
-        return criteriaBuilderFactory.create(entityManager, Long.class).from(Activity.class).select("COUNT(id)").where("persons.id").eq(person.getId()).getSingleResult();
+        return criteriaBuilderFactory.create(entityManager, Long.class)
+                .from(Activity.class)
+                .select("COUNT(DISTINCT(id))")
+                .where("author.id").eq(person.getId())
+                .where("persons.id").eq(person.getId())
+                .getSingleResult();
     }
 }

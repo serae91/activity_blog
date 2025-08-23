@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LocationDto, LocationListDto } from '../../_api/location.dto';
 import { LocationService } from '../../../app/core/services/location/location.service';
@@ -9,7 +9,7 @@ import { CreateLocationModalComponent } from './create-location-modal/create-loc
   templateUrl: './location-list.component.html',
   styleUrls: ['./location-list.component.scss']
 })
-export class LocationListComponent {
+export class LocationListComponent implements OnInit {
   locationListDtos: LocationListDto[];
 
   constructor(private locationService: LocationService, private dialog: MatDialog){}
@@ -23,7 +23,7 @@ export class LocationListComponent {
     .afterClosed()
     .subscribe((location: LocationDto) => {
       if(location) {
-        this.locationListDtos.push({location, canBeDeleted: true} as LocationListDto)
+        this.locationListDtos.push({location, activityCount: 0} as LocationListDto)
       }
     });
   }

@@ -18,18 +18,18 @@ export class ActivityService extends BaseService {
   }
 
   getFilteredActivities(activityFilter: ActivityFilterDto): Observable<ActivityDto[]>{
-    return this.post<ActivityDto[]>('/filtered', activityFilter, (error)=> 'Error loading filtered activities: ' + error.statusText);
+    return this.post<ActivityDto[]>('/filtered', activityFilter, (error)=> `Error loading filtered activities: ${error.statusText}`);
   }
 
   createActivity(activityCreateDto: ActivityCreateDto): Observable<ActivityDto>{
-    return this.post<ActivityDto>('/create', activityCreateDto, (error)=> 'Error creating activity: ' + error.statusText,(response)=> 'Successfully created activity');
+    return this.post<ActivityDto>('/create', activityCreateDto, (error)=> `Error creating activity: ${error.statusText}`,(response)=> `Successfully created activity`);
   }
 
   updateActivity(updateActivityDto: ActivityUpdateDto): Observable<ActivityDto>{
-    return this.post<ActivityDto>('/update', updateActivityDto, (error)=> 'Error updating activity: ' + error.statusText,(response)=> 'Successfully updated activity');
+    return this.post<ActivityDto>('/update', updateActivityDto, (error)=> `Error updating activity: ${error.statusText}`,(response)=> `Successfully updated activity`);
   }
 
   deleteActivity(activityId: number): Observable<void>{
-    return this.delete<void>('/' + activityId, (error)=> 'Error deleting activity: ' + error.statusText,(response)=> 'Successfully deleted activity');
+    return this.delete<void>('/' + activityId, (error)=> `Error deleting activity: ${error.statusText}`,(response)=> `Successfully deleted activity`);
   }
 }

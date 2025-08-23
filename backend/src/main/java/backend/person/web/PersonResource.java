@@ -51,7 +51,7 @@ public class PersonResource {
     }
 
     @POST
-    @Path("/new")
+    @Path("/create")
     @Transactional
     @Produces(MediaType.APPLICATION_JSON)
     public PersonEntityView createNewPerson(final PersonCreateView personCreateView) {

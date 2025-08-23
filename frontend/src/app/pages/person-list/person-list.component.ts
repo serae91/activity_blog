@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PersonDto, PersonListDto } from 'src/app/_api/person.dto';
 import { PersonService } from 'src/app/core/services/person/person.service';
 import { CreatePersonModalComponent } from './create-person-modal/create-person-modal.component';
@@ -9,7 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './person-list.component.html',
   styleUrls: ['./person-list.component.scss']
 })
-export class PersonListComponent {
+export class PersonListComponent implements OnInit{
   personListDtos: PersonListDto[];
 
   constructor(private personService: PersonService, private dialog: MatDialog){}
@@ -23,7 +23,7 @@ export class PersonListComponent {
     .afterClosed()
     .subscribe((person: PersonDto) => {
       if(person) {
-        this.personListDtos.push({person, canBeDeleted: true} as PersonListDto)
+        this.personListDtos.push({person, activityCount: 0} as PersonListDto)
       }
     });
   }

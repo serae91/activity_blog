@@ -3,6 +3,6 @@
     <p class="card-text">{{locationListDto.location.street + ' ' + locationListDto.location.streetNumber}}</p>
     <p class="card-text">{{locationListDto.location.postalCode + ' ' + locationListDto.location.city}}</p>
     <p class="card-text">{{locationListDto.location.country}}</p>
-    <button type="button" class="tiny-btn" (click)="deleteLocation()" *ngIf="locationListDto.canBeDeleted">-</button>
-    <p class="card-text" *ngIf="!locationListDto.canBeDeleted">This Location can't be deleted, because it is listed in an activity</p>
+    <button type="button" class="tiny-btn" (click)="deleteLocation()" *ngIf="canLocationBeDeleted()">-</button>
+    <p class="card-text" *ngIf="!canLocationBeDeleted()">This Location can't be deleted, because it is listed in an activity</p>
 </div>

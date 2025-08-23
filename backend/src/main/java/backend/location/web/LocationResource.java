@@ -52,7 +52,7 @@ public class LocationResource {
     }
 
     @POST
-    @Path("/new")
+    @Path("/create")
     @Transactional
     @Produces(MediaType.APPLICATION_JSON)
     public LocationEntityView createLocation(final LocationCreateView locationCreateView) {

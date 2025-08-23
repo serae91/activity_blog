@@ -20,10 +20,15 @@ export class PersonCardComponent {
   personService = inject(PersonService);
 
   deletePerson(): void {
-    if(!this.personListDto.canBeDeleted){
+    console.log(`This Person cant be deleted, because it is listed in ${this.personListDto.activityCount} activity`)
+    if(!this.canPersonBeDeleted()){
       return;
     }
     this.personService.deletePerson(this.personListDto.person.id).subscribe(() => this.deletePersonEvent.emit(this.personListDto.person.id));
+  }
+
+  canPersonBeDeleted(): boolean {
+    return !this.personListDto?.activityCount;
   }
 
   getDateString(date: Date): string {
