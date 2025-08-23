@@ -1,8 +1,11 @@
 package backend.person.web;
 
+import backend.person.core.PersonService;
 import backend.person.core.listview.PersonListDto;
-import backend.person.model.Person;
-import backend.person.usecase.create.model.CreatePersonDto;
+import backend.person.model.PersonEntityView;
+import backend.person.usecase.create.PersonCreateService;
+import backend.person.usecase.create.model.PersonCreateView;
+import backend.person.usecase.delete.PersonDeleteService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -20,35 +23,40 @@ import java.util.List;
 @ApplicationScoped
 public class PersonResource {
     @Inject
-    PersonResourceFacade personResourceFacade;
+    PersonService personService;
+    @Inject
+    PersonCreateService personCreateService;
+    @Inject
+    PersonDeleteService deletePersonService;
 
     @GET
     @Path("/{personId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Person getPersonById(@PathParam("personId") final Long personId) {
-        return personResourceFacade.getPersonById(personId);
+    public PersonEntityView getPersonEntityViewById(@PathParam("personId") final Long personId) {
+        return personService.getPersonEntityViewById(personId);
     }
 
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Person> getAllPersons() {
-        return personResourceFacade.getAllPersons();
+    public List<PersonEntityView> getAllPersons() {
+        return personService.getAllPersonEntityViews();
     }
 
     @GET
     @Path("/all/list")
     @Produces(MediaType.APPLICATION_JSON)
     public List<PersonListDto> getAllPersonListDtos() {
-        return personResourceFacade.getAllPersonListDtos();
+        return personService.getAllPersonListDtos();
     }
 
     @POST
     @Path("/new")
     @Transactional
     @Produces(MediaType.APPLICATION_JSON)
-    public Person createNewPerson(final CreatePersonDto createPersonDto) {
-        return personResourceFacade.createNewPerson(createPersonDto);
+    public PersonEntityView createNewPerson(final PersonCreateView personCreateView) {
+        personCreateService.createNewPerson(personCreateView);
+        return personService.getPersonEntityViewById(personCreateView.getId());
     }
 
     @DELETE
@@ -56,6 +64,6 @@ public class PersonResource {
     @Transactional
     @Produces(MediaType.APPLICATION_JSON)
     public void deletePersonById(@PathParam("personId") final Long personId) {
-        personResourceFacade.deletePersonById(personId);
+        deletePersonService.deletePersonById(personId);
     }
 }

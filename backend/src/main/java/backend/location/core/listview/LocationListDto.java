@@ -8,5 +8,5 @@ import lombok.Data;
 @Builder
 public class LocationListDto {
     final Location location;
-    final Boolean canBeDeleted;
+    final Long activityCount;
 }

@@ -12,7 +12,15 @@ export interface ActivityDto {
     locations: LocationDto[];
 }
 
-export interface CreateActivityDto {
+export interface ActivityFilterDto {
+  authorId: number;
+  personIds: number[];
+  locationIds: number[];
+  startPostTime: Date;
+  endPostTime: Date;
+}
+
+export interface ActivityCreateDto {
     author: IdDto;
     title: string;
     description: string;
@@ -20,7 +28,7 @@ export interface CreateActivityDto {
     locations: IdDto[];
 }
 
-export interface UpdateActivityDto {
+export interface ActivityUpdateDto {
   id: number;
   author: IdDto;
   title: string;

@@ -1,6 +1,5 @@
 package backend.activity.usecase.create;
 
-import backend.activity.core.ActivityRepository;
 import backend.activity.core.ActivityService;
 import backend.activity.model.Activity;
 import backend.activity.usecase.create.model.ActivityCreateView;
@@ -8,8 +7,6 @@ import backend.location.core.LocationService;
 import backend.location.model.Location;
 import backend.person.core.PersonService;
 import backend.person.model.Person;
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,16 +14,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Date;
-import java.util.List;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class CreateActivityServiceTest {
-    @Mock
-    ActivityRepository activityRepository;
     @Mock
     ActivityService activityService;
     @Mock

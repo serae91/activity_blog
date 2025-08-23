@@ -1,45 +1,51 @@
 package backend.person.core;
 
-import backend.activity.core.ActivityRepository;
 import backend.activity.model.Activity;
 import backend.person.core.listview.PersonListDto;
 import backend.person.model.Person;
+import backend.person.model.PersonEntityView;
+import com.blazebit.persistence.CriteriaBuilderFactory;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
 
 import java.util.List;
-import java.util.Optional;
 
 @Dependent
 public class PersonService {
     @Inject
-    PersonRepository personRepository;
+    EntityManager entityManager;
     @Inject
-    ActivityRepository activityRepository;
-    public Person getPersonById(final Long personId) {
-        final Optional<Person> optionalPerson = personRepository.findByIdOptional(personId);
-        return optionalPerson.orElse(null);
+    CriteriaBuilderFactory criteriaBuilderFactory;
+
+    public PersonEntityView getPersonEntityViewById(final Long personId) {
+        return criteriaBuilderFactory.create(entityManager, PersonEntityView.class)
+                .where("id").eq(personId).getSingleResult();
     }
 
-    public List<Person> getAllPersons() {
-        return personRepository.getAllPersons();
+    public List<PersonEntityView> getAllPersonEntityViews() {
+        return criteriaBuilderFactory.create(entityManager, PersonEntityView.class)
+                .getResultList();
     }
 
-    public List<Person> getPersonsForPersonIds(final List<Long> personIds) {
-        return personIds.stream().map(this::getPersonById).toList();
-    }
     public List<PersonListDto> getAllPersonListDtos() {
         final List<Person> allPersons = getAllPersons();
         return allPersons.stream().map(this::getPersonListDto).toList();
     }
 
+    private List<Person> getAllPersons() {
+        return criteriaBuilderFactory.create(entityManager, Person.class)
+                .getResultList();
+    }
+
     private PersonListDto getPersonListDto(final Person person) {
-        //final List<ActivityPerson> activityPersonsForPerson = activityPersonRepository.getAllActivityPersonsForPerson(person.getId());
-        final List<Activity> activitiesForAuthor = activityRepository.getAllActivitiesForAuthor(person.getId());
-        final Boolean canBeDeleted = false;//person.get.isEmpty() && activitiesForAuthor.isEmpty();
         return PersonListDto.builder()
                 .person(person)
-                .canBeDeleted(canBeDeleted)
+                .activityCount(getActivityCount(person))
                 .build();
+    }
+
+    private Long getActivityCount(final Person person) {
+        return criteriaBuilderFactory.create(entityManager, Long.class).from(Activity.class).select("COUNT(id)").where("persons.id").eq(person.getId()).getSingleResult();
     }
 }

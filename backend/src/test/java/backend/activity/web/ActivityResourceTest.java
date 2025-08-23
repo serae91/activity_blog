@@ -1,7 +1,7 @@
 package backend.activity.web;
 
 import backend.activity.core.ActivityService;
-import backend.activity.model.Activity;
+import backend.activity.model.ActivityEntityView;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
@@ -21,13 +21,12 @@ class ActivityResourceTest {
     ActivityResource activityResource;
 
     @Mock
-    private Activity activity;
+    private ActivityEntityView activity;
 
     @Test
     void getActivityByIdTest() {
-        when(activityService.getActivityById(7L)).thenReturn(activity);
-        final Activity result = activityResource.getActivityById(7L);
+        when(activityService.getActivityEntityViewById(7L)).thenReturn(activity);
+        final ActivityEntityView result = activityResource.getActivityById(7L);
         MatcherAssert.assertThat(result, CoreMatchers.is(activity));
     }
-
 }

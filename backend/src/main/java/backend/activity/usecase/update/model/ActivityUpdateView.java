@@ -1,6 +1,5 @@
 package backend.activity.usecase.update.model;
 
-import backend.activity.core.model.ActivityEntityView;
 import backend.activity.model.Activity;
 import backend.location.model.LocationIdView;
 import backend.person.model.PersonIdView;
@@ -19,20 +18,25 @@ public interface ActivityUpdateView {
     Long getId();
 
     String getTitle();
+
     void setTitle(String title);
 
     String getDescription();
+
     void setDescription(String description);
 
     @Mapping("author")
     PersonIdView getAuthor();
+
     void setAuthor(PersonIdView author);
 
     @Mapping("persons")
     List<PersonIdView> getPersons();
+
     void setPersons(List<PersonIdView> persons);
 
     @Mapping("locations")
     List<LocationIdView> getLocations();
+
     void setLocations(List<LocationIdView> persons);
 }

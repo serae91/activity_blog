@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CreateActivityDto, ActivityDto, UpdateActivityDto } from 'src/app/_api/activity.dto';
+import { ActivityCreateDto, ActivityDto, ActivityFilterDto, ActivityUpdateDto } from 'src/app/_api/activity.dto';
 import { BaseService } from '../base.service';
 
 @Injectable({
@@ -17,15 +17,15 @@ export class ActivityService extends BaseService {
     return this.get<ActivityDto>('/' + activityId, (error)=> 'Error loading activity by id');
   }
 
-  getAllActivities(): Observable<ActivityDto[]>{
-    return this.get<ActivityDto[]>('/all', (error)=> 'Error loading all activities: ' + error.statusText);
+  getFilteredActivities(activityFilter: ActivityFilterDto): Observable<ActivityDto[]>{
+    return this.post<ActivityDto[]>('/filtered', activityFilter, (error)=> 'Error loading filtered activities: ' + error.statusText);
   }
 
-  createActivity(activityCreateDto: CreateActivityDto): Observable<ActivityDto>{
+  createActivity(activityCreateDto: ActivityCreateDto): Observable<ActivityDto>{
     return this.post<ActivityDto>('/create', activityCreateDto, (error)=> 'Error creating activity: ' + error.statusText,(response)=> 'Successfully created activity');
   }
 
-  updateActivity(updateActivityDto: UpdateActivityDto): Observable<ActivityDto>{
+  updateActivity(updateActivityDto: ActivityUpdateDto): Observable<ActivityDto>{
     return this.post<ActivityDto>('/update', updateActivityDto, (error)=> 'Error updating activity: ' + error.statusText,(response)=> 'Successfully updated activity');
   }
 

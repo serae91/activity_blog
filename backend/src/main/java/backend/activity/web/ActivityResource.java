@@ -1,12 +1,12 @@
 package backend.activity.web;
 
 import backend.activity.core.ActivityService;
-import backend.activity.model.Activity;
+import backend.activity.core.model.ActivityFilterDto;
 import backend.activity.model.ActivityEntityView;
 import backend.activity.usecase.create.ActivityCreateService;
 import backend.activity.usecase.create.model.ActivityCreateView;
-import backend.activity.usecase.delete.DeleteActivityService;
-import backend.activity.usecase.update.UpdateActivityService;
+import backend.activity.usecase.delete.ActivityDeleteService;
+import backend.activity.usecase.update.ActivityUpdateService;
 import backend.activity.usecase.update.model.ActivityUpdateView;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -30,22 +30,22 @@ public class ActivityResource {
     @Inject
     ActivityCreateService activityCreateService;
     @Inject
-    UpdateActivityService updateActivityService;
+    ActivityUpdateService activityUpdateService;
     @Inject
-    DeleteActivityService deleteActivityService;
+    ActivityDeleteService activityDeleteService;
 
     @GET
     @Path("/{activityId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Activity getActivityById(@PathParam("activityId") final Long activityId) {
-        return activityService.getActivityById(activityId);
+    public ActivityEntityView getActivityById(@PathParam("activityId") final Long activityId) {
+        return activityService.getActivityEntityViewById(activityId);
     }
 
-    @GET
-    @Path("/all")
+    @POST
+    @Path("/filtered")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Activity> getAllActivities() {
-        return activityService.getAllActivities();
+    public List<ActivityEntityView> getFilteredActivities(final ActivityFilterDto activityFilter) {
+        return activityService.getFilteredActivityEntityViews(activityFilter);
     }
 
     @POST
@@ -53,7 +53,8 @@ public class ActivityResource {
     @Transactional
     @Produces(MediaType.APPLICATION_JSON)
     public ActivityEntityView createActivity(final ActivityCreateView activityCreateView) {
-        return activityCreateService.createActivity(activityCreateView);
+        activityCreateService.createActivity(activityCreateView);
+        return activityService.getActivityEntityViewById(activityCreateView.getId());
     }
 
     @POST
@@ -61,7 +62,8 @@ public class ActivityResource {
     @Transactional
     @Produces(MediaType.APPLICATION_JSON)
     public ActivityEntityView updateActivity(final ActivityUpdateView activityUpdateView) {
-        return updateActivityService.updateActivity(activityUpdateView);
+        activityUpdateService.updateActivity(activityUpdateView);
+        return activityService.getActivityEntityViewById(activityUpdateView.getId());
     }
 
     @DELETE
@@ -69,6 +71,6 @@ public class ActivityResource {
     @Transactional
     @Produces(MediaType.APPLICATION_JSON)
     public void deleteActivityById(@PathParam("activityId") final Long activityId) {
-        deleteActivityService.deleteActivityById(activityId);
+        activityDeleteService.deleteActivityById(activityId);
     }
 }

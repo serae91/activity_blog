@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ActivityDto, CreateActivityDto, UpdateActivityDto } from '../../../_api/activity.dto';
+import { ActivityDto, ActivityCreateDto, ActivityUpdateDto } from '../../../_api/activity.dto';
 import { LocationDto } from '../../../_api/location.dto';
 import { PersonDto } from '../../../_api/person.dto';
 import { ActivityService } from '../../../core/services/activity/activity.service';
@@ -101,17 +101,17 @@ export class ActivityModalComponent implements OnInit {
     this.locationIds.push(this.formBuilder.control(0))
   }
 
-  getCreateActivityDto(): CreateActivityDto {
+  getCreateActivityDto(): ActivityCreateDto {
     return {
       author: { id: this.formGroup.controls['authorId'].value } as IdDto,
       title: this.formGroup.controls['title'].value,
       description: this.formGroup.controls['description'].value,
       persons: this.getToIdDtoMappedIds(this.personIds.value),
       locations: this.getToIdDtoMappedIds(this.locationIds.value),
-    } as CreateActivityDto;
+    } as ActivityCreateDto;
   }
 
-  getUpdateActivityDto(): UpdateActivityDto {
+  getUpdateActivityDto(): ActivityUpdateDto {
     return {
       author: {id: this.formGroup.controls['authorId'].value} as IdDto,
       title: this.formGroup.controls['title'].value,
@@ -119,7 +119,7 @@ export class ActivityModalComponent implements OnInit {
       persons: this.getToIdDtoMappedIds(this.personIds.value),
       locations: this.getToIdDtoMappedIds(this.locationIds.value),
       id: this.data.id
-    } as UpdateActivityDto;
+    } as ActivityUpdateDto;
   }
 
   saveActivityAndCloseDialog(): void {

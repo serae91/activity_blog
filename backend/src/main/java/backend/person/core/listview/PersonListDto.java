@@ -8,5 +8,5 @@ import lombok.Data;
 @Builder
 public class PersonListDto {
     final Person person;
-    final Boolean canBeDeleted;
+    final Long activityCount;
 }

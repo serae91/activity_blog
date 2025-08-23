@@ -34,11 +34,11 @@ describe('ActivityListComponent', () => {
 
   it('should on Init', () => {
     const activities = [{ id: 17 }] as ActivityDto[];
-    jest.spyOn(activityService, 'getAllActivities').mockReturnValue(of(activities));
+    jest.spyOn(activityService, 'getFilteredActivities').mockReturnValue(of(activities));
 
     component.ngOnInit();
 
-    expect(activityService.getAllActivities).toHaveBeenCalledWith();
+    expect(activityService.getFilteredActivities).toHaveBeenCalledWith();
     expect(component.activities).toBe(activities);
   });
 

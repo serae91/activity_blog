@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivityDto } from '../../_api/activity.dto';
+import { ActivityDto, ActivityFilterDto } from '../../_api/activity.dto';
 import { ActivityService } from '../../core/services/activity/activity.service';
 import { ActivityModalComponent } from './activity-modal/activity-modal.component';
 
@@ -13,10 +13,12 @@ export class ActivityListComponent implements OnInit {
 
   activities: ActivityDto[];
 
+  activityFilter = {} as ActivityFilterDto;
+
   constructor(private activityService: ActivityService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.activityService.getAllActivities().subscribe(activities => this.activities = activities);
+    this.activityService.getFilteredActivities(this.activityFilter).subscribe(activities => this.activities = activities);
   }
 
   openCreateActivityModal(): void {

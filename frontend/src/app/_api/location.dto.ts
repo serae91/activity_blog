@@ -1,6 +1,6 @@
 export interface LocationListDto {
     location: LocationDto;
-    canBeDeleted: boolean;
+    activityCount: number;
 }
 
 export interface LocationDto {

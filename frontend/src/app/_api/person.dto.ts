@@ -2,7 +2,7 @@ import { ActivityDto } from "./activity.dto";
 
 export interface PersonListDto {
     person: PersonDto;
-    canBeDeleted: boolean;
+    activityCount: number;
 }
 
 export interface PersonDto {
