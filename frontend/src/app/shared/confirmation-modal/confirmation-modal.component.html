@@ -1,6 +1,8 @@
-<div>
-  <div>{{data.title??'Title not implemented'}}</div>
-  <div>{{data.question??'Question not implemented'}}</div>
-  <button (click)="cancel()">Cancel</button>
-  <button (click)="confirm()">Confirm</button>
+<div class="confirmation-modal-card">
+  <h3>{{data.title}}</h3>
+  <div class="question-text">{{data.question}}</div>
+  <div class="button-row">
+    <button (click)="cancel()" class="btn-secondary">Cancel</button>
+    <button (click)="confirm()" class="btn-success">Confirm</button>
+  </div>
 </div>

@@ -1,0 +1,20 @@
+.filter-drawer {
+  margin: 24px;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+
+.filter-field {
+  border-radius: 12px;
+  background-color: #eee;
+  margin: 8px;
+  padding: 16px;
+}
+
+.filter-value {
+  border-radius: 12px;
+  background-color: #fff;
+  margin: 8px;
+  padding: 16px;
+}

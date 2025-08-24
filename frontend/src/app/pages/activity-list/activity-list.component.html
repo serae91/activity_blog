@@ -1,11 +1,25 @@
-<button type="button" class="btn-primary" (click)="openActivityModal()">Create new Activity</button>
-<div class="flex-row">
-  <app-opacity-scroll>
-      <div *ngFor="let activity of activities">
-          <app-activity-list-card [activity]="activity" [openedActivityId]="openedActivity?.id??0" (deleteActivityEvent)="onDeleteActivity($event)" (openActivityEvent)="onOpenActivity($event)"/>
-      </div>
-  </app-opacity-scroll>
-  <div class="activity-card">
-    <app-activity-card [activity]="openedActivity" *ngIf="openedActivity"/>
-  </div>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #drawer mode="over" position="end" [(opened)]="isActivityFilterDrawerOpen">
+    <app-activity-filter [activityFilter]="activityFilter" (activityFilterChange)="onActivityFilterChange()"></app-activity-filter>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="sidenav-container">
+    <button type="button" class="btn-primary" (click)="openActivityModal()">Create new Activity</button>
+    <div class="filter-btn">
+      <mat-icon (click)="drawer.toggle()">filter_list</mat-icon>
+    </div>
+    <div class="flex-row">
+    <app-opacity-scroll>
+        <div *ngFor="let activity of activities">
+            <app-activity-list-card [activity]="activity" [openedActivityId]="openedActivity?.id??0" (deleteActivityEvent)="onDeleteActivity($event)" (openActivityEvent)="onOpenActivity($event)"/>
+        </div>
+    </app-opacity-scroll>
+    <div class="activity-card">
+      <app-activity-card [activity]="openedActivity" *ngIf="openedActivity"/>
+    </div>
 </div>
+
+
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

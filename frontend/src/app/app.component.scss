@@ -1,20 +1,7 @@
-$ugandaBlack: rgb(0,0,0);
-$ugandaYellow: rgb(252,220,4);
-$ugandaRed: rgb(217,0,0);
-$ugandaGrey: rgb(156,166,156);
-$germanBlack: rgb(0,0,0);
-$germanRed: rgb(255,0,0);
-$germanGold: rgb(255,204,0);
+.header {
+  height: 64px;
+}
 
-.text-field{
-  margin: 50px;
-  h1{
-    color: $ugandaRed;
-  }
-}
-.section{
-  padding: 10px 20px;
-}
-.bold{
-  font-weight: 600;
+.no-scroll{
+  height: calc(100% - 64px);
 }

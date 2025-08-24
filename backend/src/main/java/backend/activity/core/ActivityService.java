@@ -11,6 +11,8 @@ import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -62,6 +64,15 @@ public class ActivityService {
 
     private void filterEndPostTime(final CriteriaBuilder<Activity> criteriaBuilder, final ActivityFilterDto activityFilter) {
         if (Objects.isNull(activityFilter.endPostTime())) return;
-        criteriaBuilder.where("postTime").le(activityFilter.startPostTime());
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(activityFilter.endPostTime());
+        cal.set(Calendar.HOUR_OF_DAY, 23);
+        cal.set(Calendar.MINUTE, 59);
+        cal.set(Calendar.SECOND, 59);
+        cal.set(Calendar.MILLISECOND, 999);
+        Date endOfDay = cal.getTime();
+
+        criteriaBuilder.where("postTime").le(endOfDay);
     }
 }

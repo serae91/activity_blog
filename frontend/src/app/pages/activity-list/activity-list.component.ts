@@ -1,8 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivityDto, ActivityFilterDto } from '../../_api/activity.dto';
 import { ActivityService } from '../../core/services/activity/activity.service';
 import { ActivityModalComponent } from './activity-modal/activity-modal.component';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-activity-list',
@@ -10,20 +11,18 @@ import { ActivityModalComponent } from './activity-modal/activity-modal.componen
   styleUrls: ['./activity-list.component.scss'],
 })
 export class ActivityListComponent implements OnInit {
+  @ViewChild('drawer') drawer!: MatSidenav;
+
   activityService = inject(ActivityService);
   dialog = inject(MatDialog);
   activities: ActivityDto[];
   openedActivity: ActivityDto;
 
+  isActivityFilterDrawerOpen = false;
   activityFilter = {} as ActivityFilterDto;
 
   ngOnInit(): void {
-    this.activityService
-      .getFilteredActivities(this.activityFilter)
-      .subscribe((activities) => {
-        this.activities = activities;
-        this.openedActivity = activities[0];
-      });
+    this.loadActivities();
   }
 
   openActivityModal(): void {
@@ -33,6 +32,7 @@ export class ActivityListComponent implements OnInit {
       .subscribe((activity: ActivityDto) => {
         if (activity) {
           this.activities.push(activity);
+          this.openedActivity = activity;
         }
       });
   }
@@ -41,6 +41,9 @@ export class ActivityListComponent implements OnInit {
     this.activities = this.activities.filter(
       (activity) => activity.id !== activityId
     );
+    if (this.openedActivity.id === activityId) {
+      this.openedActivity = this.activities[0];
+    }
   }
 
   onOpenActivity(openedActivityId: number): void {
@@ -50,5 +53,19 @@ export class ActivityListComponent implements OnInit {
     if (activity) {
       this.openedActivity = activity;
     }
+  }
+
+  onActivityFilterChange(): void {
+    this.loadActivities();
+    this.drawer.close();
+  }
+
+  loadActivities(): void {
+    this.activityService
+      .getFilteredActivities(this.activityFilter)
+      .subscribe((activities) => {
+        this.activities = activities;
+        this.openedActivity = activities[0];
+      });
   }
 }

@@ -85,7 +85,9 @@ export class BaseService {
       tap({
         next: (response: T) => {
           if (successMessage)
-            this.snackbar.open(successMessage(response), '', { duration: 300 });
+            this.snackbar.open(successMessage(response), '', {
+              duration: 5000,
+            });
         },
         error: (error) => this.snackbar.open(errorMessage(error)),
       } as PartialObserver<T>)
