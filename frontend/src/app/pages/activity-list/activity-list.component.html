@@ -1,8 +1,11 @@
-<div>
-<app-opacity-scroll>
-    <div *ngFor="let activity of activities">
-        <app-activity-card [activity]="activity" (deleteActivityEvent)="onDeleteActivity($event)"/>
-    </div>
-</app-opacity-scroll>
-<button type="button" class="btn-primary" (click)="openCreateActivityModal()">Create new Activity</button>
+<button type="button" class="btn-primary" (click)="openActivityModal()">Create new Activity</button>
+<div class="flex-row">
+  <app-opacity-scroll>
+      <div *ngFor="let activity of activities">
+          <app-activity-list-card [activity]="activity" [openedActivityId]="openedActivity?.id??0" (deleteActivityEvent)="onDeleteActivity($event)" (openActivityEvent)="onOpenActivity($event)"/>
+      </div>
+  </app-opacity-scroll>
+  <div class="activity-card">
+    <app-activity-card [activity]="openedActivity" *ngIf="openedActivity"/>
+  </div>
 </div>

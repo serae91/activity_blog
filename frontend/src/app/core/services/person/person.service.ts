@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CreatePersonDto, PersonDto, PersonListDto } from 'src/app/_api/person.dto';
 import { BaseService } from '../base.service';
@@ -9,10 +8,6 @@ import { ConfirmationModalDataDto } from '../../../shared/confirmation-modal/con
   providedIn: 'root',
 })
 export class PersonService extends BaseService {
-  static readonly PERSON = 'person';
-  static readonly ALL = '/all';
-  static readonly LIST = '/list';
-  static readonly NEW = '/new';
 
   constructor() {
     super();

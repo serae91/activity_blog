@@ -1,0 +1,35 @@
+<div class="activity-card">
+  <div class="flex-col">
+    <div class="activity-header">
+      <img src="assets/resources/images/avatar.jpg" alt="User Avatar" class="avatar" />
+      <span class="user-info">
+        <h4 class="username">{{activity.author.firstName + ' ' + activity.author.lastName}}</h4>
+        <span class="date">{{getDateString(activity.postTime) + ', '}}</span>
+        <span class="date">{{getTimeString(activity.postTime)}}</span>
+      </span>
+    </div>
+
+    <h3 class="activity-title">{{activity.title}}</h3>
+  </div>
+  <div class="right-col">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="openUpdateActivityModal()">
+        <mat-icon>update</mat-icon>
+        <span>Update</span>
+      </button>
+      <button mat-menu-item (click)="deleteActivity()">
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+    </mat-menu>
+    <div class="open-activity-button" (click)="openActivity()" [ngClass]="activity.id === openedActivityId ? 'pressed-button' : 'unpressed-button'">
+      <mat-icon>
+        {{ activity.id === openedActivityId ? 'chevron_right' : 'chevron_left' }}
+      </mat-icon>
+    </div>
+  </div>
+</div>
+

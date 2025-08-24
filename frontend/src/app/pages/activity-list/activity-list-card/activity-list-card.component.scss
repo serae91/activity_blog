@@ -1,19 +1,20 @@
 .activity-card {
-  //background-color: #ffffff;
+  background-color: #ffffff;
   border-radius: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   padding: 20px;
-  width: 1000px;
+  max-width: 600px;
   margin: 20px auto;
   font-family: 'Inter', sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .activity-header {
   display: flex;
   align-items: center;
-  justify-content: right;
   margin-bottom: 12px;
-  width: 100%;
 }
 
 .avatar {
@@ -42,9 +43,6 @@
 }
 
 .activity-description {
-  background-color: #eee;
-  padding: 24px;
-  border-radius: 12px;
   color: #374151;
   font-size: 1rem;
   line-height: 1.5;
@@ -57,14 +55,29 @@
   margin-bottom: 12px;
 }
 
-.spread-row {
+.right-col{
   display: flex;
-  justify-content: space-between;
+  //justify-content: space-between;
   align-items: center;
 }
 
-.right-row {
+.open-activity-button {
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
   display: flex;
-  float: right;
+  justify-content: center;
   align-items: center;
+}
+
+.pressed-button {
+  background-color: lightgreen;
+}
+
+.unpressed-button {
+  cursor: pointer;
+}
+
+.unpressed-button:hover {
+  background-color: #dddddd;
 }

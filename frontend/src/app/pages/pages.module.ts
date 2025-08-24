@@ -12,16 +12,18 @@ import { CreatePersonModalComponent } from './person-list/create-person-modal/cr
 import { LocationListComponent } from './location-list/location-list.component';
 import { CreateLocationModalComponent } from './location-list/create-location-modal/create-location-modal.component';
 import { LocationCardComponent } from './location-list/location-card/location-card.component';
+import { ActivityListCardComponent } from './activity-list/activity-list-card/activity-list-card.component';
 
 const COMPONENTS = [
   ActivityListComponent,
+  ActivityListCardComponent,
   ActivityCardComponent,
   ActivityModalComponent,
   CreateLocationModalComponent,
   CreatePersonModalComponent,
   PersonCardComponent,
   PersonListComponent,
-  LocationListComponent
+  LocationListComponent,
 ];
 
 @NgModule({

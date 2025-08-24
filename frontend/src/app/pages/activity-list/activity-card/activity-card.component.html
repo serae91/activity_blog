@@ -1,52 +1,23 @@
-<!--div-- class="activity-card">
-    <h5>{{activity.title}}</h5>
-    <p class="activity-header">{{activity.description}}</p>
-    <h6>Participants</h6>
-    <p class="card-text" *ngFor="let person of activity.persons">{{person.firstName + ' ' + person.lastName}}</p>
-    <h6>Locations</h6>
-    <p class="card-text" *ngFor="let location of activity.locations">{{location.name}}</p>
-    <div class="signature">
-        <div>{{activity.author.firstName + ' ' + activity.author.lastName}}</div>
-        <div>{{getDateString(activity.postTime)}}</div>
-        <div>{{getTimeString(activity.postTime)}}</div>
-    </div>
-    <button type="button" class="tiny-btn" (click)="deleteActivity()">-</button>
-</div-->
-
 <div class="activity-card">
-  <div class="flex-row">
     <div class="activity-header">
       <img src="assets/resources/images/avatar.jpg" alt="User Avatar" class="avatar" />
       <span class="user-info">
         <h4 class="username">{{activity.author.firstName + ' ' + activity.author.lastName}}</h4>
-        <span class="date">{{getDateString(activity.postTime)}}</span>
+        <span class="date">{{getDateString(activity.postTime ) + ', '}}</span>
         <span class="date">{{getTimeString(activity.postTime)}}</span>
       </span>
     </div>
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="openUpdateActivityModal()">
-        <mat-icon>update</mat-icon>
-        <span>Update</span>
-      </button>
-      <button mat-menu-item (click)="deleteActivity()">
-        <mat-icon>delete</mat-icon>
-        <span>Delete</span>
-      </button>
-    </mat-menu>
-  </div>
   <h3 class="activity-title">{{activity.title}}</h3>
+  <div class="activity-description">{{activity.description}}</div>
 
-  <p class="activity-description">
-    {{activity.description}}
-  </p>
-
-  <div class="flex-col">
-    <h6>Participants</h6>
-    <img src="assets/resources/images/avatar.jpg" alt="User Avatar" class="participant" *ngFor="let person of activity.persons" [matTooltip]="person.firstName + ' ' + person.lastName"/>
-    <h6>Locations</h6>
-    <mat-icon class="card-text" *ngFor="let location of activity.locations" [matTooltip]="location.name">place</mat-icon>
+  <div class="spread-row">
+    <div class="flex-col">
+      <h6>Participants</h6>
+      <img src="assets/resources/images/avatar.jpg" alt="User Avatar" class="participant" *ngFor="let person of activity.persons" [matTooltip]="person.firstName + ' ' + person.lastName"/>
+    </div>
+    <div class="flex-col">
+      <h6>Locations</h6>
+      <mat-icon class="card-text" *ngFor="let location of activity.locations" [matTooltip]="location.name">place</mat-icon>
+    </div>
   </div>
 </div>

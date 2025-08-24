@@ -1,6 +1,6 @@
 <div>
-  <div>{{data?.title}}</div>
-  <div>{{data?.question}}</div>
+  <div>{{data.title??'Title not implemented'}}</div>
+  <div>{{data.question??'Question not implemented'}}</div>
   <button (click)="cancel()">Cancel</button>
   <button (click)="confirm()">Confirm</button>
 </div>
