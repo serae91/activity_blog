@@ -16,6 +16,7 @@
         <quarkus.platform.version>3.4.3</quarkus.platform.version>
         <blaze-persistence.version>1.6.16</blaze-persistence.version>
         <checkstyle.version>3.4.0</checkstyle.version>
+        <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
         <skipITs>true</skipITs>
         <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
     </properties>
@@ -179,6 +180,25 @@
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
                     <excludes>target/**</excludes>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-maven-plugin.version}</version> <!-- aktuelle Version prüfen -->
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
