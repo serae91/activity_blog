@@ -1,5 +1,5 @@
 <div class="filter-drawer">
-  <div class="filter-field">
+  <mat-form-field class="filter-field">
   <mat-label>Author</mat-label>
   <mat-select placeholder="Add Author" [(ngModel)]="activityFilter.authorId" class="filter-value">
     <mat-option  [value]="undefined">
@@ -9,28 +9,38 @@
       {{person.id ? person.firstName + ' ' + person.lastName:''}}
     </mat-option>
   </mat-select>
-  </div>
-  <div class="filter-field">
-  <mat-label>Persons</mat-label>
-  <mat-select [(ngModel)]="activityFilter.personIds" multiple class="filter-value" placeholder="Add persons">
-    <mat-option *ngFor="let person of persons" [value]="person.id" [disabled]="isPersonSelectedAsAuthor(person)">{{ person.firstName + ' ' + person.lastName }}</mat-option>
-  </mat-select></div>
-    <div class="filter-field">
-  <mat-label>Locations</mat-label>
-  <mat-select [(ngModel)]="activityFilter.locationIds" multiple  class="filter-value" placeholder="Add locations">
-    <mat-option *ngFor="let location of locations" [value]="location.id">{{ location.name }}</mat-option>
-  </mat-select></div>
+  </mat-form-field>
+  <mat-form-field class="filter-field">
+    <mat-label>Authors</mat-label>
+    <mat-select [(ngModel)]="activityFilter.authorId" multiple class="filter-value" placeholder="Add persons">
+      <mat-option *ngFor="let person of persons" [value]="person.id" [disabled]="isPersonSelectedAsAuthor(person)">{{ person.firstName + ' ' + person.lastName }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="filter-field">
+    <mat-label>Persons</mat-label>
+    <mat-select [(ngModel)]="activityFilter.personIds" multiple class="filter-value" placeholder="Add persons">
+      <mat-option *ngFor="let person of persons" [value]="person.id" [disabled]="isPersonSelectedAsAuthor(person)">{{ person.firstName + ' ' + person.lastName }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+    <mat-form-field class="filter-field">
+      <mat-label>Locations</mat-label>
+      <mat-select [(ngModel)]="activityFilter.locationIds" multiple class="filter-value" placeholder="Add locations">
+      <mat-option *ngFor="let location of locations" [value]="location.id">{{ location.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <div class="filter-field">
+  <mat-form-field class="filter-field">
     <mat-label>Start Post Time</mat-label>
     <input matInput [matDatepicker]="pickerStart" [(ngModel)]="activityFilter.startPostTime" class="filter-value">
     <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
-        <mat-datepicker #pickerStart></mat-datepicker></div>
-        <div class="filter-field">
-          <mat-label>End Post Time</mat-label>
-          <input matInput [matDatepicker]="pickerEnd" [(ngModel)]="activityFilter.endPostTime" class="filter-value">
-          <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
-          <mat-datepicker #pickerEnd></mat-datepicker>
-        </div>
-  <button (click)="activityFilterChange.emit(activityFilter)">Filter</button>
+        <mat-datepicker #pickerStart></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field class="filter-field">
+    <mat-label>End Post Time</mat-label>
+    <input matInput [matDatepicker]="pickerEnd" [(ngModel)]="activityFilter.endPostTime" class="filter-value">
+    <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+    <mat-datepicker #pickerEnd></mat-datepicker>
+  </mat-form-field>
+  <button (click)="activityFilterChange.emit(activityFilter)" class="primary-btn">Filter</button>
 </div>

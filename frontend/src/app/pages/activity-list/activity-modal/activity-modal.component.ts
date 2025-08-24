@@ -68,17 +68,13 @@ export class ActivityModalComponent implements OnInit {
       authorId: this.formBuilder.control(this.data?.author?.id ?? null),
       title: this.formBuilder.control(this.data?.title ?? ''),
       description: this.formBuilder.control(this.data?.description ?? ''),
-      personIds: this.formBuilder.array([
-        ...(this.data?.persons?.map((person) =>
-          this.formBuilder.control(person.id)
-        ) ?? this.formBuilder.control(0)),
-      ]),
-      locationIds: this.formBuilder.array([
-        this.data?.locations?.map((location) =>
-          this.formBuilder.control(location.id)
-        ) ?? this.formBuilder.control(0),
-      ]),
+      personIds: [this.data?.persons?.map((person) => person.id) ?? []],
+      locationIds: [this.data?.locations?.map((location) => location.id) ?? []],
     });
+  }
+
+  getTitle(): string {
+    return !this.data?.id ? 'Create new Activity' : 'Update Activity';
   }
 
   isPersonSelected(person: PersonDto): boolean {
@@ -105,30 +101,6 @@ export class ActivityModalComponent implements OnInit {
         this.isPersonSelectedAsAuthor(person) ||
         this.personIds.value.includes(person.id)
     );
-  }
-
-  isLocationSelected(location: LocationDto): boolean {
-    const selectedLocationIds = this.getSelectedLocations().map(
-      (location) => location.id
-    );
-    return selectedLocationIds.includes(location.id);
-  }
-
-  getSelectedLocations(): LocationDto[] {
-    if (!this.locations || !this.locationIds) {
-      return [];
-    }
-    return this.locations.filter((location) =>
-      this.locationIds.value.includes(location.id)
-    );
-  }
-
-  removeLocation(index: number) {
-    this.locationIds.removeAt(index);
-  }
-
-  addLocation() {
-    this.locationIds.push(this.formBuilder.control(0));
   }
 
   getCreateActivityDto(): ActivityCreateDto {
