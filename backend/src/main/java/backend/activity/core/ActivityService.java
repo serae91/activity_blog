@@ -65,13 +65,13 @@ public class ActivityService {
     private void filterEndPostTime(final CriteriaBuilder<Activity> criteriaBuilder, final ActivityFilterDto activityFilter) {
         if (Objects.isNull(activityFilter.endPostTime())) return;
 
-        Calendar cal = Calendar.getInstance();
+        final Calendar cal = Calendar.getInstance();
         cal.setTime(activityFilter.endPostTime());
         cal.set(Calendar.HOUR_OF_DAY, 23);
         cal.set(Calendar.MINUTE, 59);
         cal.set(Calendar.SECOND, 59);
         cal.set(Calendar.MILLISECOND, 999);
-        Date endOfDay = cal.getTime();
+        final Date endOfDay = cal.getTime();
 
         criteriaBuilder.where("postTime").le(endOfDay);
     }
