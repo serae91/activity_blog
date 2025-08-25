@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../core/material.module';
 import { PersonListComponent } from './person-list/person-list.component';
 import { PersonCardComponent } from './person-list/person-card/person-card.component';
-import { CreatePersonModalComponent } from './person-list/create-person-modal/create-person-modal.component';
+import { PersonModalComponent } from './person-list/person-modal/person-modal.component';
 import { LocationListComponent } from './location-list/location-list.component';
 import { LocationModalComponent } from './location-list/location-modal/location-modal.component';
 import { LocationCardComponent } from './location-list/location-card/location-card.component';
@@ -22,7 +22,7 @@ const COMPONENTS = [
   ActivityModalComponent,
   ActivityFilterComponent,
   LocationModalComponent,
-  CreatePersonModalComponent,
+  PersonModalComponent,
   PersonCardComponent,
   PersonListComponent,
   LocationListComponent,

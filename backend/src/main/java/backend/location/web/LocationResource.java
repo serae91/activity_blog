@@ -38,7 +38,7 @@ public class LocationResource {
     @Path("/{locationId}")
     @Produces(MediaType.APPLICATION_JSON)
     public LocationEntityView getLocationEntityViewById(@PathParam("locationId") final Long locationId) {
-        return locationService.getLocationById(locationId);
+        return locationService.getLocationEntityViewById(locationId);
     }
 
     @GET
@@ -61,7 +61,7 @@ public class LocationResource {
     @Produces(MediaType.APPLICATION_JSON)
     public LocationEntityView createLocation(final LocationCreateView locationCreateView) {
         locationCreateService.createLocation(locationCreateView);
-        return locationService.getLocationById(locationCreateView.getId());
+        return locationService.getLocationEntityViewById(locationCreateView.getId());
     }
 
     @POST
@@ -70,7 +70,7 @@ public class LocationResource {
     @Produces(MediaType.APPLICATION_JSON)
     public LocationEntityView updateLocation(final LocationUpdateView locationUpdateView) {
         locationUpdateService.updateLocation(locationUpdateView);
-        return locationService.getLocationById(locationUpdateView.getId());
+        return locationService.getLocationEntityViewById(locationUpdateView.getId());
     }
 
     @DELETE

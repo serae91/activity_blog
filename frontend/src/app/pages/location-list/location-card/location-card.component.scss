@@ -17,7 +17,7 @@ $shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   display: block; // host behaves like block element
 }
 
-@media (prefers-color-scheme: dark) {
+/*@media (prefers-color-scheme: dark) {
   :host {
     --card-bg: #0f172a;
     --card-fg: #e5e7eb;
@@ -25,7 +25,7 @@ $shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     --border: #1f2937;
     --accent: #60a5fa;
   }
-}
+}*/
 
 .address-card {
   background: var(--card-bg);

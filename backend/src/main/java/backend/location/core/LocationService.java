@@ -25,7 +25,7 @@ public class LocationService {
     @Inject
     CriteriaBuilderFactory criteriaBuilderFactory;
 
-    public LocationEntityView getLocationById(final Long locationId) {
+    public LocationEntityView getLocationEntityViewById(final Long locationId) {
         final CriteriaBuilder<Location> criteriaBuilder = criteriaBuilderFactory.create(entityManager, Location.class)
                 .where("id").eq(locationId);
         return entityViewManager.applySetting(EntityViewSetting.create(LocationEntityView.class), criteriaBuilder).getSingleResult();

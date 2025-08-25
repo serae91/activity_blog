@@ -1,7 +1,9 @@
 import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { PersonListDto } from '../../../_api/person.dto';
+import { PersonDto, PersonListDto } from '../../../_api/person.dto';
 import { PersonService } from '../../../core/services/person/person.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PersonModalComponent } from '../person-modal/person-modal.component';
 
 @Component({
   selector: 'app-person-card',
@@ -18,6 +20,16 @@ export class PersonCardComponent {
   datePipe = new DatePipe('en-US');
 
   personService = inject(PersonService);
+  dialog = inject(MatDialog);
+
+  openUpdatePersonModal(): void {
+    this.dialog
+      .open(PersonModalComponent, { data: this.personListDto.person })
+      .afterClosed()
+      .subscribe((person: PersonDto) => {
+        this.personListDto.person = person;
+      });
+  }
 
   deletePerson(): void {
     this.personService

@@ -1,9 +1,6 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { LocationDto, LocationListDto } from '../../../_api/location.dto';
 import { LocationService } from '../../../core/services/location/location.service';
-import { ActivityModalComponent } from '../../activity-list/activity-modal/activity-modal.component';
-import { ActivityDto } from '../../../_api/activity.dto';
-import { updateObjectExcludingId } from '../../../utils/update-object.utils';
 import { MatDialog } from '@angular/material/dialog';
 import { LocationModalComponent } from '../location-modal/location-modal.component';
 

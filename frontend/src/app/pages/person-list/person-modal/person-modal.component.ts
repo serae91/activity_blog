@@ -1,20 +1,25 @@
 import { DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import {
   FormArray,
   UntypedFormBuilder,
   UntypedFormGroup,
 } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
-import { CreatePersonDto, PersonDto } from 'src/app/_api/person.dto';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {
+  CreatePersonDto,
+  PersonDto,
+  PersonUpdateDto,
+} from 'src/app/_api/person.dto';
 import { PersonService } from '../../../core/services/person/person.service';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-create-person-modal',
-  templateUrl: './create-person-modal.component.html',
-  styleUrls: ['./create-person-modal.component.scss'],
+  selector: 'app-person-modal',
+  templateUrl: './person-modal.component.html',
+  styleUrls: ['./person-modal.component.scss'],
 })
-export class CreatePersonModalComponent {
+export class PersonModalComponent {
   formGroup: UntypedFormGroup;
   persons: PersonDto[];
 
@@ -25,7 +30,8 @@ export class CreatePersonModalComponent {
   }
 
   constructor(
-    private dialogRef: MatDialogRef<CreatePersonModalComponent>,
+    @Inject(MAT_DIALOG_DATA) private data: PersonDto,
+    private dialogRef: MatDialogRef<PersonModalComponent>,
     private formBuilder: UntypedFormBuilder,
     private personService: PersonService
   ) {}
@@ -35,21 +41,47 @@ export class CreatePersonModalComponent {
     this.initFormGroup();
   }
 
+  isCreatingNewPerson(): boolean {
+    return !this.data;
+  }
+
+  getTitle(): string {
+    return this.isCreatingNewPerson() ? 'Create new person' : 'Update person';
+  }
+
   loadAllPersons(): void {
     this.personService
       .getAllPersons()
-      .subscribe((persons) => (this.persons = persons));
+      .subscribe(
+        (persons) =>
+          (this.persons = this.isCreatingNewPerson()
+            ? persons
+            : persons.filter((person) => person.id !== this.data.id))
+      );
   }
 
   initFormGroup(): void {
     this.formGroup = this.formBuilder.group({
-      firstName: this.formBuilder.control(''),
-      lastName: this.formBuilder.control(''),
-      birthday: this.formBuilder.control(null),
+      firstName: this.formBuilder.control(this.data?.firstName ?? ''),
+      lastName: this.formBuilder.control(this.data?.lastName ?? ''),
+      birthday: this.formBuilder.control(
+        this.data?.birthday ? this.toDateInputString(this.data.birthday) : null
+      ),
     });
   }
 
-  getCreatePersonDto(): CreatePersonDto {
+  toDateInputString(date: Date | null): string | null {
+    if (!date) return null;
+    console.log(date);
+    /*const pad = (n: number) => n.toString().padStart(2, '0');
+    const result = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(
+      date.getDate()
+    )}`;
+    console.log(result);*/
+    return date.toString().substring(0, 10);
+  }
+
+  getPersonCreateDto(): CreatePersonDto {
     return {
       firstName: this.formGroup.controls['firstName'].value,
       lastName: this.formGroup.controls['lastName'].value,
@@ -57,10 +89,23 @@ export class CreatePersonModalComponent {
     } as CreatePersonDto;
   }
 
+  getPersonUpdateDto(): PersonUpdateDto {
+    return {
+      ...this.getPersonCreateDto(),
+      id: this.data.id,
+    } as PersonUpdateDto;
+  }
+
   savePersonAndCloseDialog(): void {
-    this.personService
-      .createNewPerson(this.getCreatePersonDto())
-      .subscribe((newPerson) => this.dialogRef.close(newPerson));
+    this.createOrUpdatePerson().subscribe((newActivity) =>
+      this.dialogRef.close(newActivity)
+    );
+  }
+
+  createOrUpdatePerson(): Observable<PersonDto> {
+    return !!this.data?.id
+      ? this.personService.updatePerson(this.getPersonUpdateDto())
+      : this.personService.createPerson(this.getPersonCreateDto());
   }
 
   cancel(): void {
@@ -75,6 +120,7 @@ export class CreatePersonModalComponent {
   }
 
   doesPersonAlreadyExist(): boolean {
+    if (!this.persons) return false;
     if (
       !this.formGroup.controls['firstName'].valid ||
       !this.formGroup.controls['lastName'].valid ||

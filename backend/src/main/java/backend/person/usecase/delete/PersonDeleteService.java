@@ -3,13 +3,13 @@ package backend.person.usecase.delete;
 import backend.activity.model.Activity;
 import backend.person.model.Person;
 import com.blazebit.persistence.CriteriaBuilderFactory;
-import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 
 import java.util.Objects;
 
-@Dependent
+@ApplicationScoped
 public class PersonDeleteService {
     @Inject
     EntityManager entityManager;

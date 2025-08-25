@@ -13,7 +13,7 @@ public class LocationUpdateService {
     @Inject
     EntityViewManager entityViewManager;
 
-    public void updateLocation(final LocationUpdateView activityUpdateView) {
-        entityViewManager.save(entityManager, activityUpdateView);
+    public void updateLocation(final LocationUpdateView locationUpdateView) {
+        entityViewManager.save(entityManager, locationUpdateView);
     }
 }

@@ -468,7 +468,7 @@
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
       </file>
-      <file name="create-person-modal.component.ts" path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/person-list/create-person-modal/create-person-modal.component.ts">
+      <file name="person-modal.component.ts" path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/person-list/create-person-modal/person-modal.component.ts">
         <metrics statements="34" coveredstatements="18" conditionals="9" coveredconditionals="2" methods="14" coveredmethods="6"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>

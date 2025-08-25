@@ -1,10 +1,45 @@
-<div class="card-container" *ngIf="personListDto?.person">
+<!--div class="card-container" *ngIf="personListDto?.person">
     <h5>{{personListDto.person.firstName + ' ' + personListDto.person.lastName}}</h5>
     <p class="card-text">{{'Birthday: ' + getDateString(personListDto.person.birthday)}}</p>
     <button type="button" class="tiny-btn" (click)="deletePerson()" *ngIf="canPersonBeDeleted()">-</button>
     <p class="card-text" *ngIf="!canPersonBeDeleted()">
         This Person can't be deleted, because it is listed in {{this.personListDto.activityCount}} activities</p>
 </div>
-<div class="card-container" *ngIf="!personListDto?.person">
+<div-- class="card-container" *ngIf="!personListDto?.person">
   <h5>No person provided</h5>
-</div>
+</div-->
+
+<article class="person-card" aria-label="Person" *ngIf="personListDto?.person">
+  <header class="person-card__header">
+      <img src="assets/resources/images/avatar.jpg" alt="User Avatar" class="person-card__avatar" />
+
+    <div class="person-card__info">
+      <h2 class="person-card__name">
+        {{ personListDto.person.firstName }} {{ personListDto.person.lastName }}
+      </h2>
+      <p class="person-card__birthday">
+        🎂 {{getDateString(personListDto.person.birthday)}}
+      </p>
+    </div>
+    <!-- Menü rechts oben -->
+    <div class="person-card__actions">
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        aria-label="Optionen">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="openUpdatePersonModal()">
+          <mat-icon>update</mat-icon>
+          <span>Update</span>
+        </button>
+        <button mat-menu-item [disabled]="!canPersonBeDeleted()" (click)="deletePerson()">
+          <mat-icon>delete</mat-icon>
+          <span>Löschen</span>
+        </button>
+      </mat-menu>
+    </div>
+  </header>
+</article>
