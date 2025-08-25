@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ActivityFilterComponent } from './activity-filter.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ActivityFilterComponent', () => {
   let component: ActivityFilterComponent;
@@ -8,9 +9,9 @@ describe('ActivityFilterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ActivityFilterComponent]
-    })
-    .compileComponents();
+      declarations: [ActivityFilterComponent],
+      imports: [HttpClientTestingModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ActivityFilterComponent);
     component = fixture.componentInstance;

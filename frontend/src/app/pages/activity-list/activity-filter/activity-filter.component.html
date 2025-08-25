@@ -1,4 +1,4 @@
-<div class="filter-drawer">
+<div class="filter-drawer" *ngIf="activityFilter">
   <mat-form-field class="filter-field">
   <mat-label>Author</mat-label>
   <mat-select placeholder="Add Author" [(ngModel)]="activityFilter.authorId" class="filter-value">

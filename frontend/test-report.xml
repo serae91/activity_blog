@@ -1,6 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
+  <file path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/app.component.spec.ts">
+    <testCase name="AppComponent should create the app" duration="31"/>
+  </file>
+  <file path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/location-list/location-list.component.spec.ts">
+    <testCase name="LocationListComponent should create" duration="31"/>
+  </file>
+  <file path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/activity-list/activity-filter/activity-filter.component.spec.ts">
+    <testCase name="ActivityFilterComponent should create" duration="21"/>
+  </file>
+  <file path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/person-list/create-person-modal/create-person-modal.component.spec.ts">
+    <testCase name="CreatePersonModalComponent should create" duration="86"/>
+  </file>
+  <file path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/activity-list/activity-modal/activity-modal.component.spec.ts">
+    <testCase name="CreateActivityModalComponent should create" duration="106"/>
+  </file>
+  <file path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/location-list/create-location-modal/create-location-modal.component.spec.ts">
+    <testCase name="CreateLocationModalComponent should create" duration="23"/>
+    <testCase name="CreateLocationModalComponent should init" duration="9"/>
+    <testCase name="CreateLocationModalComponent should load all locations" duration="7"/>
+    <testCase name="CreateLocationModalComponent should init form group" duration="6"/>
+    <testCase name="CreateLocationModalComponent should save locations success" duration="10"/>
+    <testCase name="CreateLocationModalComponent should save locations error" duration="6"/>
+  </file>
+  <file path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/location-list/location-card/location-card.component.spec.ts">
+    <testCase name="LocationCardComponent should create" duration="45"/>
+  </file>
+  <file path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/person-list/person-list.component.spec.ts">
+    <testCase name="PersonListComponent should create" duration="10"/>
+  </file>
+  <file path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/activity-list/activity-list.component.spec.ts">
+    <testCase name="ActivityListComponent should create" duration="18"/>
+    <testCase name="ActivityListComponent should on Init" duration="7"/>
+    <testCase name="ActivityListComponent should openCreateActivityModal" duration="5"/>
+  </file>
+  <file path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/shared/opacity-scroll/opacity-scroll.component.spec.ts">
+    <testCase name="OpacityScrollComponent should create" duration="18"/>
+    <testCase name="OpacityScrollComponent should get Scroll Indicator Style" duration="5"/>
+    <testCase name="OpacityScrollComponent should scroll scroll indicator hidden" duration="7"/>
+    <testCase name="OpacityScrollComponent should scroll scroll indicator visible" duration="4"/>
+    <testCase name="OpacityScrollComponent should scroll width threshold opacity" duration="7"/>
+  </file>
+  <file path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/person-list/person-card/person-card.component.spec.ts">
+    <testCase name="PersonCardComponent should create" duration="14"/>
+  </file>
+  <file path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/activity-list/activity-list-card/activity-list-card.component.spec.ts">
+    <testCase name="ActivityListCardComponent should create" duration="22"/>
+  </file>
+  <file path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/shared/header/header.component.spec.ts">
+    <testCase name="HeaderComponent should create" duration="15"/>
+  </file>
   <file path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/activity-list/activity-card/activity-card.component.spec.ts">
-    <testCase name="ActivityCardComponent should create" duration="41"/>
+    <testCase name="ActivityCardComponent should create" duration="15"/>
+  </file>
+  <file path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/shared/confirmation-modal/confirmation-modal.component.spec.ts">
+    <testCase name="ConfirmationModalComponent should create" duration="9"/>
   </file>
 </testExecutions>

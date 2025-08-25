@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { smoothstep } from 'src/app/core/utils/math/math.utils';
+import { smoothstep } from '../../core/utils/math/math.utils';
 
 @Component({
   selector: 'app-opacity-scroll',
@@ -26,11 +26,14 @@ export class OpacityScrollComponent {
     const scrollTop: number = e.target['scrollTop'];
     scrollChildren.forEach((child) => {
       const offsetTop: number = child.offsetTop;
-      const remainingScrollOpacityHeight = offsetTop - scrollTop + this.scrollOpacityHeightInPx;
+      const remainingScrollOpacityHeight =
+        offsetTop - scrollTop + this.scrollOpacityHeightInPx;
       if (remainingScrollOpacityHeight <= 0) {
         this.scrollIndicatorVisibility = 'visible';
       }
-      const opacity = smoothstep(remainingScrollOpacityHeight / this.scrollOpacityHeightInPx);
+      const opacity = smoothstep(
+        remainingScrollOpacityHeight / this.scrollOpacityHeightInPx
+      );
       if (-offsetTop - scrollTop < child.clientHeight && opacity < 0.3) {
         child.setAttribute('style', 'opacity: 0.3');
         return;

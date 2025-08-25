@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { concatMap, Observable, of, PartialObserver, tap } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {
-  ConfirmationModal,
+  ConfirmationModalComponent,
   ConfirmationModalDataDto,
 } from '../../shared/confirmation-modal/confirmation-modal.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -99,7 +99,7 @@ export class BaseService {
     observable: Observable<T>
   ): Observable<T> {
     return this.dialog
-      .open(ConfirmationModal, { data: confirmationModalDataDto })
+      .open(ConfirmationModalComponent, { data: confirmationModalDataDto })
       .afterClosed()
       .pipe(
         concatMap((confirmation: boolean) => (confirmation ? observable : of()))

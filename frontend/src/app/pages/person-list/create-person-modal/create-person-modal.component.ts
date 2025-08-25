@@ -1,17 +1,20 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormArray, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import {
+  FormArray,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+} from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CreatePersonDto, PersonDto } from 'src/app/_api/person.dto';
-import { PersonService } from 'src/app/core/services/person/person.service';
+import { PersonService } from '../../../core/services/person/person.service';
 
 @Component({
   selector: 'app-create-person-modal',
   templateUrl: './create-person-modal.component.html',
-  styleUrls: ['./create-person-modal.component.scss']
+  styleUrls: ['./create-person-modal.component.scss'],
 })
 export class CreatePersonModalComponent {
-
   formGroup: UntypedFormGroup;
   persons: PersonDto[];
 
@@ -24,7 +27,8 @@ export class CreatePersonModalComponent {
   constructor(
     private dialogRef: MatDialogRef<CreatePersonModalComponent>,
     private formBuilder: UntypedFormBuilder,
-    private personService: PersonService) {}
+    private personService: PersonService
+  ) {}
 
   ngOnInit(): void {
     this.loadAllPersons();
@@ -32,7 +36,9 @@ export class CreatePersonModalComponent {
   }
 
   loadAllPersons(): void {
-    this.personService.getAllPersons().subscribe(persons => this.persons = persons);
+    this.personService
+      .getAllPersons()
+      .subscribe((persons) => (this.persons = persons));
   }
 
   initFormGroup(): void {
@@ -47,13 +53,14 @@ export class CreatePersonModalComponent {
     return {
       firstName: this.formGroup.controls['firstName'].value,
       lastName: this.formGroup.controls['lastName'].value,
-      birthday: new Date(this.formGroup.controls['birthday'].value)
+      birthday: new Date(this.formGroup.controls['birthday'].value),
     } as CreatePersonDto;
   }
 
   savePersonAndCloseDialog(): void {
-    this.personService.createNewPerson(this.getCreatePersonDto())
-    .subscribe(newPerson => this.dialogRef.close(newPerson));
+    this.personService
+      .createNewPerson(this.getCreatePersonDto())
+      .subscribe((newPerson) => this.dialogRef.close(newPerson));
   }
 
   cancel(): void {
@@ -61,23 +68,27 @@ export class CreatePersonModalComponent {
   }
 
   canSave(): boolean {
-    if(this.doesPersonAlreadyExist()) {
+    if (this.doesPersonAlreadyExist()) {
       return false;
     }
     return this.formGroup.valid;
   }
 
   doesPersonAlreadyExist(): boolean {
-    if(!this.formGroup.controls['firstName'].valid || !this.formGroup.controls['lastName'].valid || !this.formGroup.controls['birthday'].valid) {
+    if (
+      !this.formGroup.controls['firstName'].valid ||
+      !this.formGroup.controls['lastName'].valid ||
+      !this.formGroup.controls['birthday'].valid
+    ) {
       return false;
     }
     const newPerson = {
       firstName: this.formGroup.controls['firstName'].value,
       lastName: this.formGroup.controls['lastName'].value,
-      birthday: new Date(this.formGroup.controls['birthday'].value)
+      birthday: new Date(this.formGroup.controls['birthday'].value),
     } as PersonDto;
-    for(let person of this.persons) {
-      if(this.doPersonsEqual(person, newPerson)) {
+    for (let person of this.persons) {
+      if (this.doPersonsEqual(person, newPerson)) {
         return true;
       }
     }
@@ -85,12 +96,20 @@ export class CreatePersonModalComponent {
   }
 
   doPersonsEqual(person1: PersonDto, person2: PersonDto): boolean {
-    return person1.firstName === person2.firstName && person1.lastName === person2.lastName && this.isSameDay(person1.birthday, person2.birthday);
+    return (
+      person1.firstName === person2.firstName &&
+      person1.lastName === person2.lastName &&
+      this.isSameDay(person1.birthday, person2.birthday)
+    );
   }
 
   isSameDay(date1: Date, date2: Date): boolean {
-    const dateToCheck1 = this.datePipe.transform(date1.toString().substring(0, date1.toString().length - 6));
-    const dateToCheck2 = this.datePipe.transform(date2.toString().substring(0, date2.toString().length - 6));
+    const dateToCheck1 = this.datePipe.transform(
+      date1.toString().substring(0, date1.toString().length - 6)
+    );
+    const dateToCheck2 = this.datePipe.transform(
+      date2.toString().substring(0, date2.toString().length - 6)
+    );
     return dateToCheck1 === dateToCheck2;
   }
 }

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ActivityListCardComponent } from './activity-list-card.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MaterialModule } from '../../../core/material.module';
 
 describe('ActivityListCardComponent', () => {
   let component: ActivityListCardComponent;
@@ -8,9 +9,9 @@ describe('ActivityListCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ActivityListCardComponent]
-    })
-    .compileComponents();
+      declarations: [ActivityListCardComponent],
+      imports: [HttpClientTestingModule, MaterialModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ActivityListCardComponent);
     component = fixture.componentInstance;

@@ -1,8 +1,11 @@
-<div class="card-container">
+<div class="card-container" *ngIf="locationListDto?.location">
     <h5>{{locationListDto.location.name}}</h5>
     <p class="card-text">{{locationListDto.location.street + ' ' + locationListDto.location.streetNumber}}</p>
     <p class="card-text">{{locationListDto.location.postalCode + ' ' + locationListDto.location.city}}</p>
     <p class="card-text">{{locationListDto.location.country}}</p>
     <button type="button" class="tiny-btn" (click)="deleteLocation()" *ngIf="canLocationBeDeleted()">-</button>
     <p class="card-text" *ngIf="!canLocationBeDeleted()">This Location can't be deleted, because it is listed in {{locationListDto.activityCount}} activities</p>
+</div>
+<div class="card-container" *ngIf="!locationListDto?.location">
+  <h5>No Location Provided</h5>
 </div>

@@ -3,9 +3,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivityModalComponent } from './activity-modal/activity-modal.component';
 import { of } from 'rxjs';
-import { ActivityDto } from '../../_api/activity.dto';
+import { ActivityDto, ActivityFilterDto } from '../../_api/activity.dto';
 import { ActivityService } from '../../core/services/activity/activity.service';
 import { ActivityListComponent } from './activity-list.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('ActivityListComponent', () => {
   let component: ActivityListComponent;
@@ -16,6 +18,8 @@ describe('ActivityListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ActivityListComponent],
+      imports: [HttpClientTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
 
@@ -25,6 +29,7 @@ describe('ActivityListComponent', () => {
     activityService = TestBed.inject(ActivityService);
     dialog = TestBed.inject(MatDialog);
     fixture.detectChanges();
+    component.activityFilter = {} as ActivityFilterDto;
   });
 
   it('should create', () => {
@@ -39,7 +44,9 @@ describe('ActivityListComponent', () => {
 
     component.ngOnInit();
 
-    expect(activityService.getFilteredActivities).toHaveBeenCalledWith();
+    expect(activityService.getFilteredActivities).toHaveBeenCalledWith(
+      component.activityFilter
+    );
     expect(component.activities).toBe(activities);
   });
 
