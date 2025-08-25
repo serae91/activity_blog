@@ -17,6 +17,7 @@ import { LocationService } from '../../../core/services/location/location.servic
 import { PersonService } from '../../../core/services/person/person.service';
 import { Observable } from 'rxjs';
 import { IdDto } from '../../../_api/id.dto';
+import { getUniqueValues } from '../../../utils/update-object.utils';
 
 @Component({
   selector: 'app-activity-modal',
@@ -103,7 +104,7 @@ export class ActivityModalComponent implements OnInit {
     );
   }
 
-  getCreateActivityDto(): ActivityCreateDto {
+  getActivityCreateDto(): ActivityCreateDto {
     return {
       author: { id: this.formGroup.controls['authorId'].value } as IdDto,
       title: this.formGroup.controls['title'].value,
@@ -113,13 +114,9 @@ export class ActivityModalComponent implements OnInit {
     } as ActivityCreateDto;
   }
 
-  getUpdateActivityDto(): ActivityUpdateDto {
+  getActivityUpdateDto(): ActivityUpdateDto {
     return {
-      author: { id: this.formGroup.controls['authorId'].value } as IdDto,
-      title: this.formGroup.controls['title'].value,
-      description: this.formGroup.controls['description'].value,
-      persons: this.getToIdDtoMappedIds(this.personIds.value),
-      locations: this.getToIdDtoMappedIds(this.locationIds.value),
+      ...this.getActivityCreateDto(),
       id: this.data.id,
     } as ActivityUpdateDto;
   }
@@ -132,18 +129,14 @@ export class ActivityModalComponent implements OnInit {
 
   createOrUpdateActivity(): Observable<ActivityDto> {
     return !!this.data?.id
-      ? this.activityService.updateActivity(this.getUpdateActivityDto())
-      : this.activityService.createActivity(this.getCreateActivityDto());
+      ? this.activityService.updateActivity(this.getActivityUpdateDto())
+      : this.activityService.createActivity(this.getActivityCreateDto());
   }
 
   getToIdDtoMappedIds(ids: number[]): IdDto[] {
-    return this.getUniqueValues(ids.filter((id) => id > 0)).map(
+    return getUniqueValues(ids.filter((id) => id > 0)).map(
       (id) => ({ id } as IdDto)
     );
-  }
-
-  getUniqueValues<T>(values: T[]): T[] {
-    return values.filter((value, index, self) => index === self.indexOf(value));
   }
 
   cancel(): void {

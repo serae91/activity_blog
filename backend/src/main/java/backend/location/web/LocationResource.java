@@ -6,6 +6,8 @@ import backend.location.model.LocationEntityView;
 import backend.location.usecase.create.LocationCreateService;
 import backend.location.usecase.create.model.LocationCreateView;
 import backend.location.usecase.delete.LocationDeleteService;
+import backend.location.usecase.update.LocationUpdateService;
+import backend.location.usecase.update.model.LocationUpdateView;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -27,6 +29,8 @@ public class LocationResource {
     LocationService locationService;
     @Inject
     LocationCreateService locationCreateService;
+    @Inject
+    LocationUpdateService locationUpdateService;
     @Inject
     LocationDeleteService locationDeleteService;
 
@@ -58,6 +62,15 @@ public class LocationResource {
     public LocationEntityView createLocation(final LocationCreateView locationCreateView) {
         locationCreateService.createLocation(locationCreateView);
         return locationService.getLocationById(locationCreateView.getId());
+    }
+
+    @POST
+    @Path("/update")
+    @Transactional
+    @Produces(MediaType.APPLICATION_JSON)
+    public LocationEntityView updateLocation(final LocationUpdateView locationUpdateView) {
+        locationUpdateService.updateLocation(locationUpdateView);
+        return locationService.getLocationById(locationUpdateView.getId());
     }
 
     @DELETE

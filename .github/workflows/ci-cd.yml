@@ -75,7 +75,6 @@ jobs:
       - name: Set OWNER variable
         run: echo "OWNER=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
-
       - name: Build and Push Backend Docker image
         run: |
           docker build -t ghcr.io/$OWNER/activity-blog-backend:latest \

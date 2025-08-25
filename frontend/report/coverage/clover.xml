@@ -383,7 +383,7 @@
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
       </file>
-      <file name="create-location-modal.component.ts" path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/location-list/create-location-modal/create-location-modal.component.ts">
+      <file name="location-modal.component.ts" path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/location-list/create-location-modal/location-modal.component.ts">
         <metrics statements="33" coveredstatements="23" conditionals="12" coveredconditionals="3" methods="14" coveredmethods="11"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>

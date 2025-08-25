@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LocationDto, LocationListDto } from '../../_api/location.dto';
 import { LocationService } from '../../../app/core/services/location/location.service';
-import { CreateLocationModalComponent } from './create-location-modal/create-location-modal.component';
+import { LocationModalComponent } from './location-modal/location-modal.component';
 
 @Component({
   selector: 'app-location-list',
@@ -24,7 +24,7 @@ export class LocationListComponent implements OnInit {
 
   openCreateLocationModal(): void {
     this.dialog
-      .open(CreateLocationModalComponent)
+      .open(LocationModalComponent)
       .afterClosed()
       .subscribe((location: LocationDto) => {
         if (location) {

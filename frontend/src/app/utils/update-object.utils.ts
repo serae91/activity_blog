@@ -1,4 +1,8 @@
-export function updateObject<T extends object>(target: T, source: Partial<T>, keysToUpdate: (keyof T)[]): void {
+export function updateObject<T extends object>(
+  target: T,
+  source: Partial<T>,
+  keysToUpdate: (keyof T)[]
+): void {
   for (const key of keysToUpdate) {
     if (key in source) {
       target[key] = source[key]!;
@@ -22,5 +26,9 @@ export function updateObjectExcludingId<T extends object>(
   target: T,
   source: Partial<T>
 ): void {
-  updateObjectExcluding<T>(target, source, ["id"] as (keyof T)[])
+  updateObjectExcluding<T>(target, source, ['id'] as (keyof T)[]);
+}
+
+export function getUniqueValues<T>(values: T[]): T[] {
+  return values.filter((value, index, self) => index === self.indexOf(value));
 }

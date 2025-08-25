@@ -1,32 +1,38 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 
-import { CreateLocationModalComponent } from './create-location-modal.component';
+import { LocationModalComponent } from './location-modal.component';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { CreateLocationDto, LocationDto } from '../../../_api/location.dto';
+import { LocationCreateDto, LocationDto } from '../../../_api/location.dto';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { LocationService } from '../../../core/services/location/location.service';
 import { of, throwError } from 'rxjs';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
 describe('CreateLocationModalComponent', () => {
-  let component: CreateLocationModalComponent;
-  let fixture: ComponentFixture<CreateLocationModalComponent>;
+  let component: LocationModalComponent;
+  let fixture: ComponentFixture<LocationModalComponent>;
   let locationService: LocationService;
-  let dialogRef: MatDialogRef<CreateLocationModalComponent>;
+  let dialogRef: MatDialogRef<LocationModalComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [CreateLocationModalComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-    imports: [MatDialogModule],
-    providers: [
-        { provide: MatDialogRef, useValue: { close: (location: LocationDto) => undefined } },
+      declarations: [LocationModalComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+      imports: [MatDialogModule],
+      providers: [
+        {
+          provide: MatDialogRef,
+          useValue: { close: (location: LocationDto) => undefined },
+        },
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
-    ]
-});
-    fixture = TestBed.createComponent(CreateLocationModalComponent);
+      ],
+    });
+    fixture = TestBed.createComponent(LocationModalComponent);
     component = fixture.componentInstance;
     locationService = TestBed.inject(LocationService);
     dialogRef = TestBed.inject(MatDialogRef);
@@ -47,8 +53,10 @@ describe('CreateLocationModalComponent', () => {
   });
 
   it('should load all locations', () => {
-    const allLocations = [{id: 7}] as LocationDto[];
-    jest.spyOn(locationService, 'getAllLocations').mockReturnValue(of(allLocations));
+    const allLocations = [{ id: 7 }] as LocationDto[];
+    jest
+      .spyOn(locationService, 'getAllLocations')
+      .mockReturnValue(of(allLocations));
     component.loadAllLocations();
     expect(component.locations).toBe(allLocations);
   });
@@ -64,29 +72,41 @@ describe('CreateLocationModalComponent', () => {
   });
 
   it('should save locations success', () => {
-    const createLocationDto = {name:'mockName'} as CreateLocationDto;
-    const newLocation = {name:'newMockName'} as LocationDto;
-    jest.spyOn(component, 'getCreateLocationDto').mockReturnValue(createLocationDto);
-    jest.spyOn(locationService, 'createNewLocation').mockReturnValue(of(newLocation));
+    const createLocationDto = { name: 'mockName' } as LocationCreateDto;
+    const newLocation = { name: 'newMockName' } as LocationDto;
+    jest
+      .spyOn(component, 'getLocationCreateDto')
+      .mockReturnValue(createLocationDto);
+    jest
+      .spyOn(locationService, 'createLocation')
+      .mockReturnValue(of(newLocation));
     jest.spyOn(dialogRef, 'close').mockReturnValue(undefined);
 
     component.saveLocationAndCloseDialog();
 
-    expect(component.getCreateLocationDto).toHaveBeenCalledWith();
-    expect(locationService.createNewLocation).toHaveBeenCalledWith(createLocationDto);
+    expect(component.getLocationCreateDto).toHaveBeenCalledWith();
+    expect(locationService.createLocation).toHaveBeenCalledWith(
+      createLocationDto
+    );
     expect(dialogRef.close).toHaveBeenCalledWith(newLocation);
   });
 
   it('should save locations error', () => {
-    const createLocationDto = {name:'mockName'} as CreateLocationDto;
-    jest.spyOn(component, 'getCreateLocationDto').mockReturnValue(createLocationDto);
-    jest.spyOn(locationService, 'createNewLocation').mockReturnValue(throwError('Error'));
+    const createLocationDto = { name: 'mockName' } as LocationCreateDto;
+    jest
+      .spyOn(component, 'getLocationCreateDto')
+      .mockReturnValue(createLocationDto);
+    jest
+      .spyOn(locationService, 'createLocation')
+      .mockReturnValue(throwError('Error'));
     jest.spyOn(dialogRef, 'close').mockReturnValue(undefined);
 
     component.saveLocationAndCloseDialog();
 
-    expect(component.getCreateLocationDto).toHaveBeenCalledWith();
-    expect(locationService.createNewLocation).toHaveBeenCalledWith(createLocationDto);
+    expect(component.getLocationCreateDto).toHaveBeenCalledWith();
+    expect(locationService.createLocation).toHaveBeenCalledWith(
+      createLocationDto
+    );
     expect(dialogRef.close).not.toHaveBeenCalled();
   });
 });

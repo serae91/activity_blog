@@ -15,13 +15,13 @@
   <file path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/activity-list/activity-modal/activity-modal.component.spec.ts">
     <testCase name="CreateActivityModalComponent should create" duration="106"/>
   </file>
-  <file path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/location-list/create-location-modal/create-location-modal.component.spec.ts">
-    <testCase name="CreateLocationModalComponent should create" duration="23"/>
-    <testCase name="CreateLocationModalComponent should init" duration="9"/>
-    <testCase name="CreateLocationModalComponent should load all locations" duration="7"/>
-    <testCase name="CreateLocationModalComponent should init form group" duration="6"/>
-    <testCase name="CreateLocationModalComponent should save locations success" duration="10"/>
-    <testCase name="CreateLocationModalComponent should save locations error" duration="6"/>
+  <file path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/location-list/create-location-modal/location-modal.component.spec.ts">
+    <testCase name="LocationModalComponent should create" duration="23"/>
+    <testCase name="LocationModalComponent should init" duration="9"/>
+    <testCase name="LocationModalComponent should load all locations" duration="7"/>
+    <testCase name="LocationModalComponent should init form group" duration="6"/>
+    <testCase name="LocationModalComponent should save locations success" duration="10"/>
+    <testCase name="LocationModalComponent should save locations error" duration="6"/>
   </file>
   <file path="/Users/seraphinaeschbach/udemy/test/activity_blog/frontend/src/app/pages/location-list/location-card/location-card.component.spec.ts">
     <testCase name="LocationCardComponent should create" duration="45"/>

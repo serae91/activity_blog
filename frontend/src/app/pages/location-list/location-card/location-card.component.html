@@ -1,11 +1,77 @@
-<div class="card-container" *ngIf="locationListDto?.location">
-    <h5>{{locationListDto.location.name}}</h5>
-    <p class="card-text">{{locationListDto.location.street + ' ' + locationListDto.location.streetNumber}}</p>
-    <p class="card-text">{{locationListDto.location.postalCode + ' ' + locationListDto.location.city}}</p>
-    <p class="card-text">{{locationListDto.location.country}}</p>
-    <button type="button" class="tiny-btn" (click)="deleteLocation()" *ngIf="canLocationBeDeleted()">-</button>
-    <p class="card-text" *ngIf="!canLocationBeDeleted()">This Location can't be deleted, because it is listed in {{locationListDto.activityCount}} activities</p>
-</div>
-<div class="card-container" *ngIf="!locationListDto?.location">
-  <h5>No Location Provided</h5>
-</div>
+<!--article class="address-card" itemscope itemtype="https://schema.org/PostalAddress" aria-label="Adresse">
+
+  <header class="address-card__header">
+    <h2 class="address-card__name" itemprop="name">{{ locationListDto.location.name }}</h2>
+
+    <div class="address-card__actions">
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="openUpdateLocationModal()">
+          <mat-icon>update</mat-icon>
+          <span>Update</span>
+        </button>
+        <button mat-menu-item (click)="deleteLocation()">
+          <mat-icon>delete</mat-icon>
+          <span>Delete</span>
+        </button>
+      </mat-menu>
+    </div>
+  </header>
+
+  <address class="address-card__body" translate="no">
+    <p class="address-card__line">
+      <span class="address-card__street" itemprop="streetAddress">
+        {{ locationListDto.location.street }} <span class="address-card__street-number">{{ locationListDto.location.streetNumber }}</span>
+      </span>
+    </p>
+    <p class="address-card__line">
+      <span class="address-card__postal" itemprop="postalCode">{{ locationListDto.location.postalCode }}</span>
+      <span class="address-card__city" itemprop="addressLocality">{{ locationListDto.location.city }}</span>
+    </p>
+    <p class="address-card__line">
+      <span class="address-card__country" itemprop="addressCountry">{{ locationListDto.location.country }}</span>
+    </p>
+  </address>
+</article-->
+<article class="address-card" itemscope itemtype="https://schema.org/PostalAddress" aria-label="Adresse">
+  <!-- Header mit Name + Menü -->
+  <header class="address-card__header">
+    <h2 class="address-card__name" itemprop="name">{{ locationListDto.location.name }}</h2>
+
+    <!-- Menü mit Angular Material -->
+    <div class="address-card__actions">
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        aria-label="Optionen">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="openUpdateLocationModal()">
+          <mat-icon>update</mat-icon>
+          <span>Update</span>
+        </button>
+        <button mat-menu-item (click)="deleteLocation()">
+          <mat-icon>delete</mat-icon>
+          <span>Delete</span>
+        </button>
+      </mat-menu>
+    </div>
+  </header>
+
+  <!-- Adresse -->
+  <address class="address-card__body" translate="no">
+    <p class="address-card__line">
+      <span class="address-card__street" itemprop="streetAddress">
+        {{ locationListDto.location.street }} <span class="address-card__street-number">{{ locationListDto.location.streetNumber }}</span>
+      </span>
+    </p>
+    <p class="address-card__line">
+      <span class="address-card__postal" itemprop="postalCode">{{ locationListDto.location.postalCode }}</span>
+      <span class="address-card__city" itemprop="addressLocality">{{ locationListDto.location.city }}</span>
+    </p>
+    <p class="address-card__line">
+      <span class="address-card__country" itemprop="addressCountry">{{ locationListDto.location.country }}</span>
+    </p>
+  </address>
+</article>

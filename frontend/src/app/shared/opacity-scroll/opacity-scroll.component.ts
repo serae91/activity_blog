@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { smoothstep } from '../../core/utils/math/math.utils';
+import { smoothstep } from '../../utils/math.utils';
 
 @Component({
   selector: 'app-opacity-scroll',

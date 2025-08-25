@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CreateLocationDto, LocationDto, LocationListDto } from 'src/app/_api/location.dto';
+import {
+  LocationCreateDto,
+  LocationDto,
+  LocationListDto,
+  LocationUpdateDto,
+} from 'src/app/_api/location.dto';
 import { BaseService } from '../base.service';
 import { ConfirmationModalDataDto } from '../../../shared/confirmation-modal/confirmation-modal.component';
 
@@ -9,33 +14,60 @@ import { ConfirmationModalDataDto } from '../../../shared/confirmation-modal/con
   providedIn: 'root',
 })
 export class LocationService extends BaseService {
-  static readonly LOCATION = 'location';
-  static readonly ALL = '/all';
-  static readonly LIST = '/list';
-  static readonly NEW = '/create';
-
   constructor() {
     super();
     this.setBaseUrl('location');
   }
 
-  getLocationById(locationId: number): Observable<LocationDto>{
-    return this.get<LocationDto>(`/${locationId}`, (error) => `Error loading Location by id: ${error.statusText}`);
+  getLocationById(locationId: number): Observable<LocationDto> {
+    return this.get<LocationDto>(
+      `/${locationId}`,
+      (error) => `Error loading Location by id: ${error.statusText}`
+    );
   }
 
-  getAllLocations(): Observable<LocationDto[]>{
-    return this.get<LocationDto[]>(`/all`,(error) => `Error loading all Locations: ${error.statusText}`);
+  getAllLocations(): Observable<LocationDto[]> {
+    return this.get<LocationDto[]>(
+      `/all`,
+      (error) => `Error loading all Locations: ${error.statusText}`
+    );
   }
 
-  getAllLocationListDtos(): Observable<LocationListDto[]>{
-    return this.get<LocationListDto[]>(`/all/list`, (error) => `Error loading all Location list dtos: ${error.statusText}`);
+  getAllLocationListDtos(): Observable<LocationListDto[]> {
+    return this.get<LocationListDto[]>(
+      `/all/list`,
+      (error) => `Error loading all Location list dtos: ${error.statusText}`
+    );
   }
 
-  createNewLocation(createLocationDto: CreateLocationDto): Observable<LocationDto>{
-    return this.post<LocationDto>('/create', createLocationDto, (error) => `Error creating Location: ${error.statusText}`);
+  createLocation(
+    locationCreateDto: LocationCreateDto
+  ): Observable<LocationDto> {
+    return this.post<LocationDto>(
+      '/create',
+      locationCreateDto,
+      (error) => `Error creating Location: ${error.statusText}`
+    );
   }
 
-  deleteLocation(locationId: number): Observable<void>{
-    return this.delete<void>(`/${locationId}`, {title: 'Delete Location', question: 'Do you want to delete this location?'} as ConfirmationModalDataDto, (error) => `Error deleting Location by id: ${error.error.details}`);
+  updateLocation(
+    locationUpdateDto: LocationUpdateDto
+  ): Observable<LocationDto> {
+    return this.post<LocationDto>(
+      '/update',
+      locationUpdateDto,
+      (error) => `Error updating Location: ${error.statusText}`
+    );
+  }
+
+  deleteLocation(locationId: number): Observable<void> {
+    return this.delete<void>(
+      `/${locationId}`,
+      {
+        title: 'Delete Location',
+        question: 'Do you want to delete this location?',
+      } as ConfirmationModalDataDto,
+      (error) => `Error deleting Location by id: ${error.error.details}`
+    );
   }
 }

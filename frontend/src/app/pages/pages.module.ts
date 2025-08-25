@@ -10,7 +10,7 @@ import { PersonListComponent } from './person-list/person-list.component';
 import { PersonCardComponent } from './person-list/person-card/person-card.component';
 import { CreatePersonModalComponent } from './person-list/create-person-modal/create-person-modal.component';
 import { LocationListComponent } from './location-list/location-list.component';
-import { CreateLocationModalComponent } from './location-list/create-location-modal/create-location-modal.component';
+import { LocationModalComponent } from './location-list/location-modal/location-modal.component';
 import { LocationCardComponent } from './location-list/location-card/location-card.component';
 import { ActivityListCardComponent } from './activity-list/activity-list-card/activity-list-card.component';
 import { ActivityFilterComponent } from './activity-list/activity-filter/activity-filter.component';
@@ -21,7 +21,7 @@ const COMPONENTS = [
   ActivityCardComponent,
   ActivityModalComponent,
   ActivityFilterComponent,
-  CreateLocationModalComponent,
+  LocationModalComponent,
   CreatePersonModalComponent,
   PersonCardComponent,
   PersonListComponent,
