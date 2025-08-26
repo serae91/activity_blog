@@ -1,68 +1,59 @@
-<div class="modal-content">
-    <div class="modal-header">
-        <h3>{{getTitle()}}</h3>
+<div class="activity-modal">
+  <div class="modal-header">
+    <h3>{{ getTitle() }}</h3>
+  </div>
+
+  <form [formGroup]="formGroup" class="modal-body">
+    <mat-dialog-content class="dialog-content">
+      <div class="form-fields">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title" required maxlength="50" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description" required></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Author</mat-label>
+          <mat-select placeholder="Add Author" formControlName="authorId" required>
+            <mat-option *ngFor="let person of persons" [value]="person.id" [disabled]="isPersonSelected(person)">
+              {{person.id ? person.firstName + ' ' + person.lastName : ''}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="select-panels">
+        <div class="select-panel">
+          <mat-label>Participants</mat-label>
+          <mat-form-field appearance="fill">
+            <mat-select formControlName="personIds" multiple>
+              <mat-option *ngFor="let person of persons" [value]="person.id" [disabled]="isPersonSelectedAsAuthor(person)">
+                {{ person.firstName + ' ' + person.lastName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="select-panel">
+          <mat-label>Locations</mat-label>
+          <mat-form-field appearance="fill">
+            <mat-select formControlName="locationIds" multiple>
+              <mat-option *ngFor="let location of locations" [value]="location.id">
+                {{ location.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-dialog-content>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+      <button type="button" class="btn btn-success" [disabled]="!canSave()" (click)="saveActivityAndCloseDialog()">Save</button>
     </div>
-    <div class="modal-content">
-        <form [formGroup]="formGroup">
-            <mat-dialog-content class="dialog-content">
-                <div class="flex-col">
-                    <mat-form-field>
-                        <mat-label>Title</mat-label>
-                        <input matInput
-                               formControlName="title"
-                               required
-                               id="title"
-                               name="title"
-                               maxlength="50">
-                    </mat-form-field>
-
-                    <mat-form-field>
-                        <mat-label>Description</mat-label>
-                        <textarea id="description"
-                               name="description"
-                               type="text" matInput appNumeric
-                               formControlName="description"
-                                  required></textarea>
-                    </mat-form-field>
-
-                    <mat-form-field>
-                        <mat-label>Author</mat-label>
-                        <mat-select placeholder="Add Author" formControlName="authorId" required>
-                            <mat-option *ngFor="let person of persons" [value]="person.id" [disabled]="isPersonSelected(person)">
-                                {{person.id ? person.firstName + ' ' + person.lastName : ''}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <div class="select-panels">
-                    <div class="select-panel" >
-                      <mat-label>Participants</mat-label>
-                      <mat-form-field>
-                        <mat-select formControlName="personIds" multiple>
-                          <mat-option *ngFor="let person of persons" [value]="person.id" [disabled]="isPersonSelectedAsAuthor(person)">
-                            {{ person.firstName + ' ' + person.lastName }}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-                    <div class="select-panel">
-                      <mat-label>Locations</mat-label>
-                      <mat-form-field>
-                        <mat-select formControlName="locationIds" multiple>
-                          <mat-option *ngFor="let location of locations" [value]="location.id">
-                            {{ location.name }}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-                </div>
-
-            </mat-dialog-content>
-        </form>
-
-    </div>
-    <div class="flex-row">
-        <button class="btn-secondary" (click)="cancel()">Cancel</button>
-        <button class="btn-success" [disabled]="!canSave()" (click)="saveActivityAndCloseDialog()">Save</button>
-    </div>
+  </form>
 </div>

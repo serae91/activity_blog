@@ -1,47 +1,35 @@
-<div class="modal-content">
-    <div class="modal-header">
-        <h3>{{getTitle()}}</h3>
+<div class="person-modal">
+  <div class="modal-header">
+    <h3>{{ getTitle() }}</h3>
+  </div>
+
+  <form [formGroup]="formGroup" class="modal-body">
+    <mat-dialog-content class="dialog-content">
+      <div class="form-fields">
+        <mat-form-field appearance="fill">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName" required maxlength="50" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Birthday</mat-label>
+          <input matInput type="date" formControlName="birthday" required />
+        </mat-form-field>
+      </div>
+    </mat-dialog-content>
+
+    <div class="error-message" *ngIf="doesPersonAlreadyExist()">
+      This person already exists
     </div>
-    <div class="modal-content">
-        <form [formGroup]="formGroup">
-            <mat-dialog-content class="dialog-content">
-                <div class="flex-col">
-                    <mat-form-field>
-                        <mat-label>First Name</mat-label>
-                        <input matInput
-                               formControlName="firstName"
-                               required
-                               id="firstName"
-                               name="firstName"
-                               maxlength="50">
-                    </mat-form-field>
 
-                    <mat-form-field>
-                        <mat-label>Last Name</mat-label>
-                        <input id="lastName"
-                               name="lastName"
-                               type="text" matInput appNumeric
-                               formControlName="lastName"
-                               required>
-                    </mat-form-field>
-
-                    <mat-form-field>
-                        <mat-label>Birthday</mat-label>
-                        <input id="birthday"
-                               name="birthday"
-                               type="date" matInput appNumeric
-                               formControlName="birthday"
-                               required>
-                    </mat-form-field>
-                </div>
-
-            </mat-dialog-content>
-        </form>
-
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+      <button type="button" class="btn btn-success" [disabled]="!canSave()" (click)="savePersonAndCloseDialog()">Save</button>
     </div>
-    <div *ngIf="doesPersonAlreadyExist()">This person already exists</div>
-    <div class="flex-row">
-        <button class="btn-secondary" (click)="cancel()">Cancel</button>
-        <button class="btn-success" [disabled]="!canSave()" (click)="savePersonAndCloseDialog()">Save</button>
-    </div>
+  </form>
 </div>

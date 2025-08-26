@@ -1,78 +1,52 @@
-<div class="modal-content">
-    <div class="modal-header">
-        <h3>{{getTitle()}}</h3>
+<div class="location-modal">
+  <div class="modal-header">
+    <h3>{{ getTitle() }}</h3>
+  </div>
+
+  <form [formGroup]="formGroup" class="modal-body">
+    <mat-dialog-content class="dialog-content">
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" required maxlength="50" />
+      </mat-form-field>
+
+      <div class="form-grid">
+        <mat-form-field appearance="fill">
+          <mat-label>Street</mat-label>
+          <input matInput formControlName="street" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Street Number</mat-label>
+          <input matInput type="number" formControlName="streetNumber" required appNumeric />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Postal Code</mat-label>
+          <input matInput type="number" formControlName="postalCode" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>City</mat-label>
+          <input matInput formControlName="city" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Country</mat-label>
+          <input matInput formControlName="country" required />
+        </mat-form-field>
+      </div>
+    </mat-dialog-content>
+
+    <div class="error-messages">
+      <div *ngIf="doesLocationNameAlreadyExist()">This location name is already taken</div>
+      <div *ngIf="doesLocationAlreadyExist()">This location already exists</div>
     </div>
-    <div class="modal-content">
-        <form [formGroup]="formGroup">
-            <mat-dialog-content class="dialog-content">
-                <div class="flex-col">
-                    <mat-form-field>
-                        <mat-label>Name</mat-label>
-                        <input matInput
-                               formControlName="name"
-                               required
-                               id="name"
-                               name="name"
-                               maxlength="50">
-                    </mat-form-field>
 
-                    <mat-form-field>
-                        <mat-label>Street</mat-label>
-                        <input id="street"
-                               name="street"
-                               type="text" matInput
-                               formControlName="street"
-                               required>
-                    </mat-form-field>
-
-                    <mat-form-field>
-                        <mat-label>Street Number</mat-label>
-                        <input id="streetNumber"
-                               name="streetNumber"
-                               type="number" matInput appNumeric
-                               formControlName="streetNumber"
-                               required>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>Postal Code</mat-label>
-                        <input matInput
-                               formControlName="postalCode"
-                               required
-                               id="postalCode"
-                               name="postalCode"
-                               type="number"
-                               maxlength="50"
-                               required>
-                    </mat-form-field>
-
-                    <mat-form-field>
-                        <mat-label>City</mat-label>
-                        <input id="city"
-                               name="city"
-                               type="text" matInput
-                               formControlName="city"
-                               required>
-                    </mat-form-field>
-
-                    <mat-form-field>
-                        <mat-label>Country</mat-label>
-                        <input id="country"
-                               name="country"
-                               matInput
-                               formControlName="country"
-                               required>
-                    </mat-form-field>
-                </div>
-
-            </mat-dialog-content>
-        </form>
-
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+      <button type="button" class="btn btn-success" [disabled]="!canSave()" (click)="saveLocationAndCloseDialog()">Save</button>
     </div>
-    <div *ngIf="doesLocationNameAlreadyExist()">This location name is already taken</div>
-    <div *ngIf="doesLocationAlreadyExist()">This location already exists</div>
-    <div class="flex-row">
-        <button class="btn-secondary" (click)="cancel()">Cancel</button>
-        <button class="btn-success" [disabled]="!canSave()" (click)="saveLocationAndCloseDialog()">Save</button>
-    </div>
+  </form>
 </div>
-
