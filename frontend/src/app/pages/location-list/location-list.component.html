@@ -1,7 +1,7 @@
 <div>
     <app-opacity-scroll>
-        <div *ngFor="let locationListDto of locationListDtos">
-            <app-location-card [locationListDto]="locationListDto" (deleteLocationEvent)="onDeleteLocation($event)"></app-location-card>
+        <div *ngFor="let locationListDto of locationListDtos()">
+            <app-location-card [locationListDto]="locationListDto" (updateLocationEvent)="onUpdateLocation($event)" (deleteLocationEvent)="onDeleteLocation($event)"></app-location-card>
         </div>
     </app-opacity-scroll>
 </div>

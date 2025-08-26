@@ -30,7 +30,7 @@ public class PersonService {
     }
 
     public List<PersonEntityView> getAllPersonEntityViews() {
-        final CriteriaBuilder<Person> criteriaBuilder = criteriaBuilderFactory.create(entityManager, Person.class);
+        final CriteriaBuilder<Person> criteriaBuilder = criteriaBuilderFactory.create(entityManager, Person.class).orderByAsc("firstName");
         return entityViewManager.applySetting(EntityViewSetting.create(PersonEntityView.class), criteriaBuilder).getResultList();
     }
 
@@ -40,7 +40,7 @@ public class PersonService {
     }
 
     private List<Person> getAllPersons() {
-        return criteriaBuilderFactory.create(entityManager, Person.class)
+        return criteriaBuilderFactory.create(entityManager, Person.class).orderByAsc("firstName")
                 .getResultList();
     }
 

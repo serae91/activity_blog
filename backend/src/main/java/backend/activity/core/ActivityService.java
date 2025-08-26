@@ -39,6 +39,7 @@ public class ActivityService {
         filterLocations(criteriaBuilder, activityFilter);
         filterStartPostTime(criteriaBuilder, activityFilter);
         filterEndPostTime(criteriaBuilder, activityFilter);
+        criteriaBuilder.orderByDesc("postTime");
         return entityViewManager.applySetting(EntityViewSetting.create(ActivityEntityView.class), criteriaBuilder).getResultList();
     }
 

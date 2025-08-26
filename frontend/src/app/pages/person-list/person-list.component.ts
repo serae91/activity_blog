@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { PersonDto, PersonListDto } from '../../_api/person.dto';
 import { PersonService } from '../../core/services/person/person.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -10,7 +10,7 @@ import { PersonModalComponent } from './person-modal/person-modal.component';
   styleUrls: ['./person-list.component.scss'],
 })
 export class PersonListComponent implements OnInit {
-  personListDtos: PersonListDto[];
+  personListDtos = signal<PersonListDto[]>([]);
 
   constructor(
     private personService: PersonService,
@@ -20,7 +20,7 @@ export class PersonListComponent implements OnInit {
   ngOnInit(): void {
     this.personService
       .getAllPersonListDtos()
-      .subscribe((personListDtos) => (this.personListDtos = personListDtos));
+      .subscribe((personListDtos) => this.personListDtos.set(personListDtos));
   }
 
   openPersonModal(): void {
@@ -29,17 +29,33 @@ export class PersonListComponent implements OnInit {
       .afterClosed()
       .subscribe((person: PersonDto) => {
         if (person) {
-          this.personListDtos.push({
-            person,
-            activityCount: 0,
-          } as PersonListDto);
+          this.personListDtos.update((persons) => [
+            {
+              person,
+              activityCount: 0,
+            } as PersonListDto,
+            ...persons,
+          ]);
         }
       });
   }
 
+  onUpdatePerson(person: PersonDto): void {
+    this.personListDtos.update((personListDtos) => {
+      return personListDtos.map((personListDto) => {
+        if (personListDto.person.id === person.id) {
+          return { ...personListDto, person };
+        }
+        return personListDto;
+      });
+    });
+  }
+
   onDeletePerson(personId: number): void {
-    this.personListDtos = this.personListDtos.filter(
-      (personListDto) => personListDto.person.id !== personId
+    this.personListDtos.update((personsListDtos) =>
+      personsListDtos.filter(
+        (personsListDto) => personsListDto.person.id !== personId
+      )
     );
   }
 }

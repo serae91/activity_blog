@@ -12,8 +12,10 @@ import { PersonModalComponent } from '../person-modal/person-modal.component';
 })
 export class PersonCardComponent {
   @Input()
-  personListDto: PersonListDto;
+  personListDto!: PersonListDto;
 
+  @Output()
+  updatePersonEvent = new EventEmitter<PersonDto>();
   @Output()
   deletePersonEvent = new EventEmitter<number>();
 
@@ -27,7 +29,7 @@ export class PersonCardComponent {
       .open(PersonModalComponent, { data: this.personListDto.person })
       .afterClosed()
       .subscribe((person: PersonDto) => {
-        this.personListDto.person = person;
+        this.updatePersonEvent.emit(person);
       });
   }
 

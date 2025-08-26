@@ -11,8 +11,10 @@ import { LocationModalComponent } from '../location-modal/location-modal.compone
 })
 export class LocationCardComponent {
   @Input()
-  locationListDto: LocationListDto;
+  locationListDto!: LocationListDto;
 
+  @Output()
+  updateLocationEvent = new EventEmitter<LocationDto>();
   @Output()
   deleteLocationEvent = new EventEmitter<number>();
 
@@ -24,7 +26,7 @@ export class LocationCardComponent {
       .open(LocationModalComponent, { data: this.locationListDto.location })
       .afterClosed()
       .subscribe((location: LocationDto) => {
-        this.locationListDto.location = location;
+        this.updateLocationEvent.emit(location);
       });
   }
 

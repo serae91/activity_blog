@@ -4,8 +4,7 @@
       <img src="assets/resources/images/avatar.jpg" alt="User Avatar" class="avatar" />
       <span class="user-info" *ngIf="activity.author">
         <h4 class="username">{{activity.author.firstName + ' ' + activity.author.lastName}}</h4>
-        <span class="date">{{getDateString(activity.postTime) + ', '}}</span>
-        <span class="date">{{getTimeString(activity.postTime)}}</span>
+        <span class="date">{{getDateString(activity.postTime)}}</span>
       </span>
     </div>
 

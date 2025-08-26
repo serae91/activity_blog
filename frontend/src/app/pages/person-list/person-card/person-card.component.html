@@ -1,14 +1,3 @@
-<!--div class="card-container" *ngIf="personListDto?.person">
-    <h5>{{personListDto.person.firstName + ' ' + personListDto.person.lastName}}</h5>
-    <p class="card-text">{{'Birthday: ' + getDateString(personListDto.person.birthday)}}</p>
-    <button type="button" class="tiny-btn" (click)="deletePerson()" *ngIf="canPersonBeDeleted()">-</button>
-    <p class="card-text" *ngIf="!canPersonBeDeleted()">
-        This Person can't be deleted, because it is listed in {{this.personListDto.activityCount}} activities</p>
-</div>
-<div-- class="card-container" *ngIf="!personListDto?.person">
-  <h5>No person provided</h5>
-</div-->
-
 <article class="person-card" aria-label="Person" *ngIf="personListDto?.person">
   <header class="person-card__header">
       <img src="assets/resources/images/avatar.jpg" alt="User Avatar" class="person-card__avatar" />

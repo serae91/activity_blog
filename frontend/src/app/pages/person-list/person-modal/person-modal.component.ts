@@ -72,12 +72,6 @@ export class PersonModalComponent {
 
   toDateInputString(date: Date | null): string | null {
     if (!date) return null;
-    console.log(date);
-    /*const pad = (n: number) => n.toString().padStart(2, '0');
-    const result = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(
-      date.getDate()
-    )}`;
-    console.log(result);*/
     return date.toString().substring(0, 10);
   }
 

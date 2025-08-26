@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivityDto, ActivityFilterDto } from '../../_api/activity.dto';
 import { ActivityService } from '../../core/services/activity/activity.service';
@@ -15,7 +15,7 @@ export class ActivityListComponent implements OnInit {
 
   activityService = inject(ActivityService);
   dialog = inject(MatDialog);
-  activities: ActivityDto[];
+  activities = signal<ActivityDto[]>([]);
   openedActivity: ActivityDto;
 
   isActivityFilterDrawerOpen = false;
@@ -31,27 +31,41 @@ export class ActivityListComponent implements OnInit {
       .afterClosed()
       .subscribe((activity: ActivityDto) => {
         if (activity) {
-          this.activities.push(activity);
+          this.activities.update((activities) => [activity, ...activities]);
           this.openedActivity = activity;
         }
       });
   }
 
-  onDeleteActivity(activityId: number) {
-    this.activities = this.activities.filter(
-      (activity) => activity.id !== activityId
+  onUpdateActivity(updatedActivity: ActivityDto) {
+    this.activities.update((activities) =>
+      activities.map((activity) =>
+        activity.id === updatedActivity.id ? updatedActivity : activity
+      )
     );
-    if (this.openedActivity.id === activityId) {
-      this.openedActivity = this.activities[0];
+    if (this.openedActivity.id === updatedActivity.id) {
+      this.openedActivity = updatedActivity;
     }
   }
 
+  onDeleteActivity(activityId: number) {
+    this.activities.update((activities) => {
+      const newActivities = activities.filter(
+        (activity) => activity.id !== activityId
+      );
+      if (this.openedActivity.id === activityId) {
+        this.openedActivity = this.activities()[0];
+      }
+      return newActivities;
+    });
+  }
+
   onOpenActivity(openedActivityId: number): void {
-    const activity = this.activities.find(
+    const openedActivity = this.activities().find(
       (activity) => activity.id === openedActivityId
     );
-    if (activity) {
-      this.openedActivity = activity;
+    if (openedActivity) {
+      this.openedActivity = openedActivity;
     }
   }
 
@@ -64,7 +78,7 @@ export class ActivityListComponent implements OnInit {
     this.activityService
       .getFilteredActivities(this.activityFilter)
       .subscribe((activities) => {
-        this.activities = activities;
+        this.activities.set(activities);
         this.openedActivity = activities[0];
       });
   }

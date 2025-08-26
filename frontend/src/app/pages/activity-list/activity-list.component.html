@@ -10,12 +10,12 @@
     </div>
     <div class="flex-row">
     <app-opacity-scroll>
-        <div *ngFor="let activity of activities">
-            <app-activity-list-card [activity]="activity" [openedActivityId]="openedActivity.id" (deleteActivityEvent)="onDeleteActivity($event)" (openActivityEvent)="onOpenActivity($event)"/>
+        <div *ngFor="let activity of activities()">
+            <app-activity-list-card [activity]="activity" [openedActivityId]="openedActivity.id" (updateActivityEvent)="onUpdateActivity($event)" (deleteActivityEvent)="onDeleteActivity($event)" (openActivityEvent)="onOpenActivity($event)"/>
         </div>
     </app-opacity-scroll>
-    <div class="activity-card">
-      <app-activity-card [activity]="openedActivity" *ngIf="openedActivity"/>
+    <div class="activity-card" *ngIf="openedActivity">
+      <app-activity-card [activity]="openedActivity" />
     </div>
 </div>
 

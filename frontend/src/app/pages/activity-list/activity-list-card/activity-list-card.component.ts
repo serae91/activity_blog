@@ -4,7 +4,6 @@ import { ActivityDto } from '../../../_api/activity.dto';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivityService } from '../../../core/services/activity/activity.service';
 import { ActivityModalComponent } from '../activity-modal/activity-modal.component';
-import { updateObjectExcludingId } from '../../../utils/update-object.utils';
 
 @Component({
   selector: 'app-activity-list-card',
@@ -13,12 +12,15 @@ import { updateObjectExcludingId } from '../../../utils/update-object.utils';
 })
 export class ActivityListCardComponent {
   @Input()
-  activity: ActivityDto;
+  activity!: ActivityDto;
+
   @Input()
   openedActivityId: number;
 
   @Output()
   openActivityEvent = new EventEmitter<number>();
+  @Output()
+  updateActivityEvent = new EventEmitter<ActivityDto>();
   @Output()
   deleteActivityEvent = new EventEmitter<number>();
 
@@ -34,7 +36,7 @@ export class ActivityListCardComponent {
       .open(ActivityModalComponent, { data: this.activity })
       .afterClosed()
       .subscribe((activity: ActivityDto) => {
-        updateObjectExcludingId(this.activity, activity);
+        this.updateActivityEvent.emit(activity);
       });
   }
 
@@ -49,18 +51,9 @@ export class ActivityListCardComponent {
   }
 
   getDateString(date: Date): string {
-    return this.getDateTimeString(date).substring(0, 11);
-  }
-
-  getTimeString(date: Date): string {
-    return this.getDateTimeString(date).substring(12);
-  }
-
-  private getDateTimeString(date: Date): string {
-    if (!date) return '';
     return (
       this.datePipe
-        .transform(date.toString().substring(0, 19), 'dd MMM YYYY HH:mm:ss')
+        .transform(date.toString().substring(0, 19), 'dd.MM.YYYY, HH:mm:ss')
         ?.toString() ?? ''
     );
   }

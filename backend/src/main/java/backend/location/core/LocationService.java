@@ -32,7 +32,7 @@ public class LocationService {
     }
 
     public List<LocationEntityView> getAllLocationEntityViews() {
-        final CriteriaBuilder<Location> criteriaBuilder = criteriaBuilderFactory.create(entityManager, Location.class);
+        final CriteriaBuilder<Location> criteriaBuilder = criteriaBuilderFactory.create(entityManager, Location.class).orderByAsc("name");
         return entityViewManager.applySetting(EntityViewSetting.create(LocationEntityView.class), criteriaBuilder).getResultList();
     }
 
@@ -42,7 +42,7 @@ public class LocationService {
     }
 
     private List<Location> getAllLocations() {
-        return criteriaBuilderFactory.create(entityManager, Location.class)
+        return criteriaBuilderFactory.create(entityManager, Location.class).orderByAsc("name")
                 .getResultList();
     }
 
