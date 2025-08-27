@@ -15,7 +15,7 @@ export class ActivityListCardComponent {
   activity!: ActivityDto;
 
   @Input()
-  openedActivityId: number;
+  openedActivityId?: number;
 
   @Output()
   openActivityEvent = new EventEmitter<number>();

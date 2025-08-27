@@ -3,12 +3,13 @@ package backend.activity.usecase.update.model;
 import backend.activity.model.Activity;
 import backend.location.model.LocationIdView;
 import backend.person.model.PersonIdView;
+import com.blazebit.persistence.view.CascadeType;
 import com.blazebit.persistence.view.EntityView;
 import com.blazebit.persistence.view.IdMapping;
-import com.blazebit.persistence.view.Mapping;
 import com.blazebit.persistence.view.UpdatableEntityView;
+import com.blazebit.persistence.view.UpdatableMapping;
 
-import java.util.List;
+import java.util.Set;
 
 @EntityView(Activity.class)
 @UpdatableEntityView
@@ -25,18 +26,17 @@ public interface ActivityUpdateView {
 
     void setDescription(String description);
 
-    @Mapping("author")
     PersonIdView getAuthor();
 
     void setAuthor(PersonIdView author);
 
-    @Mapping("persons")
-    List<PersonIdView> getPersons();
+    @UpdatableMapping(cascade = CascadeType.DELETE, orphanRemoval = true)
+    Set<PersonIdView> getPersons();
 
-    void setPersons(List<PersonIdView> persons);
+    void setPersons(Set<PersonIdView> persons);
 
-    @Mapping("locations")
-    List<LocationIdView> getLocations();
+    @UpdatableMapping(cascade = CascadeType.DELETE, orphanRemoval = true)
+    Set<LocationIdView> getLocations();
 
-    void setLocations(List<LocationIdView> persons);
+    void setLocations(Set<LocationIdView> locations);
 }

@@ -7,7 +7,7 @@ import com.blazebit.persistence.view.IdMapping;
 import com.blazebit.persistence.view.Mapping;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @EntityView(Activity.class)
 public interface ActivityEntityView {
@@ -24,8 +24,8 @@ public interface ActivityEntityView {
     Date getPostTime();
 
     @Mapping("persons")
-    List<PersonEntityView> getPersons();
+    Set<PersonEntityView> getPersons();
 
     @Mapping("locations")
-    List<LocationEntityView> getLocations();
+    Set<LocationEntityView> getLocations();
 }

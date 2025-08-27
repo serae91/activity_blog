@@ -1,5 +1,5 @@
 <mat-sidenav-container class="example-container">
-  <mat-sidenav #drawer mode="over" position="end" [(opened)]="isActivityFilterDrawerOpen">
+  <mat-sidenav #drawer mode="over" position="end">
     <app-activity-filter [activityFilter]="activityFilter" (activityFilterChange)="onActivityFilterChange()"></app-activity-filter>
   </mat-sidenav>
 
@@ -11,11 +11,11 @@
     <div class="flex-row">
     <app-opacity-scroll>
         <div *ngFor="let activity of activities()">
-            <app-activity-list-card [activity]="activity" [openedActivityId]="openedActivity.id" (updateActivityEvent)="onUpdateActivity($event)" (deleteActivityEvent)="onDeleteActivity($event)" (openActivityEvent)="onOpenActivity($event)"/>
+            <app-activity-list-card [activity]="activity" [openedActivityId]="openedActivity()?.id" (updateActivityEvent)="onUpdateActivity($event)" (deleteActivityEvent)="onDeleteActivity($event)" (openActivityEvent)="onOpenActivity($event)"/>
         </div>
     </app-opacity-scroll>
-    <div class="activity-card" *ngIf="openedActivity">
-      <app-activity-card [activity]="openedActivity" />
+    <div class="activity-card">
+      <app-activity-card *ngIf="openedActivity() as openedActivity" [activity]="openedActivity" />
     </div>
 </div>
 

@@ -18,6 +18,7 @@ import java.util.Objects;
 
 @Dependent
 public class ActivityService {
+    private static final String POST_TIME = "postTime";
 
     @Inject
     EntityManager entityManager;
@@ -39,7 +40,7 @@ public class ActivityService {
         filterLocations(criteriaBuilder, activityFilter);
         filterStartPostTime(criteriaBuilder, activityFilter);
         filterEndPostTime(criteriaBuilder, activityFilter);
-        criteriaBuilder.orderByDesc("postTime");
+        criteriaBuilder.orderByDesc(POST_TIME);
         return entityViewManager.applySetting(EntityViewSetting.create(ActivityEntityView.class), criteriaBuilder).getResultList();
     }
 
@@ -60,7 +61,7 @@ public class ActivityService {
 
     private void filterStartPostTime(final CriteriaBuilder<Activity> criteriaBuilder, final ActivityFilterDto activityFilter) {
         if (Objects.isNull(activityFilter.startPostTime())) return;
-        criteriaBuilder.where("postTime").ge(activityFilter.startPostTime());
+        criteriaBuilder.where(POST_TIME).ge(activityFilter.startPostTime());
     }
 
     private void filterEndPostTime(final CriteriaBuilder<Activity> criteriaBuilder, final ActivityFilterDto activityFilter) {
@@ -74,6 +75,6 @@ public class ActivityService {
         cal.set(Calendar.MILLISECOND, 999);
         final Date endOfDay = cal.getTime();
 
-        criteriaBuilder.where("postTime").le(endOfDay);
+        criteriaBuilder.where(POST_TIME).le(endOfDay);
     }
 }

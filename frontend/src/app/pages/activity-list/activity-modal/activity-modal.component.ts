@@ -115,6 +115,10 @@ export class ActivityModalComponent implements OnInit {
   }
 
   getActivityUpdateDto(): ActivityUpdateDto {
+    console.log({
+      ...this.getActivityCreateDto(),
+      id: this.data.id,
+    } as ActivityUpdateDto);
     return {
       ...this.getActivityCreateDto(),
       id: this.data.id,

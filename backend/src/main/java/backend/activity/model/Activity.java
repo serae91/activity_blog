@@ -5,27 +5,27 @@ import backend.person.model.Person;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "activity")
@@ -64,7 +64,7 @@ public class Activity {
             inverseJoinColumns = {
                     @JoinColumn(name = "person_id", referencedColumnName = "person_id")
             })
-    private List<Person> persons = new ArrayList<>();
+    private Set<Person> persons = new HashSet<>();
 
     @ManyToMany(targetEntity = Location.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(name = "activity_location",
@@ -74,5 +74,5 @@ public class Activity {
             inverseJoinColumns = {
                     @JoinColumn(name = "location_id", referencedColumnName = "location_id")
             })
-    private List<Location> locations = new ArrayList<>();
+    private Set<Location> locations = new HashSet<>();
 }

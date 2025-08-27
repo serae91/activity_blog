@@ -4,6 +4,7 @@ import { ActivityDto, ActivityFilterDto } from '../../_api/activity.dto';
 import { ActivityService } from '../../core/services/activity/activity.service';
 import { ActivityModalComponent } from './activity-modal/activity-modal.component';
 import { MatSidenav } from '@angular/material/sidenav';
+import { filter, take } from 'rxjs';
 
 @Component({
   selector: 'app-activity-list',
@@ -16,9 +17,8 @@ export class ActivityListComponent implements OnInit {
   activityService = inject(ActivityService);
   dialog = inject(MatDialog);
   activities = signal<ActivityDto[]>([]);
-  openedActivity: ActivityDto;
+  openedActivity = signal<ActivityDto | null>(null);
 
-  isActivityFilterDrawerOpen = false;
   activityFilter = {} as ActivityFilterDto;
 
   ngOnInit(): void {
@@ -29,11 +29,13 @@ export class ActivityListComponent implements OnInit {
     this.dialog
       .open(ActivityModalComponent)
       .afterClosed()
-      .subscribe((activity: ActivityDto) => {
-        if (activity) {
-          this.activities.update((activities) => [activity, ...activities]);
-          this.openedActivity = activity;
-        }
+      .pipe(
+        take(1),
+        filter((activity): activity is ActivityDto => !!activity)
+      )
+      .subscribe((activity) => {
+        this.activities.update((activities) => [activity, ...activities]);
+        this.openedActivity.set(activity);
       });
   }
 
@@ -43,8 +45,8 @@ export class ActivityListComponent implements OnInit {
         activity.id === updatedActivity.id ? updatedActivity : activity
       )
     );
-    if (this.openedActivity.id === updatedActivity.id) {
-      this.openedActivity = updatedActivity;
+    if (this.openedActivity()?.id === updatedActivity.id) {
+      this.openedActivity.set(updatedActivity);
     }
   }
 
@@ -53,20 +55,18 @@ export class ActivityListComponent implements OnInit {
       const newActivities = activities.filter(
         (activity) => activity.id !== activityId
       );
-      if (this.openedActivity.id === activityId) {
-        this.openedActivity = this.activities()[0];
+      if (this.openedActivity()?.id === activityId) {
+        this.openedActivity.set(this.getFirstOrNull(newActivities));
       }
       return newActivities;
     });
   }
 
   onOpenActivity(openedActivityId: number): void {
-    const openedActivity = this.activities().find(
-      (activity) => activity.id === openedActivityId
+    this.openedActivity.set(
+      this.activities().find((activity) => activity.id === openedActivityId) ??
+        null
     );
-    if (openedActivity) {
-      this.openedActivity = openedActivity;
-    }
   }
 
   onActivityFilterChange(): void {
@@ -77,9 +77,14 @@ export class ActivityListComponent implements OnInit {
   loadActivities(): void {
     this.activityService
       .getFilteredActivities(this.activityFilter)
+      .pipe(take(1))
       .subscribe((activities) => {
         this.activities.set(activities);
-        this.openedActivity = activities[0];
+        this.openedActivity.set(this.getFirstOrNull(activities));
       });
+  }
+
+  getFirstOrNull(activities: ActivityDto[]): ActivityDto | null {
+    return activities.length > 0 ? activities[0] : null;
   }
 }
