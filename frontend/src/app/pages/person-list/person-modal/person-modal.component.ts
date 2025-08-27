@@ -10,7 +10,7 @@ import {
   CreatePersonDto,
   PersonDto,
   PersonUpdateDto,
-} from 'src/app/_api/person.dto';
+} from '../../../_api/person.dto';
 import { PersonService } from '../../../core/services/person/person.service';
 import { Observable } from 'rxjs';
 

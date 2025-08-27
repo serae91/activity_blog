@@ -1,19 +1,58 @@
 .confirmation-modal-card {
-  width: 500px;
-  min-height: 250px;
-  border-radius: 48px;
-  padding: 48px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  padding: 24px;
+  width: 320px;
+  max-width: 90%;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
 }
 
-.question-text {
-  margin-top: 8px;
-  border-radius: 12px;
-  background-color: #eeeeee;
-  padding: 12px;
+.confirmation-modal-card h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.confirmation-modal-card .question-text {
+  margin: 16px 0;
+  font-size: 1rem;
+  color: #555;
 }
 
 .button-row {
-  position: absolute;
-  right: 48px;
-  bottom: 48px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.button-row button {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.button-row .btn-secondary {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.button-row .btn-secondary:hover {
+  background-color: #d5d5d5;
+}
+
+.button-row .btn-success {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.button-row .btn-success:hover {
+  background-color: #45a049;
 }

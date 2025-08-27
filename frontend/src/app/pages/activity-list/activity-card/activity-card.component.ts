@@ -18,9 +18,10 @@ export class ActivityCardComponent {
 
   getDateString(date: Date): string {
     return (
-      this.datePipe
-        .transform(date.toString().substring(0, 19), 'dd.MM.YYYY, HH:mm:ss')
-        ?.toString() ?? ''
+      this.datePipe.transform(
+        date.toString().substring(0, 19),
+        'dd.MM.YYYY, HH:mm:ss'
+      ) ?? ''
     );
   }
 }

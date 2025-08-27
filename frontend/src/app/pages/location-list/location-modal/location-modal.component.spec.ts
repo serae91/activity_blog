@@ -2,7 +2,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 import { LocationModalComponent } from './location-modal.component';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogModule,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { LocationCreateDto, LocationDto } from '../../../_api/location.dto';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { LocationService } from '../../../core/services/location/location.service';
@@ -12,7 +16,7 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 
-describe('CreateLocationModalComponent', () => {
+describe('LocationModalComponent', () => {
   let component: LocationModalComponent;
   let fixture: ComponentFixture<LocationModalComponent>;
   let locationService: LocationService;
@@ -24,6 +28,7 @@ describe('CreateLocationModalComponent', () => {
       schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
       imports: [MatDialogModule],
       providers: [
+        { provide: MAT_DIALOG_DATA, useValue: {} as LocationDto },
         {
           provide: MatDialogRef,
           useValue: { close: (location: LocationDto) => undefined },
@@ -58,7 +63,7 @@ describe('CreateLocationModalComponent', () => {
       .spyOn(locationService, 'getAllLocations')
       .mockReturnValue(of(allLocations));
     component.loadAllLocations();
-    expect(component.locations).toBe(allLocations);
+    expect(component.locations).toEqual(allLocations);
   });
 
   it('should init form group', () => {

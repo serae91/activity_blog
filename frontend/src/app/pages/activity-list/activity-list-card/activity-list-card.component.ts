@@ -4,6 +4,7 @@ import { ActivityDto } from '../../../_api/activity.dto';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivityService } from '../../../core/services/activity/activity.service';
 import { ActivityModalComponent } from '../activity-modal/activity-modal.component';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-activity-list-card',
@@ -35,6 +36,7 @@ export class ActivityListCardComponent {
     this.dialog
       .open(ActivityModalComponent, { data: this.activity })
       .afterClosed()
+      .pipe(take(1))
       .subscribe((activity: ActivityDto) => {
         this.updateActivityEvent.emit(activity);
       });

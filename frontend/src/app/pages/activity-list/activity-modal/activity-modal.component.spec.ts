@@ -17,7 +17,7 @@ import { PersonService } from '../../../core/services/person/person.service';
 import { LocationService } from '../../../core/services/location/location.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-describe('CreateActivityModalComponent', () => {
+describe('ActivityModalComponent', () => {
   let component: ActivityModalComponent;
   let fixture: ComponentFixture<ActivityModalComponent>;
 
