@@ -19,17 +19,15 @@ public class ActivityUpdateService {
         entityViewManager.save(entityManager, activityUpdateView);
 
         if (Objects.isNull(activityUpdateView.getPersons()) || activityUpdateView.getPersons().isEmpty()) {
-            deleteTableConnection("activity_person", activityUpdateView.getId());
+            entityManager.createNativeQuery("DELETE FROM activity_person WHERE activity_id = :id")
+                    .setParameter("id", activityUpdateView.getId())
+                    .executeUpdate();
         }
-        
-        if (Objects.isNull(activityUpdateView.getLocations()) || activityUpdateView.getLocations().isEmpty()) {
-            deleteTableConnection("activity_location", activityUpdateView.getId());
-        }
-    }
 
-    private void deleteTableConnection(final String tableName, final Long activityId) {
-        entityManager.createNativeQuery("DELETE FROM " + tableName + " WHERE activity_id = :id")
-                .setParameter("id", activityId)
-                .executeUpdate();
+        if (Objects.isNull(activityUpdateView.getLocations()) || activityUpdateView.getLocations().isEmpty()) {
+            entityManager.createNativeQuery("DELETE FROM activity_location WHERE activity_id = :id")
+                    .setParameter("id", activityUpdateView.getId())
+                    .executeUpdate();
+        }
     }
 }
