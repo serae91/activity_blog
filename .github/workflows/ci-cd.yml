@@ -72,8 +72,22 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set OWNER variable
-        run: echo "OWNER=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+      - name: Set OWNER variable (lowercase for GHCR)
+        run: echo "OWNER=${GITHUB_ACTOR,,}" >> $GITHUB_ENV
+
+      - name: Cleanup old GHCR images
+        run: |
+          gh api -X GET /user/packages/container/activity-blog-backend/versions \
+            -H "Accept: application/vnd.github.v3+json" \
+            | jq '.[].id' \
+            | xargs -n 1 -I {} gh api -X DELETE /user/packages/container/activity-blog-backend/versions/{} \
+              -H "Accept: application/vnd.github.v3+json" || true
+          
+          gh api -X GET /user/packages/container/activity-blog-frontend/versions \
+            -H "Accept: application/vnd.github.v3+json" \
+            | jq '.[].id' \
+            | xargs -n 1 -I {} gh api -X DELETE /user/packages/container/activity-blog-frontend/versions/{} \
+              -H "Accept: application/vnd.github.v3+json" || true
 
       - name: Build and Push Backend Docker image
         run: |
