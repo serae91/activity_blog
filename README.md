@@ -1,5 +1,7 @@
 # Activity Blog
 
+> This project is also available in German: [README_DE.md](README_DE.md)
+
 This project was developed as a **demo for job applications**. It demonstrates how I build and deploy a small fullstack application with **frontend, backend, and infrastructure**.  
 My focus was on **clean structure**, **containerization**, and **deployment with Kubernetes**.
 

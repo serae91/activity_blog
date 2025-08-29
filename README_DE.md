@@ -1,5 +1,7 @@
 # Activity Blog
 
+> Dieses Projekt ist auch auf Englisch verfügbar: [README.md](README.md)
+
 Dieses Projekt habe ich als **Demo für Bewerbungen** entwickelt. Es zeigt, wie ich eine kleine Fullstack-Anwendung mit **Frontend, Backend und Infrastruktur** aufbaue und bereitstelle.  
 Mein Fokus lag auf **sauberer Struktur**, **Containerisierung** und **Deployment mit Kubernetes**.
 
