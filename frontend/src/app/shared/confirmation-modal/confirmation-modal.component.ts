@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -7,10 +7,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./confirmation-modal.component.scss'],
 })
 export class ConfirmationModalComponent {
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: ConfirmationModalDataDto,
-    private dialogRef: MatDialogRef<ConfirmationModalComponent>
-  ) {}
+  data = inject<ConfirmationModalDataDto>(MAT_DIALOG_DATA);
+  dialogRef = inject(MatDialogRef<ConfirmationModalComponent>);
 
   confirm(): void {
     this.dialogRef.close(true);

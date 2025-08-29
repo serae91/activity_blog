@@ -107,7 +107,7 @@ chmod +x ./scripts/deploy.sh
 2. Deployment starten:
 
 ```bash
-./scripts/deploy.sh
+./scripts/k8s-deployment.sh
 ```
 
 3. Minikube Tunnel öffnen, damit alle Services vom Host erreichbar sind:

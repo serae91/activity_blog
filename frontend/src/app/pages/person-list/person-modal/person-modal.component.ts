@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormArray,
   UntypedFormBuilder,
@@ -19,7 +19,7 @@ import { Observable } from 'rxjs';
   templateUrl: './person-modal.component.html',
   styleUrls: ['./person-modal.component.scss'],
 })
-export class PersonModalComponent {
+export class PersonModalComponent implements OnInit {
   formGroup: UntypedFormGroup;
   persons: PersonDto[];
 
@@ -28,13 +28,10 @@ export class PersonModalComponent {
   get personIds(): FormArray {
     return this.formGroup.controls['personIds'] as FormArray;
   }
-
-  constructor(
-    @Inject(MAT_DIALOG_DATA) private data: PersonDto,
-    private dialogRef: MatDialogRef<PersonModalComponent>,
-    private formBuilder: UntypedFormBuilder,
-    private personService: PersonService
-  ) {}
+  private data = inject<PersonDto>(MAT_DIALOG_DATA);
+  private dialogRef = inject(MatDialogRef<PersonModalComponent>);
+  private formBuilder = inject(UntypedFormBuilder);
+  private personService = inject(PersonService);
 
   ngOnInit(): void {
     this.loadAllPersons();
@@ -97,7 +94,7 @@ export class PersonModalComponent {
   }
 
   createOrUpdatePerson(): Observable<PersonDto> {
-    return !!this.data?.id
+    return this.data?.id
       ? this.personService.updatePerson(this.getPersonUpdateDto())
       : this.personService.createPerson(this.getPersonCreateDto());
   }
@@ -127,7 +124,7 @@ export class PersonModalComponent {
       lastName: this.formGroup.controls['lastName'].value,
       birthday: new Date(this.formGroup.controls['birthday'].value),
     } as PersonDto;
-    for (let person of this.persons) {
+    for (const person of this.persons) {
       if (this.doPersonsEqual(person, newPerson)) {
         return true;
       }

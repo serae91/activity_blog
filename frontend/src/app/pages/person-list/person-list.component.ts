@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, inject } from '@angular/core';
 import { PersonDto, PersonListDto } from '../../_api/person.dto';
 import { PersonService } from '../../core/services/person/person.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -10,12 +10,12 @@ import { PersonModalComponent } from './person-modal/person-modal.component';
   styleUrls: ['./person-list.component.scss'],
 })
 export class PersonListComponent implements OnInit {
+  private personService = inject(PersonService);
+  private dialog = inject(MatDialog);
+
   personListDtos = signal<PersonListDto[]>([]);
 
-  constructor(
-    private personService: PersonService,
-    private dialog: MatDialog
-  ) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.personService

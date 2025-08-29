@@ -31,7 +31,7 @@ describe('LocationModalComponent', () => {
         { provide: MAT_DIALOG_DATA, useValue: {} as LocationDto },
         {
           provide: MatDialogRef,
-          useValue: { close: (location: LocationDto) => undefined },
+          useValue: { close: () => undefined },
         },
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),

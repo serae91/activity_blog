@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { LocationDto, LocationListDto } from '../../_api/location.dto';
 import { LocationService } from '../../core/services/location/location.service';
 import { LocationModalComponent } from './location-modal/location-modal.component';
-import { PersonDto } from '../../_api/person.dto';
 
 @Component({
   selector: 'app-location-list',

@@ -32,28 +32,41 @@ describe('OpacityScrollComponent', () => {
   it('should scroll scroll indicator hidden', () => {
     const child1 = { offsetTop: 5, setAttribute: () => {} };
     const child2 = { offsetTop: 15, setAttribute: () => {} };
-    const event = { target: { scrollTop: 30, children: [{ children: [child1, child2] }] } };
+    const event = {
+      target: { scrollTop: 30, children: [{ children: [child1, child2] }] },
+    };
     jest.spyOn(child1, 'setAttribute').mockReturnValue(undefined);
     jest.spyOn(child2, 'setAttribute').mockReturnValue(undefined);
 
-    component.scroll(event);
+    component.scroll({ e: event });
 
-    expect(child1.setAttribute).toHaveBeenCalledWith('style', 'opacity: 0.84375');
-    expect(child2.setAttribute).toHaveBeenCalledWith('style', 'opacity: 0.9392499999999999');
+    expect(child1.setAttribute).toHaveBeenCalledWith(
+      'style',
+      'opacity: 0.84375'
+    );
+    expect(child2.setAttribute).toHaveBeenCalledWith(
+      'style',
+      'opacity: 0.9392499999999999'
+    );
     expect(component.scrollIndicatorVisibility).toBe('hidden');
   });
 
   it('should scroll scroll indicator visible', () => {
     const child1 = { offsetTop: -10, setAttribute: () => {} };
     const child2 = { offsetTop: -9, setAttribute: () => {} };
-    const event = { target: { scrollTop: 90, children: [{ children: [child1, child2] }] } };
+    const event = {
+      target: { scrollTop: 90, children: [{ children: [child1, child2] }] },
+    };
     jest.spyOn(child1, 'setAttribute').mockReturnValue(undefined);
     jest.spyOn(child2, 'setAttribute').mockReturnValue(undefined);
 
-    component.scroll(event);
+    component.scroll({ e: event });
 
     expect(child1.setAttribute).toHaveBeenCalledWith('style', 'opacity: 0');
-    expect(child2.setAttribute).toHaveBeenCalledWith('style', 'opacity: 0.00029800000000000003');
+    expect(child2.setAttribute).toHaveBeenCalledWith(
+      'style',
+      'opacity: 0.00029800000000000003'
+    );
     expect(component.scrollIndicatorVisibility).toBe('visible');
   });
 
@@ -75,18 +88,27 @@ describe('OpacityScrollComponent', () => {
       setAttribute: () => {},
     };
     const event = {
-      target: { scrollTop: 80, children: [{ children: [child1, child2, child3, child4] }] },
+      target: {
+        scrollTop: 80,
+        children: [{ children: [child1, child2, child3, child4] }],
+      },
     };
     jest.spyOn(child1, 'setAttribute').mockReturnValue(undefined);
     jest.spyOn(child2, 'setAttribute').mockReturnValue(undefined);
     jest.spyOn(child3, 'setAttribute').mockReturnValue(undefined);
     jest.spyOn(child4, 'setAttribute').mockReturnValue(undefined);
 
-    component.scroll(event);
+    component.scroll({ e: event });
 
     expect(child1.setAttribute).toHaveBeenCalledWith('style', 'opacity: 0.3');
     expect(child2.setAttribute).toHaveBeenCalledWith('style', 'opacity: 0.3');
-    expect(child3.setAttribute).toHaveBeenCalledWith('style', 'visibility: hidden');
-    expect(child4.setAttribute).toHaveBeenCalledWith('style', 'visibility: hidden');
+    expect(child3.setAttribute).toHaveBeenCalledWith(
+      'style',
+      'visibility: hidden'
+    );
+    expect(child4.setAttribute).toHaveBeenCalledWith(
+      'style',
+      'visibility: hidden'
+    );
   });
 });

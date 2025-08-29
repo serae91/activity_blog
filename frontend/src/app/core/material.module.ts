@@ -4,7 +4,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CdkStepperModule } from '@angular/cdk/stepper';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
-import { NgModule } from '@angular/core';
+import { NgModule, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -16,10 +16,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {
-  MAT_DIALOG_DEFAULT_OPTIONS,
-  MatDialogModule,
-} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -99,70 +96,11 @@ const MODULES = [
   exports: MODULES,
 })
 export class MaterialModule {
-  constructor(
-    private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
-  ) {
+  private matIconRegistry = inject(MatIconRegistry);
+  private domSanitizer = inject(DomSanitizer);
+
+  constructor() {
     this.registerIcon('exit-icon', 'assets/icons/exit_to_app-24px.svg');
-    this.registerIcon('more-vert-icon', 'assets/icons/more_vert.svg');
-    this.registerIcon(
-      'keyboard-arrow-down',
-      'assets/icons/keyboard_arrow_down-24px.svg'
-    );
-    this.registerIcon('assays-icon', 'assets/icons/assays_icon-24px.svg');
-    this.registerIcon('dashboard-icon', 'assets/icons/dashboard_icon-24px.svg');
-    this.registerIcon(
-      'import-summary-icon',
-      'assets/icons/import_summary_icon-24px.svg'
-    );
-    this.registerIcon('samples-icon', 'assets/icons/samples_icon-24px.svg');
-    this.registerIcon('config-icon', 'assets/icons/config_icon-24px.svg');
-    this.registerIcon('audit-icon', 'assets/icons/audit_icon-24px.svg');
-    this.registerIcon('list-view-icon', 'assets/icons/list_view_icon-24px.svg');
-    this.registerIcon(
-      'plate-view-icon',
-      'assets/icons/plate_view_icon-24px.svg'
-    );
-    this.registerIcon('edit-icon', 'assets/icons/edit_icon-24px.svg');
-    this.registerIcon(
-      'sample-validation-status-invalid-icon',
-      'assets/icons/sample_validation_status_invalid_icon-24px.svg'
-    );
-    this.registerIcon(
-      'sample-validation-status-negative-icon',
-      'assets/icons/sample_validation_status_negative_icon-24px.svg'
-    );
-    this.registerIcon(
-      'sample-validation-status-positive-icon',
-      'assets/icons/sample_validation_status_positive_icon-24px.svg'
-    );
-    this.registerIcon(
-      'change-status-icon',
-      'assets/icons/change_status_icon-24px.svg'
-    );
-    this.registerIcon('reserve-icon', 'assets/icons/reserve_icon-24px.svg');
-    this.registerIcon(
-      'cancel-reservation-icon',
-      'assets/icons/cancel_reservation_icon-24px.svg'
-    );
-    this.registerIcon(
-      'show-more-information-icon',
-      'assets/icons/show_more_information_icon-24px.svg'
-    );
-    this.registerIcon('expand-icon', 'assets/icons/expand_icon-24px.svg');
-    this.registerIcon('collapse-icon', 'assets/icons/collapse_icon-24px.svg');
-    this.registerIcon(
-      'quality-control-create-chart-icon',
-      'assets/icons/quality_control_create_chart_icon.svg'
-    );
-    this.registerIcon(
-      'covid-transfer-icon',
-      'assets/icons/covid_transfer_icon-24px.svg'
-    );
-    this.registerIcon(
-      'covid-transfer-payload-icon',
-      'assets/icons/covid_transfer_payload_icon-24px.svg'
-    );
   }
 
   private registerIcon(name: string, path: string): void {

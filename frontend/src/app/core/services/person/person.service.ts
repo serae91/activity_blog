@@ -40,7 +40,7 @@ export class PersonService extends BaseService {
   }
 
   createPerson(createPersonDto: CreatePersonDto): Observable<PersonDto> {
-    return this.post<PersonDto>(
+    return this.post<PersonDto, CreatePersonDto>(
       `/create`,
       createPersonDto,
       (error) => `Error creating Person: ${error.statusText}`
@@ -48,7 +48,7 @@ export class PersonService extends BaseService {
   }
 
   updatePerson(personUpdateDto: PersonUpdateDto): Observable<PersonDto> {
-    return this.post<PersonDto>(
+    return this.post<PersonDto, PersonUpdateDto>(
       '/update',
       personUpdateDto,
       (error) => `Error updating Person: ${error.statusText}`

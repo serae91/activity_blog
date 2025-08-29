@@ -33,9 +33,9 @@ export class BaseService {
     );
   }
 
-  protected post<T>(
+  protected post<T, U>(
     url: string,
-    body: any,
+    body: U,
     errorMessage: (error: HttpErrorResponse) => string,
     successMessage?: (response: T) => string
   ): Observable<T> {
@@ -46,9 +46,9 @@ export class BaseService {
     );
   }
 
-  protected put<T>(
+  protected put<T, U>(
     url: string,
-    body: any,
+    body: U,
     errorMessage: (error: HttpErrorResponse) => string,
     successMessage?: (response: T) => string
   ): Observable<T> {

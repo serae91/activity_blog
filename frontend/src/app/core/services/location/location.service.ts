@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {
   LocationCreateDto,
@@ -43,7 +42,7 @@ export class LocationService extends BaseService {
   createLocation(
     locationCreateDto: LocationCreateDto
   ): Observable<LocationDto> {
-    return this.post<LocationDto>(
+    return this.post<LocationDto, LocationCreateDto>(
       '/create',
       locationCreateDto,
       (error) => `Error creating Location: ${error.statusText}`
@@ -53,7 +52,7 @@ export class LocationService extends BaseService {
   updateLocation(
     locationUpdateDto: LocationUpdateDto
   ): Observable<LocationDto> {
-    return this.post<LocationDto>(
+    return this.post<LocationDto, LocationUpdateDto>(
       '/update',
       locationUpdateDto,
       (error) => `Error updating Location: ${error.statusText}`

@@ -8,6 +8,7 @@ import { ActivityService } from '../../core/services/activity/activity.service';
 import { ActivityListComponent } from './activity-list.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 
 describe('ActivityListComponent', () => {
   let component: ActivityListComponent;
@@ -74,7 +75,6 @@ describe('ActivityListComponent', () => {
   it('should openCreateActivityModal and return undefined', () => {
     component.activities.set([{ id: 3 }] as ActivityDto[]);
     component.openedActivity.set({ id: 4 } as ActivityDto);
-    const activity = { id: 17 } as ActivityDto;
     const dialogRef = {
       afterClosed: () => of(undefined),
     } as MatDialogRef<ActivityModalComponent>;
@@ -174,10 +174,10 @@ describe('ActivityListComponent', () => {
   });
 
   it('should onActivityFilterChange', () => {
-    const mockDrawer = {
+    const mockDrawer: Partial<MatSidenav> = {
       close: jest.fn(),
     };
-    component.drawer = mockDrawer as any;
+    component.drawer = mockDrawer as MatSidenav;
     jest.spyOn(component, 'loadActivities').mockReturnValue(undefined);
     component.onActivityFilterChange();
     expect(component.loadActivities).toHaveBeenCalledWith();

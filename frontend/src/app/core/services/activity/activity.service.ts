@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ActivityCreateDto, ActivityDto, ActivityFilterDto, ActivityUpdateDto } from 'src/app/_api/activity.dto';
+import {
+  ActivityCreateDto,
+  ActivityDto,
+  ActivityFilterDto,
+  ActivityUpdateDto,
+} from 'src/app/_api/activity.dto';
 import { BaseService } from '../base.service';
 import { ConfirmationModalDataDto } from '../../../shared/confirmation-modal/confirmation-modal.component';
 
@@ -8,29 +13,59 @@ import { ConfirmationModalDataDto } from '../../../shared/confirmation-modal/con
   providedIn: 'root',
 })
 export class ActivityService extends BaseService {
-
   constructor() {
     super();
     this.setBaseUrl('activity');
   }
 
-  getActivityById(activityId: number, ): Observable<ActivityDto>{
-    return this.get<ActivityDto>(`/${activityId}`, (error)=> 'Error loading activity by id');
+  getActivityById(activityId: number): Observable<ActivityDto> {
+    return this.get<ActivityDto>(
+      `/${activityId}`,
+      (error) => `Error loading activity by id: ${error.statusText}`
+    );
   }
 
-  getFilteredActivities(activityFilter: ActivityFilterDto): Observable<ActivityDto[]>{
-    return this.post<ActivityDto[]>('/filtered', activityFilter, (error)=> `Error loading filtered activities: ${error.statusText}`);
+  getFilteredActivities(
+    activityFilter: ActivityFilterDto
+  ): Observable<ActivityDto[]> {
+    return this.post<ActivityDto[], ActivityFilterDto>(
+      '/filtered',
+      activityFilter,
+      (error) => `Error loading filtered activities: ${error.statusText}`
+    );
   }
 
-  createActivity(activityCreateDto: ActivityCreateDto): Observable<ActivityDto>{
-    return this.post<ActivityDto>('/create', activityCreateDto, (error)=> `Error creating activity: ${error.statusText}`,(response)=> `Successfully created activity`);
+  createActivity(
+    activityCreateDto: ActivityCreateDto
+  ): Observable<ActivityDto> {
+    return this.post<ActivityDto, ActivityCreateDto>(
+      '/create',
+      activityCreateDto,
+      (error) => `Error creating activity: ${error.statusText}`,
+      () => `Successfully created activity`
+    );
   }
 
-  updateActivity(updateActivityDto: ActivityUpdateDto): Observable<ActivityDto>{
-    return this.post<ActivityDto>('/update', updateActivityDto, (error)=> `Error updating activity: ${error.statusText}`,(response)=> `Successfully updated activity`);
+  updateActivity(
+    updateActivityDto: ActivityUpdateDto
+  ): Observable<ActivityDto> {
+    return this.post<ActivityDto, ActivityUpdateDto>(
+      '/update',
+      updateActivityDto,
+      (error) => `Error updating activity: ${error.statusText}`,
+      () => `Successfully updated activity`
+    );
   }
 
-  deleteActivity(activityId: number): Observable<void>{
-    return this.delete<void>(`/${activityId}`, {title: 'Delete Activity', question: 'Do you want to delete this activity?'} as ConfirmationModalDataDto, (error)=> `Error deleting activity: ${error.statusText}`,(response)=> `Successfully deleted activity`);
+  deleteActivity(activityId: number): Observable<void> {
+    return this.delete<void>(
+      `/${activityId}`,
+      {
+        title: 'Delete Activity',
+        question: 'Do you want to delete this activity?',
+      } as ConfirmationModalDataDto,
+      (error) => `Error deleting activity: ${error.statusText}`,
+      () => `Successfully deleted activity`
+    );
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormArray,
   UntypedFormBuilder,
@@ -12,14 +12,19 @@ import {
   LocationUpdateDto,
 } from '../../../_api/location.dto';
 import { Observable } from 'rxjs';
-import { ActivityDto } from '../../../_api/activity.dto';
 
 @Component({
   selector: 'app-location-modal',
   templateUrl: './location-modal.component.html',
   styleUrls: ['./location-modal.component.scss'],
 })
-export class LocationModalComponent {
+export class LocationModalComponent implements OnInit {
+  private data = inject<LocationDto>(MAT_DIALOG_DATA);
+  private dialogRef =
+    inject<MatDialogRef<LocationModalComponent>>(MatDialogRef);
+  private formBuilder = inject(UntypedFormBuilder);
+  private locationService = inject(LocationService);
+
   formGroup: UntypedFormGroup;
   locations: LocationDto[];
 
@@ -27,12 +32,7 @@ export class LocationModalComponent {
     return this.formGroup.controls['personIds'] as FormArray;
   }
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) private data: LocationDto,
-    private dialogRef: MatDialogRef<LocationModalComponent>,
-    private formBuilder: UntypedFormBuilder,
-    private locationService: LocationService
-  ) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.loadAllLocations();
@@ -96,7 +96,7 @@ export class LocationModalComponent {
   }
 
   createOrUpdateLocation(): Observable<LocationDto> {
-    return !!this.data?.id
+    return this.data?.id
       ? this.locationService.updateLocation(this.getLocationUpdateDto())
       : this.locationService.createLocation(this.getLocationCreateDto());
   }

@@ -8,27 +8,19 @@
       "files": [
         "*.ts"
       ],
-      "parserOptions": {
-        "project": [
-          "tsconfig.json",
-          "e2e/tsconfig.json"
-        ],
-        "createDefaultProgram": true
-      },
       "extends": [
-        "plugin:@angular-eslint/ng-cli-compat",
-        "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
-        "@angular-eslint/component-class-suffix": [
+        "@angular-eslint/directive-selector": [
           "error",
           {
-            "suffixes": [
-              "Component",
-              "View",
-              "Showcase"
-            ]
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
           }
         ],
         "@angular-eslint/component-selector": [
@@ -38,39 +30,7 @@
             "prefix": "app",
             "style": "kebab-case"
           }
-        ],
-        "@angular-eslint/directive-selector": [
-          "error",
-          {
-            "type": "attribute",
-            "prefix": "app",
-            "style": "camelCase"
-          }
-        ],
-        "@typescript-eslint/consistent-type-definitions": "error",
-        "@typescript-eslint/dot-notation": "off",
-        "@typescript-eslint/explicit-member-accessibility": [
-          "error",
-          {
-            "accessibility": "no-public"
-          }
-        ],
-        "brace-style": [
-          "error",
-          "1tbs"
-        ],
-        "id-blacklist": "off",
-        "id-match": "off",
-        "max-len": "off",
-        "no-underscore-dangle": "off",
-        "@typescript-eslint/naming-convention": "off",
-        "prefer-arrow/prefer-arrow-functions": "off",
-        "@typescript-eslint/member-ordering": "off",
-        "@typescript-eslint/no-unused-expressions": [
-          "error",
-          { "allowTernary": true }
-        ],
-        "jsdoc/newline-after-description": 0
+        ]
       }
     },
     {
@@ -78,7 +38,8 @@
         "*.html"
       ],
       "extends": [
-        "plugin:@angular-eslint/template/recommended"
+        "plugin:@angular-eslint/template/recommended",
+        "plugin:@angular-eslint/template/accessibility"
       ],
       "rules": {}
     }

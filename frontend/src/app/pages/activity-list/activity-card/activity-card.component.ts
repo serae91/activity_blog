@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, EventEmitter, Input, Output, Signal } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivityDto } from '../../../_api/activity.dto';
 
 @Component({

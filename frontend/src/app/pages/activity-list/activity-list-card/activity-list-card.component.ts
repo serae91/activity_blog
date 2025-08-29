@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivityDto } from '../../../_api/activity.dto';
 import { MatDialog } from '@angular/material/dialog';
@@ -25,12 +25,10 @@ export class ActivityListCardComponent {
   @Output()
   deleteActivityEvent = new EventEmitter<number>();
 
-  datePipe = new DatePipe('en-US');
+  dialog = inject(MatDialog);
+  activityService = inject(ActivityService);
 
-  constructor(
-    private dialog: MatDialog,
-    private activityService: ActivityService
-  ) {}
+  datePipe = new DatePipe('en-US');
 
   openUpdateActivityModal(): void {
     this.dialog

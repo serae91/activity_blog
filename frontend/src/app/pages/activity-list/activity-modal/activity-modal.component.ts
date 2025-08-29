@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   FormArray,
   UntypedFormBuilder,
@@ -25,6 +25,14 @@ import { getUniqueValues } from '../../../utils/update-object.utils';
   styleUrls: ['./activity-modal.component.scss'],
 })
 export class ActivityModalComponent implements OnInit {
+  private data = inject<ActivityDto>(MAT_DIALOG_DATA);
+  private dialogRef =
+    inject<MatDialogRef<ActivityModalComponent>>(MatDialogRef);
+  private formBuilder = inject(UntypedFormBuilder);
+  private activityService = inject(ActivityService);
+  private personService = inject(PersonService);
+  private locationService = inject(LocationService);
+
   formGroup: UntypedFormGroup;
   persons: PersonDto[];
   locations: LocationDto[];
@@ -36,15 +44,6 @@ export class ActivityModalComponent implements OnInit {
   get locationIds(): FormArray {
     return this.formGroup.controls['locationIds'] as FormArray;
   }
-
-  constructor(
-    @Inject(MAT_DIALOG_DATA) private data: ActivityDto,
-    private dialogRef: MatDialogRef<ActivityModalComponent>,
-    private formBuilder: UntypedFormBuilder,
-    private activityService: ActivityService,
-    private personService: PersonService,
-    private locationService: LocationService
-  ) {}
 
   ngOnInit(): void {
     this.loadAllPersons();
@@ -132,7 +131,7 @@ export class ActivityModalComponent implements OnInit {
   }
 
   createOrUpdateActivity(): Observable<ActivityDto> {
-    return !!this.data?.id
+    return this.data?.id
       ? this.activityService.updateActivity(this.getActivityUpdateDto())
       : this.activityService.createActivity(this.getActivityCreateDto());
   }
