@@ -1,15 +1,17 @@
+version: '3.9'
+
 services:
   postgres:
-    container_name: activity_blog_container
-    image: postgres:13-alpine
+    image: postgres:15
+    container_name: activity-blog-db
     environment:
       POSTGRES_USER: blogger
       POSTGRES_PASSWORD: aktiVyti3_sAfe_Pass5ord
-      PGDATA: /data/postgres
-    ports: [ 5430:5432 ]
-    networks: [ postgres ]
-    restart: unless-stopped
+      POSTGRES_DB: activity_blog
+    ports:
+      - "5430:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
 
-networks:
-  postgres:
-    driver: bridge
+volumes:
+  pgdata:

@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
+import {
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpInterceptor,
+} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AppConfigService } from 'src/app/core/services/app-config/app-config.service';
 import { TokenStorageService } from 'src/app/core/services/token-storage/token-storage.service';
@@ -12,12 +17,15 @@ export class AuthTokenInterceptorService implements HttpInterceptor {
   ) {}
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
     // do not intercept loading icons request
     if (req.url.includes('assets')) {
       return next.handle(req);
     }
-    if (req.url.includes('README.md')) {
+    if (req.url.includes('README_DE.md')) {
       return next.handle(req);
     }
 

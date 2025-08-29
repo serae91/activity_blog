@@ -1,13 +1,16 @@
 set -e
 
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+
 echo "Start Developer Environment..."
 
 setup() {
   echo "Install Frontend-Dependencies..."
-  ( cd frontend && npm install )
+  ( cd "$PROJECT_ROOT/frontend" && npm install )
 
   echo "Build Backend (Quarkus)..."
-  ( cd backend && ./mvnw compile )
+  ( cd "$PROJECT_ROOT/backend" && ./mvnw compile )
 }
 
 start_dev() {
@@ -22,13 +25,13 @@ start_dev() {
   trap cleanup SIGINT EXIT
 
   echo "Start Postgres via Docker Compose..."
-  (cd backend/setup/database && docker-compose up -d postgres)
+  (cd "$PROJECT_ROOT/backend/setup/database" && docker-compose up -d postgres)
 
   echo "Wait for Postgres to be ready..."
   sleep 3
 
   echo "Start Quarkus Backend in Dev-Mode..."
-  cd backend
+  cd "$PROJECT_ROOT/backend"
   ./mvnw quarkus:dev &
   PID1=$!
   cd - >/dev/null
@@ -45,7 +48,7 @@ start_dev() {
   done
 
   echo "Start Frontend in Dev-Mode..."
-  cd frontend
+  cd "$PROJECT_ROOT/frontend"
   npm start &
   PID2=$!
   cd - >/dev/null
