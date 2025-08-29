@@ -25,7 +25,7 @@ export class AuthTokenInterceptorService implements HttpInterceptor {
     if (req.url.includes('assets')) {
       return next.handle(req);
     }
-    if (req.url.includes('README_DE.md')) {
+    if (req.url.includes('README.md')) {
       return next.handle(req);
     }
 
