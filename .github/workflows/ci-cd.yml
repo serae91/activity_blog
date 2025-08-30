@@ -73,7 +73,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set OWNER variable
-        run: echo "OWNER=${GITHUB_ACTOR}" >> $GITHUB_ENV
+        run: echo "OWNER=serae91" >> $GITHUB_ENV
 
       - name: Cleanup old GHCR images
         run: |
