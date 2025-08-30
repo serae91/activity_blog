@@ -38,7 +38,7 @@ describe('OpacityScrollComponent', () => {
     jest.spyOn(child1, 'setAttribute').mockReturnValue(undefined);
     jest.spyOn(child2, 'setAttribute').mockReturnValue(undefined);
 
-    component.scroll({ e: event });
+    component.scroll(event as unknown as Event);
 
     expect(child1.setAttribute).toHaveBeenCalledWith(
       'style',
@@ -60,7 +60,7 @@ describe('OpacityScrollComponent', () => {
     jest.spyOn(child1, 'setAttribute').mockReturnValue(undefined);
     jest.spyOn(child2, 'setAttribute').mockReturnValue(undefined);
 
-    component.scroll({ e: event });
+    component.scroll(event as unknown as Event);
 
     expect(child1.setAttribute).toHaveBeenCalledWith('style', 'opacity: 0');
     expect(child2.setAttribute).toHaveBeenCalledWith(
@@ -98,7 +98,7 @@ describe('OpacityScrollComponent', () => {
     jest.spyOn(child3, 'setAttribute').mockReturnValue(undefined);
     jest.spyOn(child4, 'setAttribute').mockReturnValue(undefined);
 
-    component.scroll({ e: event });
+    component.scroll(event as unknown as Event);
 
     expect(child1.setAttribute).toHaveBeenCalledWith('style', 'opacity: 0.3');
     expect(child2.setAttribute).toHaveBeenCalledWith('style', 'opacity: 0.3');
