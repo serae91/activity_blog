@@ -45,3 +45,15 @@
   object-fit: cover;
   cursor: pointer;
 }
+
+.nav-link {
+  text-decoration: none;
+  color: black;
+  padding: 5px;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  color: red;
+  border-bottom: 2px solid red;
+}

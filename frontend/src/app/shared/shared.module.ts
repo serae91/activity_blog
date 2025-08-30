@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../core/material.module';
 import { HeaderComponent } from './header/header.component';
 import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
+import { RouterModule } from '@angular/router';
 
 const COMPONENTS = [
   OpacityScrollComponent,
@@ -14,7 +15,7 @@ const COMPONENTS = [
 
 @NgModule({
   declarations: [COMPONENTS],
-  imports: [CommonModule, FormsModule, MaterialModule],
+  imports: [CommonModule, FormsModule, MaterialModule, RouterModule],
   exports: [COMPONENTS],
 })
 export class SharedModule {}
