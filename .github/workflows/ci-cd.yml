@@ -73,19 +73,23 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set OWNER variable
-        run: echo "OWNER=serae91" >> $GITHUB_ENV
+        run: echo "OWNER=serae91" >> $GITHUB_ENV  # dein GitHub-Username in Kleinbuchstaben
 
       - name: Cleanup old GHCR images
         run: |
+          CURRENT_SHA=${GITHUB_SHA}
+
+          # Backend
           gh api -X GET /user/packages/container/activity-blog-backend/versions \
             -H "Accept: application/vnd.github.v3+json" \
-            | jq '.[].id' \
+            | jq -r '.[] | select(.metadata.container.tags[] != "latest" and .metadata.container.tags[] != "'$CURRENT_SHA'") | .id' \
             | xargs -n 1 -I {} gh api -X DELETE /user/packages/container/activity-blog-backend/versions/{} \
               -H "Accept: application/vnd.github.v3+json" || true
-          
+
+          # Frontend
           gh api -X GET /user/packages/container/activity-blog-frontend/versions \
             -H "Accept: application/vnd.github.v3+json" \
-            | jq '.[].id' \
+            | jq -r '.[] | select(.metadata.container.tags[] != "latest" and .metadata.container.tags[] != "'$CURRENT_SHA'") | .id' \
             | xargs -n 1 -I {} gh api -X DELETE /user/packages/container/activity-blog-frontend/versions/{} \
               -H "Accept: application/vnd.github.v3+json" || true
 
