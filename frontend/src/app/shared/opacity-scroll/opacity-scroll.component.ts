@@ -20,12 +20,13 @@ export class OpacityScrollComponent {
 
   scrollIndicatorVisibility = 'hidden';
 
-  scroll(e: any): void {
+  scroll(e: Event): void {
     this.scrollIndicatorVisibility = 'hidden';
-    const scrollChildren = [...e.target['children'][0]['children']];
-    const scrollTop: number = e.target['scrollTop'];
+    const target = e.target as HTMLElement;
+    const scrollChildren = Array.from(target['children'][0]['children']);
+    const scrollTop: number = target['scrollTop'];
     scrollChildren.forEach((child) => {
-      const offsetTop: number = child.offsetTop;
+      const offsetTop: number = (child as HTMLElement).offsetTop;
       const remainingScrollOpacityHeight =
         offsetTop - scrollTop + this.scrollOpacityHeightInPx;
       if (remainingScrollOpacityHeight <= 0) {

@@ -11,16 +11,14 @@ import { TokenStorageService } from 'src/app/core/services/token-storage/token-s
 
 @Injectable()
 export class AuthTokenInterceptorService implements HttpInterceptor {
-  constructor(
-    private tokenStorageService: TokenStorageService,
-    private appConfig: AppConfigService
-  ) {}
+  tokenStorageService = inject(TokenStorageService);
+  appConfig = inject(AppConfigService);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  intercept(
-    req: HttpRequest<any>,
+  intercept<T>(
+    req: HttpRequest<T>,
     next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  ): Observable<HttpEvent<T>> {
     // do not intercept loading icons request
     if (req.url.includes('assets')) {
       return next.handle(req);
