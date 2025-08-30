@@ -11,12 +11,6 @@
   </mat-select>
   </mat-form-field>
   <mat-form-field class="filter-field">
-    <mat-label>Authors</mat-label>
-    <mat-select [(ngModel)]="activityFilter.authorId" multiple class="filter-value" placeholder="Add persons">
-      <mat-option *ngFor="let person of persons" [value]="person.id" [disabled]="isPersonSelectedAsAuthor(person)">{{ person.firstName + ' ' + person.lastName }}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field class="filter-field">
     <mat-label>Persons</mat-label>
     <mat-select [(ngModel)]="activityFilter.personIds" multiple class="filter-value" placeholder="Add persons">
       <mat-option *ngFor="let person of persons" [value]="person.id" [disabled]="isPersonSelectedAsAuthor(person)">{{ person.firstName + ' ' + person.lastName }}</mat-option>
