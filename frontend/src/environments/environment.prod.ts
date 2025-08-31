@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://myapp.local/api/',
+  apiUrl: 'http://activity-blog.local/api/',
 };

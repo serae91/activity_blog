@@ -97,28 +97,50 @@ chmod +x ./scripts/start-in-dev-mode.sh
 
 ## Kubernetes Deployment
 
-1. Make the script executable (once):
+### Backend API Access
+The frontend uses the Hostname `activity-blog.local` for the API. For the frontend to work properly,
+`activity-blog.local` must point to the IP of the running backend:
 
+If you are running the backend locally, you can add the following line to your hosts file:
+```text
+127.0.0.1 activity-blog.local
+```
+- macOS/Linux: `/etc/hosts`
+- Windows: `C:\Windows\System32\drivers\etc\hosts`
+
+
+You can decide to **build the images locally** or **load them from the GitHub Container Registry (GHCR)**.
+
+Make the script executable (once):
+- If you want to build the images locally:
 ```bash
-chmod +x ./scripts/deploy.sh
+chmod +x ./scripts/k8s-deployment.sh
+```
+- If you want to load the images from GHCR:
+```bash
+chmod +x ./scripts/run-with-ghcr-images.sh
 ```
 
-2. Start the deployment:
+Start Minikube (if not already running):
+minikube start
 
+Start the deployment:
+- If you want to build the images locally:
 ```bash
 ./scripts/k8s-deployment.sh
 ```
+- If you want to load the images from GHCR:
+```bash
+./scripts/run-with-ghcr-images.sh
+```
 
-3. Open a Minikube tunnel to make all services reachable from the host:
-
+Open a Minikube tunnel to make all services reachable from the host:
 ```bash
 minikube tunnel
 ```
+Enter your password if prompted.
 
-- Enter your password if prompted.
-
-4. Open the frontend in the browser:
-
+Open the frontend in the browser:
 ```bash
 minikube service activity-blog-frontend
 ```

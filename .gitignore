@@ -9,3 +9,6 @@ bin/
 *.ipr
 *.iml
 *.iws
+
+.DS_Store
+
