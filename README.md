@@ -122,8 +122,9 @@ chmod +x ./scripts/run-with-ghcr-images.sh
 ```
 
 Start Minikube (if not already running):
+```bash
 minikube start
-
+```
 Start the deployment:
 - If you want to build the images locally:
 ```bash
