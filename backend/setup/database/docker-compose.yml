@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_USER: blogger
       POSTGRES_PASSWORD: aktiVyti3_sAfe_Pass5ord
-      POSTGRES_DB: activity_blog
+      POSTGRES_DB: activity-blog-db
     ports:
       - "5430:5432"
     volumes:
