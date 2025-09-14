@@ -9,6 +9,7 @@ My focus was on **clean structure**, **containerization**, and **deployment with
 
 1. Project Goal
 2. Project Description
+3. Screenshots
 3. Tests
 4. Installation & Start
     - Development Mode
@@ -30,6 +31,54 @@ This project is meant to showcase my working style:
 Users can blog their activities and experiences. They can create persons and locations and link them to activities.
 
 > Note: This project is a **learning and showcase project**. It is not a finished product.
+
+# Screenshots
+
+## Activities Tab
+<p align="center">
+  <img src="./screenshots/ActivitiesTab.png" alt="ActivityTab" width="400"/>
+</p>
+
+In the Activity Tab you can see the overview of the activities of all people. On the left hand side you see the title, author and post date. On the right hand side you see further details of the selected activity, like description, people who were involved and the locations where the activity took place.
+
+## Create Activity Dialog
+<p align="center">
+  <img src="./screenshots/CreateActivityDialog.png" alt="CreateActivityDialog" width="400"/>
+</p>
+
+In the Create Activity Dialog you can create a new activity.
+
+## Update and delete Activity
+
+<p align="center">
+  <img src="./screenshots/UpdateAndDeleteActivity.png" alt="CreateActivityDialog" width="200"/>
+</p>
+
+In the dropdwon menu of the three dots you can update and delete an Activity.
+
+## Activity Filter Drawer
+
+<p align="center">
+  <img src="./screenshots/ActivityFilter.png" alt="ActivityFilter" width="400"/>
+</p>
+
+Press the filter icon in the upper right corner to open the activity filter. You can filter activities by author, participating persons, locations and by a time window in which the activity was posted.
+
+## Create person dialog
+
+<p align="center">
+  <img src="./screenshots/CreatePersonDialog.png" alt="CreatePersonDialog" width="400"/>
+</p>
+
+In the create person dialog you can create new persons who can be selected as author or participating people in activities.
+
+## Create location dialog
+
+<p align="center">
+  <img src="./screenshots/CreateLocationDialog.png" alt="CreateLocationDialog" width="400"/>
+</p>
+
+In the create location dialog you can create new locations which can be selected where the activities took place.
 
 # Tests
 

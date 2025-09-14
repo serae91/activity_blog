@@ -9,6 +9,7 @@ Mein Fokus lag auf **sauberer Struktur**, **Containerisierung** und **Deployment
 
 1. Ziel des Projekts
 2. Projektbeschreibung
+3. Screenshots
 3. Tests
 4. Installation & Start
    - Entwicklungsmodus
@@ -30,6 +31,55 @@ Dieses Projekt soll meine Arbeitsweise demonstrieren:
 Benutzer können ihre Aktivitäten und Erlebnisse bloggen. Dabei können sie Personen und Locations anlegen und diese mit Aktivitäten verknüpfen.
 
 > Hinweis: Das Projekt ist ein **Lern- und Showcase-Projekt**. Es handelt sich nicht um ein fertiges Produkt.
+
+
+# Screenshots
+
+## Activities Tab
+<p align="center">
+  <img src="./screenshots/ActivitiesTab.png" alt="ActivityTab" width="400"/>
+</p>
+
+Im Activity Tab sieht man die Übersicht über die Aktivitäten aller Leute. Links sieht man den Titel, Autor und Post Datum. Rechts sieht man weitere Details der ausgewählten Aktivität, wie Beschreibung, Leute, die beteiligt waren und die Orte, an denen die Aktivität stattfand.
+
+## Create Activity Dialog
+<p align="center">
+  <img src="./screenshots/CreateActivityDialog.png" alt="CreateActivityDialog" width="400"/>
+</p>
+
+Im Create Activity Dialog kann man eine neue Aktivität erstellen.
+
+## Update and delete Activity
+
+<p align="center">
+  <img src="./screenshots/UpdateAndDeleteActivity.png" alt="CreateActivityDialog" width="200"/>
+</p>
+
+Im Dropdown Menu der drei Punkte kann man eine Aktivity aktualisieren oder löschen.
+
+## Activity Filter Drawer
+
+<p align="center">
+  <img src="./screenshots/ActivityFilter.png" alt="ActivityFilter" width="400"/>
+</p>
+
+Drücke das Filter Icon in der oberen rechten Ecke, um den Activity Filter zu öffnen. Man kann Aktivitäten nach Autor, teilnehmenden Personen, Orten und nach dem Zeitfenster filtern, in dem die Aktivität stattfand.
+
+## Create person dialog
+
+<p align="center">
+  <img src="./screenshots/CreatePersonDialog.png" alt="CreatePersonDialog" width="400"/>
+</p>
+
+Im Create Person Dialog kann man neue Personen erstellen, die als Autor oder teilnehmende Person in Aktivitäten ausgewählt werden können.
+
+## Create location dialog
+
+<p align="center">
+  <img src="./screenshots/CreateLocationDialog.png" alt="CreateLocationDialog" width="400"/>
+</p>
+
+Im Create Locations Dialog kann man neue Orte erstellen, die als Ort ausgewöhlt werden können, an dem eine Aktivität stattfand.
 
 # Tests
 
