@@ -7,7 +7,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppConfigService } from './services/app-config/app-config.service';
-import { AuthTokenInterceptorService } from './interceptors/token-interceptor/auth-token-interceptor.service';
+import { AuthTokenInterceptorService } from './interceptors/jwt-interceptor/jwt-interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ActivityService } from './services/activity/activity.service';
 import { LocationService } from './services/location/location.service';

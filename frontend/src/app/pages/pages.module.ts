@@ -14,6 +14,7 @@ import { LocationModalComponent } from './location-list/location-modal/location-
 import { LocationCardComponent } from './location-list/location-card/location-card.component';
 import { ActivityListCardComponent } from './activity-list/activity-list-card/activity-list-card.component';
 import { ActivityFilterComponent } from './activity-list/activity-filter/activity-filter.component';
+import { LoginComponent } from './auth/login/login.component';
 
 const COMPONENTS = [
   ActivityListComponent,
@@ -22,6 +23,7 @@ const COMPONENTS = [
   ActivityModalComponent,
   ActivityFilterComponent,
   LocationModalComponent,
+  LoginComponent,
   PersonModalComponent,
   PersonCardComponent,
   PersonListComponent,
